@@ -1,0 +1,118 @@
+﻿<Window x:Class="Inventario_y_Contabilidad.Venta"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Inventario_y_Contabilidad"
+        mc:Ignorable="d"
+        Title="Venta" 
+        ResizeMode="CanResize"
+        WindowState="Normal"
+        MinHeight="550"  MinWidth="650"
+        Height="390"  Width="450">
+    <Grid>
+        <Image Height="119" 
+               Margin="0,17,10,0" 
+               VerticalAlignment="Top" 
+               Source="051-online payment.png" 
+               HorizontalAlignment="Right" 
+               Width="118"/>
+
+        <Image x:Name="imgAceptarCompra" 
+               Margin="348,75,0,0" 
+               Source="035-shopping cart.png" 
+               HorizontalAlignment="Left" 
+               MouseLeftButtonDown="aceptarCompra"
+               Width="60" Cursor="Hand" Height="61" VerticalAlignment="Top"/>
+
+        <Image x:Name="imgCancelCompra" 
+               Margin="413,75,0,0" 
+               Source="037-shopping cart.png" 
+               HorizontalAlignment="Left" 
+               MouseLeftButtonDown="cancelarCompra"
+               Width="60" Cursor="Hand" Height="61" VerticalAlignment="Top"/>
+
+        <TextBox x:Name="txtIdArt"
+                 HorizontalAlignment="Left" 
+                 Height="40" 
+                 Margin="10,96,0,0" 
+                 TextWrapping="Wrap" 
+                 VerticalAlignment="Top" 
+                 Width="250" 
+                 FontSize="20"/>
+
+        <Button x:Name="btnBuscar" 
+                Margin="265,96,0,0"
+                Content="Buscar"
+                HorizontalAlignment="Left" 
+                Width="78" Height="40" 
+                VerticalAlignment="Top" 
+                Click="btnBuscar_Click"
+                
+                />
+
+        <Label Content="Total:" 
+               HorizontalAlignment="Left" 
+               Margin="10,17,0,0" 
+               VerticalAlignment="Top" FontSize="20"/>
+
+        <Label x:Name="lblTotalBs"
+               Content="Bs.S. 999.999" 
+               HorizontalAlignment="Left" 
+               HorizontalContentAlignment="Right"
+               Margin="71,17,0,0" 
+               VerticalAlignment="Top" FontSize="20" Width="189"/>
+
+        <Label x:Name="lblTotalDolar"
+               Content="$ 999.999" 
+               HorizontalAlignment="Left"
+               HorizontalContentAlignment="Right"
+               Margin="71,54,0,0" 
+               VerticalAlignment="Top" FontSize="20" Width="189"/>
+
+        <DataGrid x:Name="dataArticulosVenta" 
+                  Margin="10,151,10,10" 
+                  IsReadOnly="True"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  CanUserReorderColumns="False"
+                  CanUserSortColumns="False"
+                  >
+            <DataGrid.Columns>
+                <DataGridTextColumn 
+                                Header="Id. Articulo" 
+                                Binding="{Binding id}"/>
+                <DataGridTextColumn 
+                                Header="Cantidad" 
+                                Binding="{Binding cantidad}"/>
+                <DataGridTextColumn 
+                                Header="Subtotal $" 
+                                Binding="{Binding subtotal}"/>
+                <DataGridTextColumn 
+                                Header="Conversión Bs." 
+                                Binding="{Binding subtotalBs}"/>
+
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="btnBorrar"
+                                    Click="btnBorrar_Click">
+                                <Button.Content>
+                                    <Label Content="X"/>
+                                </Button.Content>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <CheckBox Content="Efectivo" 
+                  x:Name="checkEfectivo"
+                  HorizontalAlignment="Left" 
+                  VerticalContentAlignment="Center"
+                  Margin="265,28,0,0" 
+                  VerticalAlignment="Top" Width="80" Height="20" FontSize="14"/>
+
+    </Grid>
+</Window>

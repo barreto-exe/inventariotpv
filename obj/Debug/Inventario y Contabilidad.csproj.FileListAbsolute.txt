@@ -1,0 +1,18 @@
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\bin\Debug\Inventario y Contabilidad.exe.config
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\bin\Debug\Inventario y Contabilidad.exe
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\bin\Debug\Inventario y Contabilidad.pdb
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\Inventario y Contabilidad.csprojAssemblyReference.cache
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\MainWindow.g.cs
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\App.g.cs
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\Inventario y Contabilidad_MarkupCompile.cache
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\Inventario y Contabilidad_MarkupCompile.lref
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\MainWindow.baml
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\Inventario y Contabilidad.g.resources
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\Inventario_y_Contabilidad.Properties.Resources.resources
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\Inventario y Contabilidad.csproj.GenerateResource.cache
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\Inventario y Contabilidad.exe
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\Inventario y Contabilidad.pdb
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\bin\Debug\System.Data.SqlServerCe.dll
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\Inventario y Contabilidad.csproj.CopyComplete
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\Venta.g.cs
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\Venta.baml

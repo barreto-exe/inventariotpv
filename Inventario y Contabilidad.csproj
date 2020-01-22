@@ -162,6 +162,11 @@
   <ItemGroup>
     <Resource Include="editar.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="bd.sdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

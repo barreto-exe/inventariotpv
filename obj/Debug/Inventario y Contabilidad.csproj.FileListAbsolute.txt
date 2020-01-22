@@ -24,3 +24,5 @@ D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\Articul
 D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\ArticuloBuscar.baml
 D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\cambioTasa.baml
 D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\Inventario.baml
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\bin\Debug\bd.sdf
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\Inventario y Contabilidad_Content.g.cs

@@ -29,7 +29,7 @@
                 HorizontalAlignment="Left" 
                 Width="266" Height="40" VerticalAlignment="Top"
         />
-        <TextBox x:Name="txtMontoTasa_Copy"
+        <TextBox x:Name="txtPorcentajeBS"
                  HorizontalAlignment="Left" 
                  Height="40" 
                  Margin="10,152,0,0" 
@@ -39,7 +39,7 @@
                  FontSize="20"/>
 
         <Button x:Name="btnAceptar"
-                Content="Aceptar" Margin="70,211,70,20"/>
+                Content="Aceptar" Margin="70,211,70,20" Click="btnAceptar_Click"/>
 
     </Grid>
 </Window>

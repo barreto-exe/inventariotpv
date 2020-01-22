@@ -15,18 +15,13 @@ using System.Windows.Shapes;
 namespace Inventario_y_Contabilidad
 {
     /// <summary>
-    /// Lógica de interacción para Inventario.xaml
+    /// Lógica de interacción para cambioTasa.xaml
     /// </summary>
-    public partial class Inventario : Window
+    public partial class cambioTasa : Window
     {
-        public Inventario()
+        public cambioTasa()
         {
             InitializeComponent();
-        }
-
-        private void btnEditar_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

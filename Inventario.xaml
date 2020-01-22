@@ -9,15 +9,91 @@
         ResizeMode="CanResize"
         WindowState="Normal"
         MinHeight="550"  MinWidth="650"
-        Height="390"  Width="450">
+        Height="332"  Width="463">
     <Grid>
-        <Label x:Name="lblFechaHora"
-            Content="Jue. 20/01/2020 - 9:20pm" 
-            Margin="10,10,0,457" 
-            FontSize="20" 
-            HorizontalAlignment="Left" 
-            Width="250"
+        <Label x:Name="lblValorInventario"
+               Content="999$ - Bs.S. 999.999" 
+               Margin="205,10,0,457" 
+               FontSize="20" 
+               HorizontalAlignment="Left" 
+               Width="250"
         />
+        <Label 
+               Content="Valor de Inventario: " 
+               Margin="10,10,0,457" 
+               FontSize="20" 
+               HorizontalAlignment="Left" 
+               Width="195"
+        />
+
+        <DataGrid x:Name="dataReportePrin" 
+                  Margin="10,85,105,10" 
+                  IsReadOnly="True"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  CanUserReorderColumns="False"
+                  CanUserSortColumns="False"
+                  >
+            <DataGrid.Columns>
+                <DataGridTextColumn 
+                                Header="Id" 
+                                SortDirection="Ascending"
+                                Binding="{Binding id}"/>
+                <DataGridTextColumn 
+                                Header="Descripción" 
+                                Binding="{Binding descripcion}"/>
+                <DataGridTextColumn 
+                                Header="Cantidad Act." 
+                                Binding="{Binding cantidadAct}"/>
+                <DataGridTextColumn 
+                                Header="Última Actualización" 
+                                Binding="{Binding fechaHora}"/>
+                <DataGridTextColumn 
+                                Header="Precio $/Unidad" 
+                                Binding="{Binding precioDolar}"/>
+                <DataGridTextColumn 
+                                Header="Precio Bs.S/Unidad" 
+                                Binding="{Binding conversionBs}"/>
+                <DataGridTextColumn 
+                                Header="Precio Efectivo Bs.S/Unidad" 
+                                Binding="{Binding conversionBsEfect}"/>
+
+
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="btnEditar"
+                                    Click="btnEditar_Click">
+                                <Button.Content>
+                                    <Label Content="Editar"/>
+                                </Button.Content>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Rectangle Fill="#FF43B05C" HorizontalAlignment="Left" Height="6" Margin="10,56,0,0" Stroke="Black" VerticalAlignment="Top" Width="416"/>
+
+        <Image x:Name="imgAgregarArt"
+               HorizontalAlignment="Right" 
+               Height="80" 
+               Margin="0,85,10,0" 
+               VerticalAlignment="Top" 
+               Width="80" 
+               Source="agregar.png" 
+               Cursor="Hand"/>
+        
+        <Image x:Name="imgEditar"
+               HorizontalAlignment="Right" 
+               Height="80" 
+               Margin="0,185,10,0" 
+               VerticalAlignment="Top" 
+               Width="80" 
+               Source="editar.png" 
+               Cursor="Hand"/>
+
 
     </Grid>
 </Window>

@@ -57,12 +57,33 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Articulo.cs">
+      <DependentUpon>Articulo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ArticuloBuscar.xaml.cs">
+      <DependentUpon>ArticuloBuscar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="cambioTasa.xaml.cs">
+      <DependentUpon>cambioTasa.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Inventario.xaml.cs">
       <DependentUpon>Inventario.xaml</DependentUpon>
     </Compile>
     <Compile Include="Venta.xaml.cs">
       <DependentUpon>Venta.xaml</DependentUpon>
     </Compile>
+    <Page Include="Articulo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ArticuloBuscar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="cambioTasa.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Inventario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -131,6 +152,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="037-shopping cart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="032-box.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="agregar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="editar.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

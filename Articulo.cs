@@ -15,16 +15,16 @@ using System.Windows.Shapes;
 namespace Inventario_y_Contabilidad
 {
     /// <summary>
-    /// Lógica de interacción para Inventario.xaml
+    /// Lógica de interacción para ArticuloCrear.xaml
     /// </summary>
-    public partial class Inventario : Window
+    public partial class Articulo : Window
     {
-        public Inventario()
+        public Articulo()
         {
             InitializeComponent();
         }
 
-        private void btnEditar_Click(object sender, RoutedEventArgs e)
+        private void btnBuscar_Click(object sender, RoutedEventArgs e)
         {
 
         }

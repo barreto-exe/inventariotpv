@@ -16,3 +16,11 @@ D:\Documents\Repositorios\Personales\Inventario y Contabilidad\bin\Debug\System.
 D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\Inventario y Contabilidad.csproj.CopyComplete
 D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\Venta.g.cs
 D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\Venta.baml
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\Articulo.g.cs
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\ArticuloBuscar.g.cs
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\cambioTasa.g.cs
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\Inventario.g.cs
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\Articulo.baml
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\ArticuloBuscar.baml
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\cambioTasa.baml
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\Inventario.baml

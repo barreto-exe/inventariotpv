@@ -10,7 +10,7 @@
         WindowStartupLocation="CenterScreen"
         WindowState="Normal"
         MinHeight="550" MinWidth="650"
-        Height="550"  Width="650">
+        Height="371"  Width="539">
     <Grid>
         <Label Content="Tasa del Día:" 
                Margin="10,73,0,406" 
@@ -18,7 +18,7 @@
                HorizontalAlignment="Left" 
                Width="134"
                />
-        
+
         <Label x:Name="lblTasaDia"
                Content="Bs.S. 999.999" 
                Margin="126,73,0,406" 
@@ -63,7 +63,7 @@
                />
 
         <Image x:Name="imgVender"
-               Margin="0,40,10,0" 
+               Margin="0,19,10,0" 
                Source="013-cpu.png" 
                HorizontalAlignment="Right"
                Width="100" 
@@ -73,20 +73,20 @@
                VerticalAlignment="Top"/>
 
         <Image x:Name="imgCargar"
-               Margin="0,179,10,0" 
+               Margin="0,141,10,0" 
                Source="018-package.png" 
                Cursor="Hand"
                HorizontalAlignment="Right" 
                Width="100" Height="100" VerticalAlignment="Top"/>
 
-        <Image x:Name="imgReporte" 
+        <!--<Image x:Name="imgReporte" 
                Height="100"
                Margin="0,331,10,0" 
                VerticalAlignment="Top" 
                Cursor="Hand"
                Source="003-curriculum.png" 
                HorizontalAlignment="Right" 
-               Width="100"/>
+               Width="100"/>-->
 
         <Label x:Name="lblFechaHora"
                Content="Jue. 20/01/2020 - 9:20pm" 
@@ -99,7 +99,7 @@
         <Rectangle Fill="#FF43B05C" HorizontalAlignment="Left" Height="6" Margin="10,62,0,0" Stroke="Black" VerticalAlignment="Top" Width="250"/>
 
         <DataGrid x:Name="dataReportePrin" 
-                  Margin="10,247,132,10" 
+                  Margin="10,257,10,10" 
                   IsReadOnly="True"
                   CanUserAddRows="False"
                   CanUserDeleteRows="False"
@@ -142,7 +142,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        
+
 
     </Grid>
 </Window>

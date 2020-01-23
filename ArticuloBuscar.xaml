@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Inventario_y_Contabilidad"
         mc:Ignorable="d"
         Title="Buscar Artículo" 
+        WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         WindowState="Normal"
         Height="340"  Width="490">
@@ -14,9 +15,7 @@
                   Margin="10" 
                   IsReadOnly="True"
                   CanUserAddRows="False"
-                  CanUserDeleteRows="False"
-                  CanUserReorderColumns="False"
-                  CanUserSortColumns="False"
+                  CanUserDeleteRows="False" FontSize="16"
                   >
             <DataGrid.Columns>
                 <DataGridTextColumn 
@@ -28,7 +27,10 @@
                                 Binding="{Binding descripcion}"/>
                 <DataGridTextColumn 
                                 Header="Precio $/Unidad" 
-                                Binding="{Binding tasaVenta}"/>
+                                Binding="{Binding precioDolar}"/>
+                <DataGridTextColumn 
+                                Header="Costo $/Unidad" 
+                                Binding="{Binding costoDolar}"/>
 
 
                 <DataGridTemplateColumn>
@@ -37,7 +39,7 @@
                             <Button x:Name="btnSeleccionar"
                                     Click="btnSeleccionar_Click">
                                 <Button.Content>
-                                    <Label Content="Editar"/>
+                                    <Label Content="🖊"/>
                                 </Button.Content>
                             </Button>
                         </DataTemplate>

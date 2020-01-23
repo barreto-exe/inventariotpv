@@ -6,9 +6,10 @@
         xmlns:local="clr-namespace:Inventario_y_Contabilidad"
         mc:Ignorable="d"
         Title="Editar Artículo" 
+        WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize"
         WindowState="Normal"
-        Height="340"  Width="490">
+        Height="340"  Width="500">
     <Grid>
 
         <TextBox 
@@ -21,11 +22,20 @@
             Width="459" 
             FontSize="20"/>
         <Label 
-            Content="Descripción del Artículo: #id" 
+            Content="Descripción del Artículo:" 
             Margin="10,10,0,0" 
             FontSize="20" 
             HorizontalAlignment="Left" 
-            Width="376" Height="40" VerticalAlignment="Top"
+            Width="223" Height="40" VerticalAlignment="Top"
+        />
+
+        <Label 
+            x:Name="lblIdArt"
+            Content="#id" 
+            Margin="233,10,0,0" 
+            FontSize="20" 
+            HorizontalAlignment="Left" 
+            Width="136" Height="40" VerticalAlignment="Top"
         />
         <TextBox 
             x:Name="txtPrecioDolar"
@@ -60,14 +70,14 @@
             Width="223" Height="40" VerticalAlignment="Top"
         />
         <TextBox 
-            x:Name="txtCantidadActual"
+            x:Name="txtCantidadAgg"
             HorizontalAlignment="Left" 
             Margin="10,250,0,0" 
             TextWrapping="Wrap" 
             Width="200" 
             FontSize="20" Height="40" VerticalAlignment="Top"/>
         <Label 
-            Content="Unidades Actuales:" 
+            Content="Unidades Agregadas:" 
             Margin="10,210,0,0" 
             FontSize="20" 
             HorizontalAlignment="Left" 
@@ -75,8 +85,8 @@
         />
 
         <Button x:Name="btnAceptar"
-            Content="Aceptar" Margin="0,260,15,0" HorizontalAlignment="Right" Width="100" Height="30" VerticalAlignment="Top"/>
-        
+            Content="Aceptar" Margin="0,260,25,0" HorizontalAlignment="Right" Width="100" Height="30" VerticalAlignment="Top" Click="btnAceptar_Click"/>
+
         <Button 
             x:Name="btnBuscar" 
             Margin="369,15,0,0"

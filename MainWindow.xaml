@@ -8,7 +8,7 @@
         Title="Contabilidad" 
         ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen"
-        WindowState="Normal"
+        WindowState="Maximized"
         Closing="Window_Closing"
         MinHeight="550" MinWidth="650"
         Height="371"  Width="539">
@@ -29,8 +29,8 @@
                />
 
         <Button x:Name="btnCambiarTasa" 
-                Margin="16,113,0,0"
-                Content="Cambiar" HorizontalAlignment="Left" Width="105" Height="23" VerticalAlignment="Top" Click="btnCambiarTasa_Click"
+                Margin="16,116,0,0"
+                Content="Cambiar" HorizontalAlignment="Left" Width="105" Height="32" VerticalAlignment="Top" Click="btnCambiarTasa_Click"
                 />
 
         <Label
@@ -92,10 +92,10 @@
 
         <Label x:Name="lblFechaHora"
                Content="Jue. 20/01/2020 - 9:20pm" 
-               Margin="10,10,0,457" 
+               Margin="10,10,0,0" 
                FontSize="20" 
                HorizontalAlignment="Left" 
-               Width="380"
+               Width="380" Height="52" VerticalAlignment="Top"
                />
         <Rectangle Fill="#FF43B05C" HorizontalAlignment="Left" Height="6" Margin="10,155,0,0" Stroke="Black" VerticalAlignment="Top" Width="250"/>
         <Rectangle Fill="#FF43B05C" HorizontalAlignment="Left" Height="6" Margin="10,62,0,0" Stroke="Black" VerticalAlignment="Top" Width="250"/>
@@ -104,9 +104,7 @@
                   Margin="10,257,10,10" 
                   IsReadOnly="True"
                   CanUserAddRows="False"
-                  CanUserDeleteRows="False"
-                  CanUserReorderColumns="False"
-                  CanUserSortColumns="False"
+                  CanUserDeleteRows="False" FontSize="16"
                   >
             <DataGrid.Columns>
                 <DataGridTextColumn 
@@ -146,10 +144,11 @@
         </DataGrid>
         <Label x:Name="lblPorcentaje"
             Content="100%" 
-            Margin="126,113,0,366" 
+            Margin="126,113,0,363" 
             FontSize="20" 
             HorizontalAlignment="Left" 
-            Width="204"
+            VerticalContentAlignment="Top"
+            Width="134"
                />
 
 

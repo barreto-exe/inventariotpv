@@ -51,7 +51,7 @@ namespace Inventario_y_Contabilidad
 
         void timer_Tick(object sender, EventArgs e)
         {
-            this.lblFechaHora.Content = String.Format("{0:dddd, dd/MM/yyyy - hh:m:ss tt}", DateTime.Now);
+            this.lblFechaHora.Content = String.Format("{0:dddd, dd/MM/yyyy - hh:mm:ss tt}", DateTime.Now);
 
             //Consultano Tasa Actual
             SqlCeCommand command = new SqlCeCommand("SELECT TOP 1 * FROM c_tasa ORDER BY id DESC", conn);

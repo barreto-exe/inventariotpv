@@ -36,11 +36,11 @@ namespace Inventario_y_Contabilidad
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
-            int n = 0;
+            float n = 0;
 
             //Validar que no sea texto vacío ni caracteres alfabéticos o especiales.
-            if (txtMontoTasa.Text == "" || txtPorcentajeBS.Text == "" ||
-               !int.TryParse(txtMontoTasa.Text, out n) || !int.TryParse(txtPorcentajeBS.Text, out n))
+            if (               txtMontoTasa.Text == ""   || txtPorcentajeBS.Text == "" ||
+               !float.TryParse(txtMontoTasa.Text, out n) || !float.TryParse(txtPorcentajeBS.Text, out n))
             {
                 return;
             }

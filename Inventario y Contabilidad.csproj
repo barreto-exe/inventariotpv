@@ -63,6 +63,7 @@
     <Compile Include="ArticuloBuscar.xaml.cs">
       <DependentUpon>ArticuloBuscar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ArticuloClase.cs" />
     <Compile Include="cambioTasa.xaml.cs">
       <DependentUpon>cambioTasa.xaml</DependentUpon>
     </Compile>

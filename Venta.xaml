@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Inventario_y_Contabilidad"
         mc:Ignorable="d"
         Title="Venta" 
+        WindowStartupLocation="CenterOwner"
         ResizeMode="CanResize"
         WindowState="Normal"
         MinHeight="550"  MinWidth="650"

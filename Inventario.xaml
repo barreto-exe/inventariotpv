@@ -7,9 +7,10 @@
         mc:Ignorable="d"
         Title="Inventario" 
         ResizeMode="CanResize"
-        WindowState="Normal"
+        WindowState="Maximized"
+        WindowStartupLocation="CenterOwner"
         MinHeight="550"  MinWidth="650"
-        Height="332"  Width="463">
+        Height="332"  Width="800">
     <Grid>
         <Label x:Name="lblValorInventario"
                Content="999$ - Bs.S. 999.999" 
@@ -31,8 +32,7 @@
                   IsReadOnly="True"
                   CanUserAddRows="False"
                   CanUserDeleteRows="False"
-                  CanUserReorderColumns="False"
-                  CanUserSortColumns="False"
+                  CanUserReorderColumns="False" FontSize="16"
                   >
             <DataGrid.Columns>
                 <DataGridTextColumn 
@@ -44,22 +44,24 @@
                                 Binding="{Binding descripcion}"/>
                 <DataGridTextColumn 
                                 Header="Cantidad Act." 
-                                Binding="{Binding cantidadAct}"/>
+                                Binding="{Binding cantAct}"/>
                 <DataGridTextColumn 
                                 Header="Última Actualización" 
                                 Binding="{Binding fechaHora}"/>
+                <DataGridTextColumn 
+                                Header="Costo $/Unidad" 
+                                Binding="{Binding costoDolar}"/>
                 <DataGridTextColumn 
                                 Header="Precio $/Unidad" 
                                 Binding="{Binding precioDolar}"/>
                 <DataGridTextColumn 
                                 Header="Precio Bs.S/Unidad" 
-                                Binding="{Binding conversionBs}"/>
+                                Binding="{Binding precioBs}"/>
                 <DataGridTextColumn 
                                 Header="Precio Efectivo Bs.S/Unidad" 
-                                Binding="{Binding conversionBsEfect}"/>
+                                Binding="{Binding precioBsEfect}"/>
 
-
-                <DataGridTemplateColumn>
+                <!--<DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button x:Name="btnEditar"
@@ -70,7 +72,7 @@
                             </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                </DataGridTemplateColumn>-->
             </DataGrid.Columns>
         </DataGrid>
 
@@ -83,6 +85,7 @@
                VerticalAlignment="Top" 
                Width="80" 
                Source="agregar.png" 
+               MouseLeftButtonDown="imgAgregarArt_MouseLeftButtonDown"
                Cursor="Hand"/>
         
         <Image x:Name="imgEditar"
@@ -92,6 +95,7 @@
                VerticalAlignment="Top" 
                Width="80" 
                Source="editar.png" 
+               MouseLeftButtonDown="imgEditar_MouseLeftButtonDown"
                Cursor="Hand"/>
 
 

@@ -21,6 +21,7 @@ namespace Inventario_y_Contabilidad
     public partial class Venta : Window
     {
         public decimal totalVentaDolar;
+        public decimal costoVenta;
         public decimal tasa;
         public decimal porcentaje;
         public Venta()
@@ -28,6 +29,7 @@ namespace Inventario_y_Contabilidad
             InitializeComponent();
             this.txtIdArt.Focus();
             totalVentaDolar = 0;
+            costoVenta = 0;
 
             SqlCeCommand command = new SqlCeCommand("SELECT TOP 1 * FROM c_tasa ORDER BY id DESC", MainWindow.conn);
             SqlCeDataReader dr = command.ExecuteReader();
@@ -66,9 +68,11 @@ namespace Inventario_y_Contabilidad
 
             //Seteando monto * cantidad
             decimal subtotalDolar = decimal.Parse(articulo.precioDolar) * decimal.Parse(articulo.cantAct);
+            decimal costoDolar    = decimal.Parse(articulo.costoDolar)  * decimal.Parse(articulo.cantAct);
             decimal subtotalBs = subtotalDolar * tasa;
 
             articulo.precioDolar = subtotalDolar.ToString();
+            articulo.costoDolar  = costoDolar.ToString();
             articulo.precioBs    = subtotalBs.ToString();
             if (checkEfectivo.IsChecked == true)
             {
@@ -84,8 +88,10 @@ namespace Inventario_y_Contabilidad
         {
             int cantArt = dataArticulosVenta.Items.Count;
             totalVentaDolar = 0;
+            costoVenta = 0;
             ArticuloClase articulo;
             decimal subtotalDolar;
+            decimal costoDolar;
             decimal subtotalBs;
 
             DataGrid aux = new DataGrid();
@@ -95,10 +101,13 @@ namespace Inventario_y_Contabilidad
                 articulo = dataArticulosVenta.ItemContainerGenerator.Items[i] as ArticuloClase;
 
                 subtotalDolar = decimal.Parse(articulo.precioDolar);
+                costoDolar =    decimal.Parse(articulo.costoDolar);
                 subtotalBs = subtotalDolar * tasa;
                 totalVentaDolar += subtotalDolar;
+                costoVenta      += costoDolar;
 
                 articulo.precioDolar = subtotalDolar.ToString();
+                articulo.costoDolar  = costoDolar.ToString();
                 articulo.precioBs = subtotalBs.ToString();
                 if (checkEfectivo.IsChecked == true)
                 {
@@ -145,12 +154,13 @@ namespace Inventario_y_Contabilidad
                 totalVentaBs = totalVentaDolar * tasa;
             }
 
-            string query = "INSERT INTO c_ventas (fechaHora,pagoDolar,conversionBs,pagoBsEfect,tasaVenta,porcentajeEfectivoVenta) " +
+            string query = "INSERT INTO c_ventas (fechaHora,pagoDolar,conversionBs,pagoBsEfect,costoVenta,tasaVenta,porcentajeEfectivoVenta) " +
                            "VALUES("
                            + CS(String.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.Now)) + ","
                            + totalVentaDolar.ToString().Replace(",",".") + ","
                            + totalVentaBs.ToString().Replace(",",".") + ","
                            + pagoEnEfectivo.ToString() + ","
+                           + costoVenta.ToString().Replace(",", ".") + ","
                            + tasa.ToString().Replace(",", ".") + ","
                            + porcentaje.ToString().Replace(",", ".") + ")";
             SqlCeCommand command = new SqlCeCommand(query, MainWindow.conn);

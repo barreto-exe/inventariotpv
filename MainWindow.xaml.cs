@@ -47,6 +47,8 @@ namespace Inventario_y_Contabilidad
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += timer_Tick;
             timer.Start();
+
+            actualizaVentas();
         }
 
         void timer_Tick(object sender, EventArgs e)
@@ -69,19 +71,93 @@ namespace Inventario_y_Contabilidad
 
         private void actualizaVentas()
         {
-            string query = "SELECT * FROM c_ventas WHERE fechaHora" +
-                           String.Format("{0:dd-MM-yyyy}", DateTime.Now) + "'  AND '" +
-                           String.Format("{0:dd-MM-yyyy}", DateTime.Now) + " 23:59:59' ORDER BY id DESC; ";
+            dataReportePrin.Items.Clear();
+
+            string query = "SELECT * FROM c_ventas WHERE fechaHora BETWEEN '" +
+                           String.Format("{0:yyyy-MM-dd}", DateTime.Now) + "'  AND '" +
+                           String.Format("{0:yyyy-MM-dd}", DateTime.Now) + " 23:59:59' ORDER BY id DESC; ";
             SqlCeCommand command = new SqlCeCommand(query, conn);
             SqlCeDataReader dr = command.ExecuteReader();
-            VentaClase venta = new VentaClase();
 
             while (dr.Read())
             {
-                venta.id = "" ;
+                var venta = new VentaClase
+                {
+                    id = dr["id"].ToString(),
+                    fechaHora = dr["fechaHora"].ToString(),
+                    pagoDolar = dr["pagoDolar"].ToString(),
+                    conversionBs = dr["conversionBs"].ToString(),
+                    tasaVenta = dr["tasaVenta"].ToString(),
+                    porcentajeEfectivoVenta = dr["porcentajeEfectivoVenta"].ToString()
+                };
+                
+                if (dr["pagoBsEfect"].ToString() == "1")
+                {
+                    venta.pagoBsEfect = "Sí";
+                }
+                else
+                {
+                    venta.pagoBsEfect = "No";
+                }
+
+                dataReportePrin.Items.Add(venta);
             }
 
+            dr.Close();
 
+            //Seteando Ingresos y Ganancias
+            query = "SELECT sum(costoVenta), sum(pagoDolar) FROM c_ventas WHERE fechaHora BETWEEN '" +
+                     String.Format("{0:yyyy-MM-dd}", DateTime.Now) + "'  AND '" +
+                     String.Format("{0:yyyy-MM-dd}", DateTime.Now) + " 23:59:59'";
+            command = new SqlCeCommand(query, conn);
+            dr = command.ExecuteReader();
+
+            decimal costoVentas=0, ingresos=0, ganancias=0;
+
+            if(dr.Read() && dr.GetValue(0).ToString() != "")
+            {
+                costoVentas = decimal.Parse(dr.GetValue(0).ToString());
+                ingresos = decimal.Parse(dr.GetValue(1).ToString());
+                ganancias = ingresos - costoVentas;
+
+                dr.Close();
+            }
+
+            decimal tasa = decimal.Parse(lblTasaDia.Content.ToString().Replace("Bs.S. ", ""));
+
+            //Ingresos Bs Punto
+            query = "SELECT sum(conversionBs) FROM c_ventas WHERE pagoBsEfect = 0 AND fechaHora BETWEEN '" +
+                     String.Format("{0:yyyy-MM-dd}", DateTime.Now) + "'  AND '" +
+                     String.Format("{0:yyyy-MM-dd}", DateTime.Now) + " 23:59:59'";
+            command = new SqlCeCommand(query, conn);
+            dr = command.ExecuteReader();
+            decimal ingresoBsPunto = 0;
+
+            if(dr.Read() && dr.GetValue(0).ToString() != "")
+            {
+                ingresoBsPunto = decimal.Parse(dr.GetValue(0).ToString());
+                dr.Close();
+            }
+
+            //Ingresos Bs Efectivo
+            query = "SELECT sum(conversionBs) FROM c_ventas WHERE pagoBsEfect = 1 AND fechaHora BETWEEN '" +
+                     String.Format("{0:yyyy-MM-dd}", DateTime.Now) + "'  AND '" +
+                     String.Format("{0:yyyy-MM-dd}", DateTime.Now) + " 23:59:59'";
+            command = new SqlCeCommand(query, conn);
+            dr = command.ExecuteReader();
+            decimal ingresoBsEfect = 0;
+
+            if (dr.Read() && dr.GetValue(0).ToString() != "")
+            {
+                ingresoBsEfect = decimal.Parse(dr.GetValue(0).ToString());
+                dr.Close();
+            }
+
+            //Seteando Etiquetas
+            lblIngresoDia.Content  = "$ " + ingresos.ToString();
+            lblGananciaDia.Content = "$ " + ganancias.ToString();
+            lblBsEfectivo.Content  = "Bs.S. " + ingresoBsEfect.ToString();
+            lblBsPunto.Content     = "Bs.S. " + ingresoBsPunto.ToString();
         }
 
         private void btnCambiarTasa_Click(object sender, RoutedEventArgs e)
@@ -96,6 +172,8 @@ namespace Inventario_y_Contabilidad
             Venta venta = new Venta();
             venta.Owner = this;
             venta.ShowDialog();
+
+            actualizaVentas();
         }
 
         private void imgCargar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

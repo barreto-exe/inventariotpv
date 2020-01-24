@@ -12,6 +12,7 @@ namespace Inventario_y_Contabilidad
         public string fechaHora { get; set; }
         public string pagoDolar { get; set; }
         public string conversionBs { get; set; }
+        public string pagoBsEfect { get; set; }
         public string tasaVenta { get; set; }
         public string porcentajeEfectivoVenta { get; set; }
     }

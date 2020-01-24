@@ -10,8 +10,8 @@
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         Closing="Window_Closing"
-        MinHeight="550" MinWidth="650"
-        Height="371"  Width="539">
+        MinHeight="550" MinWidth="900"
+        Height="371"  Width="900">
     <Grid>
         <Label Content="Tasa del Día:" 
                Margin="10,73,0,406" 
@@ -29,39 +29,75 @@
                />
 
         <Button x:Name="btnCambiarTasa" 
-                Margin="16,116,0,0"
-                Content="Cambiar" HorizontalAlignment="Left" Width="105" Height="32" VerticalAlignment="Top" Click="btnCambiarTasa_Click"
+                Margin="16,118,0,0"
+                Content="Cambiar" HorizontalAlignment="Left" Width="100" Height="30" VerticalAlignment="Top" Click="btnCambiarTasa_Click"
                 />
+        <Grid Margin="350,31,218,309">
 
-        <Label
-               Content="Ingresos del Día:" 
-               Margin="10,161,0,308" 
-               FontSize="20" 
-               HorizontalAlignment="Left" 
-               Width="160"
+            <Label
+                Content="Ingresos:" 
+                FontSize="20" 
+                HorizontalAlignment="Left" 
+                Width="145" Height="40" VerticalAlignment="Top" Margin="0,19,0,0"
                />
-        <Label
-               Content="Ganancia del Día:" 
-               Margin="10,201,0,262" 
-               FontSize="20" 
-               HorizontalAlignment="Left" 
-               Width="160"
+            <Label
+                Content="Ganancias:" 
+                Margin="0,59,0,0" 
+                FontSize="20" 
+                HorizontalAlignment="Left" 
+                Width="145" Height="40" VerticalAlignment="Top"
                />
 
-        <Label x:Name="lblIngresoDia"
-            Content="Bs.S. 999.999" 
-            Margin="170,162,0,308" 
-            FontSize="20" 
-            HorizontalAlignment="Left" 
-            Width="204"
+            <Label x:Name="lblIngresoDia"
+                Content="Bs.S. 999.999" 
+                Margin="145,19,0,0" 
+                FontSize="20" 
+                HorizontalAlignment="Left" 
+                Width="224" Height="40" VerticalAlignment="Top"
                />
-        <Label x:Name="lblGananciaDia"
-            Content="Bs.S. 999.999" 
-            Margin="170,201,0,262" 
-            FontSize="20" 
-            HorizontalAlignment="Left" 
-            Width="204"
+            <Label x:Name="lblGananciaDia"
+                Content="Bs.S. 999.999" 
+                Margin="145,59,0,0" 
+                FontSize="20" 
+                HorizontalAlignment="Left" 
+                Width="224" Height="40" VerticalAlignment="Top"
                />
+            <Label x:Name="lblBsEfectivo"
+                Content="Bs.S. 999.999" 
+                Margin="145,99,0,0" 
+                FontSize="20" 
+                HorizontalAlignment="Left" 
+                Width="224" Height="40" VerticalAlignment="Top"
+               />
+            <Label x:Name="lblBsPunto"
+                Content="Bs.S. 999.999" 
+                Margin="145,139,0,0" 
+                FontSize="20" 
+                HorizontalAlignment="Left" 
+                Width="224" Height="40" VerticalAlignment="Top"
+               />
+            <Label
+                Content="Bs.S. Efectivo:" 
+                Margin="0,99,0,0" 
+                FontSize="20" 
+                HorizontalAlignment="Left" 
+                Width="145" Height="40" VerticalAlignment="Top"
+               />
+            <Label
+                Content="Bs.S. Punto:" 
+                Margin="0,139,0,0" 
+                FontSize="20" 
+                HorizontalAlignment="Left" 
+                Width="145" Height="40" VerticalAlignment="Top"
+               />
+            <Label
+                Content="Montos del Día:" 
+                FontSize="20" 
+                HorizontalAlignment="Left" 
+                Width="165" Height="40" VerticalAlignment="Top"
+               Margin="0,-21,0,0"
+               />
+        </Grid>
 
         <Image x:Name="imgVender"
                Margin="0,19,10,0" 
@@ -91,14 +127,14 @@
                Width="100"/>-->
 
         <Label x:Name="lblFechaHora"
-               Content="Jue. 20/01/2020 - 9:20pm" 
+               Content="Jue. 20/01/2020 - 12:59:59 pm" 
                Margin="10,10,0,0" 
                FontSize="20" 
                HorizontalAlignment="Left" 
-               Width="380" Height="52" VerticalAlignment="Top"
+               Width="350" Height="52" VerticalAlignment="Top"
                />
-        <Rectangle Fill="#FF43B05C" HorizontalAlignment="Left" Height="6" Margin="10,155,0,0" Stroke="Black" VerticalAlignment="Top" Width="250"/>
-        <Rectangle Fill="#FF43B05C" HorizontalAlignment="Left" Height="6" Margin="10,62,0,0" Stroke="Black" VerticalAlignment="Top" Width="250"/>
+        <Rectangle Fill="#FF43B05C" HorizontalAlignment="Left" Height="5" Margin="10,161,0,0" Stroke="Black" VerticalAlignment="Top" Width="289"/>
+        <Rectangle Fill="#FF43B05C" HorizontalAlignment="Left" Height="6" Margin="10,62,0,0" Stroke="Black" VerticalAlignment="Top" Width="289"/>
 
         <DataGrid x:Name="dataReportePrin" 
                   Margin="10,257,10,10" 
@@ -124,11 +160,11 @@
                                 Header="Conversión Bs." 
                                 Binding="{Binding conversionBs}"/>
                 <DataGridTextColumn 
-                                Header="Bs. Efectivo" 
+                                Header="Pagó Bs. Efectivo" 
                                 Binding="{Binding pagoBsEfect}"/>
 
 
-                <DataGridTemplateColumn>
+                <!--<DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button x:Name="btnDetalle"
@@ -139,7 +175,7 @@
                             </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                </DataGridTemplateColumn>-->
             </DataGrid.Columns>
         </DataGrid>
         <Label x:Name="lblPorcentaje"

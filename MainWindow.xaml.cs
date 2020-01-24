@@ -67,6 +67,23 @@ namespace Inventario_y_Contabilidad
 
         }
 
+        private void actualizaVentas()
+        {
+            string query = "SELECT * FROM c_ventas WHERE fechaHora" +
+                           String.Format("{0:dd-MM-yyyy}", DateTime.Now) + "'  AND '" +
+                           String.Format("{0:dd-MM-yyyy}", DateTime.Now) + " 23:59:59' ORDER BY id DESC; ";
+            SqlCeCommand command = new SqlCeCommand(query, conn);
+            SqlCeDataReader dr = command.ExecuteReader();
+            VentaClase venta = new VentaClase();
+
+            while (dr.Read())
+            {
+                venta.id = "" ;
+            }
+
+
+        }
+
         private void btnCambiarTasa_Click(object sender, RoutedEventArgs e)
         {
             cambioTasa cambio = new cambioTasa();

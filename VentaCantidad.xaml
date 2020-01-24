@@ -1,0 +1,29 @@
+﻿<Window x:Class="Inventario_y_Contabilidad.VentaCantidad"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Inventario_y_Contabilidad"
+        mc:Ignorable="d"        
+        Title="Cantidad"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        WindowState="Normal"
+        Height="170"  Width="250">
+    <Grid>
+        <Label Content="Cantidad:"
+               HorizontalContentAlignment="Center" Margin="10,10,0,0" FontSize="18" HorizontalAlignment="Left" Width="224" Height="44" VerticalAlignment="Top"
+               />
+        <TextBox x:Name="txtCant" 
+                 Margin="10,51,10,0" 
+                 TextWrapping="Wrap" 
+                 Text="1"
+                 HorizontalContentAlignment="Center"
+                 VerticalContentAlignment="Center"
+                 KeyDown="txtCant_KeyDown" FontSize="16" Height="35" VerticalAlignment="Top"/>
+
+        <Button x:Name="btnAceptar"
+                Content="Aceptar" Margin="10,91,10,0" Height="28" VerticalAlignment="Top" Click="btnAceptar_Click"/>
+
+    </Grid>
+</Window>

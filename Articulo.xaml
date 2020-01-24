@@ -28,7 +28,6 @@
             HorizontalAlignment="Left" 
             Width="223" Height="40" VerticalAlignment="Top"
         />
-
         <Label 
             x:Name="lblIdArt"
             Content="#id" 
@@ -45,6 +44,7 @@
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             Width="200" 
+            KeyDown="txtPrecioDolar_KeyDown"
             FontSize="20"/>
         <Label 
             Content="Precio $: " 
@@ -61,7 +61,8 @@
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             Width="223" 
-            FontSize="20"/>
+            FontSize="20"
+            KeyDown="txtCostoDolar_KeyDown"/>
         <Label 
             Content="Costo $: " 
             Margin="246,110,0,0" 
@@ -75,7 +76,8 @@
             Margin="10,250,0,0" 
             TextWrapping="Wrap" 
             Width="200" 
-            FontSize="20" Height="40" VerticalAlignment="Top"/>
+            FontSize="20" Height="40" VerticalAlignment="Top"
+            KeyDown="soloNum"/>
         <Label 
             Content="Unidades Agregadas:" 
             Margin="10,210,0,0" 

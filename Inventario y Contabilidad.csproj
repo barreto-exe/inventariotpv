@@ -39,6 +39,7 @@
     <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.SqlServer.Compact.4.0.8876.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -73,6 +74,9 @@
     <Compile Include="Venta.xaml.cs">
       <DependentUpon>Venta.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VentaCantidad.xaml.cs">
+      <DependentUpon>VentaCantidad.xaml</DependentUpon>
+    </Compile>
     <Page Include="Articulo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -102,6 +106,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Venta.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VentaCantidad.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

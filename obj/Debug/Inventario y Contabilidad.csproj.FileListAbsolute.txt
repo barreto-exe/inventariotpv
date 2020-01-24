@@ -26,3 +26,5 @@ D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\cambioT
 D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\Inventario.baml
 D:\Documents\Repositorios\Personales\Inventario y Contabilidad\bin\Debug\bd.sdf
 D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\Inventario y Contabilidad_Content.g.cs
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\VentaCantidad.g.cs
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\VentaCantidad.baml

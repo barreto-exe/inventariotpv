@@ -24,6 +24,8 @@ namespace Inventario_y_Contabilidad
         {
             InitializeComponent();
 
+            txtMontoTasa.Focus();
+
             SqlCeCommand command = new SqlCeCommand("SELECT TOP 1 * FROM c_tasa ORDER BY id DESC", MainWindow.conn);
             SqlCeDataReader dr = command.ExecuteReader();
             dr.Read();

@@ -84,27 +84,30 @@
                                 Header="Id. Articulo" 
                                 Binding="{Binding id}"/>
                 <DataGridTextColumn 
+                                Header="Descripción" 
+                                Binding="{Binding descripcion}"/>
+                <DataGridTextColumn 
                                 Header="Cantidad" 
-                                Binding="{Binding cantidad}"/>
+                                Binding="{Binding cantAct}"/>
                 <DataGridTextColumn 
                                 Header="Subtotal $" 
-                                Binding="{Binding subtotal}"/>
+                                Binding="{Binding precioDolar}"/>
                 <DataGridTextColumn 
                                 Header="Conversión Bs." 
-                                Binding="{Binding subtotalBs}"/>
+                                Binding="{Binding precioBs}"/>
 
-                <!--<DataGridTemplateColumn>
+                <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button x:Name="btnBorrar"
                                     Click="btnBorrar_Click">
                                 <Button.Content>
-                                    <Label Content="X"/>
+                                    <Label Content="❌"/>
                                 </Button.Content>
                             </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>-->
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 
@@ -113,7 +116,9 @@
                   HorizontalAlignment="Left" 
                   VerticalContentAlignment="Center"
                   Margin="265,28,0,0" 
-                  VerticalAlignment="Top" Width="80" Height="20" FontSize="14"/>
+                  VerticalAlignment="Top" Width="80" Height="20" FontSize="14" 
+                  Checked="checkEfectivo_Checked"
+                  Unchecked="checkEfectivo_Checked"/>
 
     </Grid>
 </Window>

@@ -30,12 +30,14 @@ namespace Inventario_y_Contabilidad
             //Nuevo artículo.
             if (tipo == 1)
             {
+                txtDescArt.Focus();
                 btnBuscar.IsEnabled = false;
                 lblIdArt.Content = "";
             }
             //Actualizar cantidad y precio artículo
             if(tipo == 2)
             {
+                txtPrecioDolar.Focus();
                 setArticuloBuscado();
             }
         }
@@ -152,12 +154,73 @@ namespace Inventario_y_Contabilidad
                 articuloBuscado = 1;
             }
         }
-       
+        
         private string CS(string strSinComillas)
         {
             //Añade comillas simples
             strSinComillas = strSinComillas.Replace("'", "''");
             return "'" + strSinComillas + "'";
+        }
+        private void soloNum(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Tab)
+            {
+                btnAceptar.Focus();
+            }
+
+            if ((e.Key >= Key.D0 && e.Key <= Key.D9) 
+                || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9))
+                e.Handled = false;
+            else
+                e.Handled = true;
+        }
+
+        private void txtPrecioDolar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Tab)
+            {
+                txtCostoDolar.Focus();
+            }
+
+            e.Handled = true;
+
+            if ((e.Key >= Key.D0 && e.Key <= Key.D9) || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9))
+            {
+                string tecla = e.Key.ToString().Substring(e.Key.ToString().Length - 1, 1);
+                decimal numAnterior = 0;
+                if (txtPrecioDolar.Text != "")
+                {
+                    numAnterior = Decimal.Parse(txtPrecioDolar.Text) * 100;
+                }
+                string strNumNuevo = numAnterior.ToString().Replace(",00", "") + tecla;
+                decimal numNuevo = decimal.Parse(strNumNuevo) / 100;
+
+                txtPrecioDolar.Text = String.Format("{0:#,0.00}", numNuevo);
+            }
+        }
+
+        private void txtCostoDolar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Tab)
+            {
+                txtCantidadAgg.Focus();
+            }
+
+            e.Handled = true;
+
+            if ((e.Key >= Key.D0 && e.Key <= Key.D9) || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9))
+            {
+                string tecla = e.Key.ToString().Substring(e.Key.ToString().Length - 1, 1);
+                decimal numAnterior = 0;
+                if (txtCostoDolar.Text != "")
+                {
+                    numAnterior = Decimal.Parse(txtCostoDolar.Text) * 100;
+                }
+                string strNumNuevo = numAnterior.ToString().Replace(",00", "") + tecla;
+                decimal numNuevo = decimal.Parse(strNumNuevo) / 100;
+
+                txtCostoDolar.Text = String.Format("{0:#,0.00}", numNuevo);
+            }
         }
     }
 }

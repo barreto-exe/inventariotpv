@@ -38,11 +38,11 @@ namespace Inventario_y_Contabilidad
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
-            float n = 0;
+            decimal n = 0;
 
             //Validar que no sea texto vacío ni caracteres alfabéticos o especiales.
             if (               txtMontoTasa.Text == ""   || txtPorcentajeBS.Text == "" ||
-               !float.TryParse(txtMontoTasa.Text, out n) || !float.TryParse(txtPorcentajeBS.Text, out n))
+               !decimal.TryParse(txtMontoTasa.Text, out n) || !decimal.TryParse(txtPorcentajeBS.Text, out n))
             {
                 return;
             }

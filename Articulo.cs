@@ -43,13 +43,13 @@ namespace Inventario_y_Contabilidad
         }
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
-            float n = 0; 
+            decimal n = 0; 
 
             if( txtCantidadAgg.Text == "" || txtCostoDolar.Text == ""  ||
                 txtDescArt.Text == ""        || txtPrecioDolar.Text == "" ||
-                !float.TryParse(txtPrecioDolar.Text,out n) ||
-                !float.TryParse(txtCostoDolar.Text, out n) ||
-                !float.TryParse(txtCantidadAgg.Text, out n)
+                !decimal.TryParse(txtPrecioDolar.Text,out n) ||
+                !decimal.TryParse(txtCostoDolar.Text, out n) ||
+                !decimal.TryParse(txtCantidadAgg.Text, out n)
                 )
             {
                 return;
@@ -99,8 +99,8 @@ namespace Inventario_y_Contabilidad
             //Actualizando info de articulo seleccionado
             string idArt = lblIdArt.Content.ToString().Replace("#", "");
             string query = "UPDATE c_articulos SET " +
-                           "precioDolar = " + float.Parse(txtPrecioDolar.Text).ToString().Replace(",",".") + "," +
-                           "costoDolar = "  + float.Parse(txtCostoDolar.Text).ToString().Replace(",",".") + " " +
+                           "precioDolar = " + decimal.Parse(txtPrecioDolar.Text).ToString().Replace(",",".") + "," +
+                           "costoDolar = "  + decimal.Parse(txtCostoDolar.Text).ToString().Replace(",",".") + " " +
                            "WHERE id = "    + idArt;
             SqlCeCommand command = new SqlCeCommand(query, MainWindow.conn);
             command.ExecuteReader();

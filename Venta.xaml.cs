@@ -71,12 +71,12 @@ namespace Inventario_y_Contabilidad
             decimal costoDolar    = decimal.Parse(articulo.costoDolar)  * decimal.Parse(articulo.cantAct);
             decimal subtotalBs = subtotalDolar * tasa;
 
-            articulo.precioDolar = subtotalDolar.ToString();
-            articulo.costoDolar  = costoDolar.ToString();
-            articulo.precioBs    = subtotalBs.ToString();
+            articulo.precioDolar = Decimal.Round(subtotalDolar, 2).ToString();
+            articulo.costoDolar  = Decimal.Round(costoDolar, 2).ToString();
+            articulo.precioBs    = Decimal.Round(subtotalBs, 2).ToString();
             if (checkEfectivo.IsChecked == true)
             {
-                articulo.precioBs = ((subtotalBs * tasa * 100) / porcentaje).ToString();
+                articulo.precioBs = Decimal.Round(((subtotalBs * tasa * 100) / porcentaje), 2).ToString();
             }
 
             dataArticulosVenta.Items.Add(articulo);
@@ -106,12 +106,12 @@ namespace Inventario_y_Contabilidad
                 totalVentaDolar += subtotalDolar;
                 costoVenta      += costoDolar;
 
-                articulo.precioDolar = subtotalDolar.ToString();
-                articulo.costoDolar  = costoDolar.ToString();
-                articulo.precioBs = subtotalBs.ToString();
+                articulo.precioDolar = Decimal.Round(subtotalDolar, 2).ToString();
+                articulo.costoDolar  = Decimal.Round(costoDolar, 2).ToString();
+                articulo.precioBs = Decimal.Round(subtotalBs, 2).ToString();
                 if (checkEfectivo.IsChecked == true)
                 {
-                    articulo.precioBs = ((subtotalBs * 100) / porcentaje).ToString();
+                    articulo.precioBs = Decimal.Round(((subtotalBs * 100) / porcentaje), 2).ToString();
                 }
 
                 aux.Items.Add(articulo);
@@ -123,12 +123,12 @@ namespace Inventario_y_Contabilidad
                 dataArticulosVenta.Items.Add(articulo);
             }
 
-            lblTotalDolar.Content = "$ " + totalVentaDolar.ToString();
-            lblTotalBs.Content = "Bs.S. " + (totalVentaDolar * tasa).ToString();
+            lblTotalDolar.Content = "$ "  + Decimal.Round(totalVentaDolar, 2).ToString();
+            lblTotalBs.Content = "Bs.S. " + Decimal.Round((totalVentaDolar * tasa), 2).ToString();
             
             if (checkEfectivo.IsChecked == true)
             {
-                lblTotalBs.Content = "Bs.S. " + ((totalVentaDolar * tasa * 100) / porcentaje).ToString();
+                lblTotalBs.Content = "Bs.S. " + Decimal.Round(((totalVentaDolar * tasa * 100) / porcentaje), 2).ToString();
             }
         }
        
@@ -184,6 +184,14 @@ namespace Inventario_y_Contabilidad
                         + articulo.cantAct + ","
                         + articulo.precioDolar.Replace(",", ".") + ","
                         + articulo.precioBs.Replace(",", ".") + ")";
+                command = new SqlCeCommand(query, MainWindow.conn);
+                command.ExecuteReader();
+
+                query = "INSERT INTO c_inventario (fechaHora,id_articulo,cantidad) " +
+                        "VALUES("
+                        + CS(String.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.Now)) + ","
+                        + articulo.id + ","
+                        + "-" + articulo.cantAct + ")";
                 command = new SqlCeCommand(query, MainWindow.conn);
                 command.ExecuteReader();
             }

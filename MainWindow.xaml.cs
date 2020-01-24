@@ -85,10 +85,10 @@ namespace Inventario_y_Contabilidad
                 {
                     id = dr["id"].ToString(),
                     fechaHora = dr["fechaHora"].ToString(),
-                    pagoDolar = dr["pagoDolar"].ToString(),
-                    conversionBs = dr["conversionBs"].ToString(),
-                    tasaVenta = dr["tasaVenta"].ToString(),
-                    porcentajeEfectivoVenta = dr["porcentajeEfectivoVenta"].ToString()
+                    pagoDolar    = RoundDecimalString(dr["pagoDolar"].ToString()),
+                    conversionBs = RoundDecimalString(dr["conversionBs"].ToString()),
+                    tasaVenta    = RoundDecimalString(dr["tasaVenta"].ToString()),
+                    porcentajeEfectivoVenta = RoundDecimalString(dr["porcentajeEfectivoVenta"].ToString())
                 };
                 
                 if (dr["pagoBsEfect"].ToString() == "1")
@@ -154,10 +154,10 @@ namespace Inventario_y_Contabilidad
             }
 
             //Seteando Etiquetas
-            lblIngresoDia.Content  = "$ " + ingresos.ToString();
-            lblGananciaDia.Content = "$ " + ganancias.ToString();
-            lblBsEfectivo.Content  = "Bs.S. " + ingresoBsEfect.ToString();
-            lblBsPunto.Content     = "Bs.S. " + ingresoBsPunto.ToString();
+            lblIngresoDia.Content  = "$ " + Decimal.Round(ingresos, 2).ToString();
+            lblGananciaDia.Content = "$ " + Decimal.Round(ganancias, 2).ToString();
+            lblBsEfectivo.Content  = "Bs.S. " + Decimal.Round(ingresoBsEfect, 2).ToString();
+            lblBsPunto.Content     = "Bs.S. " + Decimal.Round(ingresoBsPunto, 2).ToString();
         }
 
         private void btnCambiarTasa_Click(object sender, RoutedEventArgs e)
@@ -185,6 +185,12 @@ namespace Inventario_y_Contabilidad
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             conn.Close();
+        }
+    
+        private string RoundDecimalString(string num)
+        {
+            decimal dec = Decimal.Parse(num);
+            return decimal.Round(dec, 2).ToString();
         }
     }
 }

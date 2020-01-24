@@ -14,25 +14,25 @@
         Height="371"  Width="900">
     <Grid>
         <Label Content="Tasa del Día:" 
-               Margin="10,73,0,406" 
+               Margin="10,73,0,0" 
                FontSize="20" 
                HorizontalAlignment="Left" 
-               Width="134"
+               Width="134" Height="40" VerticalAlignment="Top"
                />
 
         <Label x:Name="lblTasaDia"
                Content="Bs.S. 999.999" 
-               Margin="126,73,0,406" 
+               Margin="126,73,0,0" 
                FontSize="20" 
                HorizontalAlignment="Left" 
-               Width="204"
+               Width="204" Height="40" VerticalAlignment="Top"
                />
 
         <Button x:Name="btnCambiarTasa" 
                 Margin="16,118,0,0"
                 Content="Cambiar" HorizontalAlignment="Left" Width="100" Height="30" VerticalAlignment="Top" Click="btnCambiarTasa_Click"
                 />
-        <Grid Margin="350,31,218,309">
+        <Grid Margin="350,31,218,0" Height="179" VerticalAlignment="Top">
 
             <Label
                 Content="Ingresos:" 
@@ -180,11 +180,11 @@
         </DataGrid>
         <Label x:Name="lblPorcentaje"
             Content="100%" 
-            Margin="126,113,0,363" 
+            Margin="126,113,0,0" 
             FontSize="20" 
             HorizontalAlignment="Left" 
             VerticalContentAlignment="Top"
-            Width="134"
+            Width="134" Height="43" VerticalAlignment="Top"
                />
 
 

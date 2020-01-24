@@ -41,15 +41,15 @@ namespace Inventario_y_Contabilidad
             porcentajeStr = dr["porcentajeEfectivo"].ToString();
             dr.Close();
 
-            float tasa = float.Parse(tasaStr),
-            porcentaje = float.Parse(porcentajeStr) + 100;
+            decimal tasa = decimal.Parse(tasaStr),
+            porcentaje = decimal.Parse(porcentajeStr) + 100;
 
             //Consultando artículos
             query = "SELECT * FROM c_articulos";
             command = new SqlCeCommand(query, MainWindow.conn);
             SqlCeDataReader dr_art = command.ExecuteReader();
 
-            double valorInventario = 0;
+            decimal valorInventario = 0;
 
             //Por cada artículo en inventario
             while (dr_art.Read())
@@ -72,21 +72,23 @@ namespace Inventario_y_Contabilidad
                     SqlCeDataReader drFecha = command.ExecuteReader();
                     drFecha.Read();
 
-                    double precioDolar = float.Parse(dr_art["precioDolar"].ToString());
-                    double costoDolar = float.Parse(dr_art["costoDolar"].ToString());
-                    double precioBs = precioDolar * tasa;
-                    double precioBsEfect = (precioBs * 100) / porcentaje;
+                    decimal precioDolar = decimal.Parse(dr_art["precioDolar"].ToString());
+                    decimal costoDolar = decimal.Parse(dr_art["costoDolar"].ToString());
+                    decimal precioBs = precioDolar * tasa;
+                    decimal precioBsEfect = (precioBs * 100) / porcentaje;
+                    
+
 
                     var articulo = new ArticuloClase
                     {
                         id = dr_art["id"].ToString(),
                         descripcion = dr_art["descripcion"].ToString(),
                         cantAct = cantidadAct.ToString(),
-                        precioDolar = precioDolar.ToString(),
-                        costoDolar = costoDolar.ToString(),
+                        precioDolar = Decimal.Round(precioDolar,2).ToString(),
+                        costoDolar = Decimal.Round(costoDolar, 2).ToString(),
                         fechaHora = drFecha.GetValue(0).ToString(),
-                        precioBs = precioBs.ToString(),
-                        precioBsEfect = precioBsEfect.ToString()
+                        precioBs = Decimal.Round(precioBs, 2).ToString(),
+                        precioBsEfect = Decimal.Round(precioBsEfect, 2).ToString()
                     };
 
                     drFecha.Close();

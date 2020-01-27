@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         WindowState="Normal"
-        Height="340"  Width="490">
+        Height="340"  Width="600">
     <Grid>
         <DataGrid x:Name="dataBuscarArt" 
                   Margin="10" 
@@ -32,14 +32,13 @@
                                 Header="Costo $/Unidad" 
                                 Binding="{Binding costoDolar}"/>
 
-
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button x:Name="btnSeleccionar"
                                     Click="btnSeleccionar_Click">
                                 <Button.Content>
-                                    <Label Content="🖊"/>
+                                    <Label Content="●"/>
                                 </Button.Content>
                             </Button>
                         </DataTemplate>

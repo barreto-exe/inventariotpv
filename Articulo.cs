@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlServerCe;
 using System.Linq;
@@ -168,7 +168,7 @@ namespace Inventario_y_Contabilidad
                 btnAceptar.Focus();
             }
 
-            if ((e.Key >= Key.D0 && e.Key <= Key.D9) 
+            if ((e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key == Key.OemMinus) 
                 || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9))
                 e.Handled = false;
             else

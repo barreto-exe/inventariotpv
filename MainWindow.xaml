@@ -30,7 +30,11 @@
 
         <Button x:Name="btnCambiarTasa" 
                 Margin="16,118,0,0"
-                Content="Cambiar" HorizontalAlignment="Left" Width="100" Height="30" VerticalAlignment="Top" Click="btnCambiarTasa_Click"
+                Content="Cambiar" 
+                HorizontalAlignment="Left" 
+                Width="100" Height="30" 
+                VerticalAlignment="Top" 
+                Click="btnCambiarTasa_Click"
                 />
         <Grid Margin="350,31,218,0" Height="179" VerticalAlignment="Top">
 
@@ -186,6 +190,8 @@
             VerticalContentAlignment="Top"
             Width="134" Height="43" VerticalAlignment="Top"
                />
+
+        <!--<TextBox x:Name="txtTest" Margin="16,189,593,278" />-->
 
 
     </Grid>

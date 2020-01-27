@@ -37,7 +37,7 @@ namespace Inventario_y_Contabilidad
             SqlCeCommand command = new SqlCeCommand(query, MainWindow.conn);
             SqlCeDataReader dr = command.ExecuteReader();
             dr.Read();
-            tasaStr = String.Format("{0:#,#.00}", dr["tasaDolar"].ToString());
+            tasaStr = dr["tasaDolar"].ToString();
             porcentajeStr = dr["porcentajeEfectivo"].ToString();
             dr.Close();
 

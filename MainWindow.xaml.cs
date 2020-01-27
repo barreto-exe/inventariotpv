@@ -30,9 +30,11 @@ namespace Inventario_y_Contabilidad
             conn = new SqlCeConnection("Data Source =" + dataSource + "; Password = contabilidad");
         }
 
+        //String.Format("{0:#,#.00}",  )
+
         public MainWindow()
         {
-            if(!File.Exists("bd.sdf"))
+            if (!File.Exists("bd.sdf"))
             {
                 MessageBox.Show("No existe bd.sdf", "Error");
                 Environment.Exit(0);
@@ -50,6 +52,12 @@ namespace Inventario_y_Contabilidad
 
             actualizaVentas();
         }
+
+        //private void test(object sender, RoutedEventArgs e)
+        //{
+        //    decimal num = decimal.Parse(txtTest.Text);
+        //    lblBsPunto.Content = num.ToString("#,#.00#;(#,#.00#)");
+        //}
 
         void timer_Tick(object sender, EventArgs e)
         {

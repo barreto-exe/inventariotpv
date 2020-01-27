@@ -1,0 +1,34 @@
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\bin\Release\bd.sdf
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\bin\Release\Inventario y Contabilidad.exe.config
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\bin\Release\Inventario y Contabilidad.exe
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\bin\Release\Inventario y Contabilidad.pdb
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\bin\Release\System.Data.SqlServerCe.dll
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Release\Inventario y Contabilidad.csprojAssemblyReference.cache
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Release\Articulo.g.cs
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Release\ArticuloBuscar.g.cs
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Release\cambioTasa.g.cs
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Release\Inventario.g.cs
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Release\MainWindow.g.cs
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Release\Venta.g.cs
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Release\VentaCantidad.g.cs
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Release\App.g.cs
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Release\Inventario y Contabilidad_Content.g.cs
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Release\Inventario y Contabilidad_MarkupCompile.cache
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Release\Inventario y Contabilidad_MarkupCompile.lref
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Release\Articulo.baml
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Release\ArticuloBuscar.baml
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Release\cambioTasa.baml
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Release\Inventario.baml
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Release\MainWindow.baml
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Release\Venta.baml
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Release\VentaCantidad.baml
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Release\Inventario y Contabilidad.g.resources
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Release\Inventario_y_Contabilidad.Properties.Resources.resources
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Release\Inventario y Contabilidad.csproj.GenerateResource.cache
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Release\Inventario y Contabilidad.csproj.CopyComplete
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Release\Inventario y Contabilidad.exe
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Release\Inventario y Contabilidad.pdb
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\bin\Release\Inventario y Contabilidad.exe.manifest
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\bin\Release\Inventario y Contabilidad.application
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Release\Inventario y Contabilidad.exe.manifest
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Release\Inventario y Contabilidad.application

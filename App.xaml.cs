@@ -15,11 +15,10 @@ namespace Inventario_y_Contabilidad
     /// </summary>
     public partial class App : Application
     {
-        void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            // Process unhandled exception
-            // Prevent default unhandled exception processing
-            CreaLog(e.Exception.ToString());
+            MessageBox.Show("Ha ocurrido un error: \n" + e.Exception.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            CreaLog("Error no controlado. \n" + e.Exception.ToString());
             e.Handled = true;
         }
 

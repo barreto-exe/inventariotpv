@@ -28,3 +28,7 @@ D:\Documents\Repositorios\Personales\Inventario y Contabilidad\bin\Debug\bd.sdf
 D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\Inventario y Contabilidad_Content.g.cs
 D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\VentaCantidad.g.cs
 D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\VentaCantidad.baml
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\bin\Debug\Inventario y Contabilidad.exe.manifest
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\bin\Debug\Inventario y Contabilidad.application
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\Inventario y Contabilidad.exe.manifest
+D:\Documents\Repositorios\Personales\Inventario y Contabilidad\obj\Debug\Inventario y Contabilidad.application

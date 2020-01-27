@@ -102,7 +102,7 @@
                             <Button x:Name="btnBorrar"
                                     Click="btnBorrar_Click">
                                 <Button.Content>
-                                    <Label Content="❌"/>
+                                    <Label Content="X"/>
                                 </Button.Content>
                             </Button>
                         </DataTemplate>

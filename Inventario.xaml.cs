@@ -84,11 +84,11 @@ namespace Inventario_y_Contabilidad
                         id = dr_art["id"].ToString(),
                         descripcion = dr_art["descripcion"].ToString(),
                         cantAct = cantidadAct.ToString(),
-                        precioDolar = Decimal.Round(precioDolar,2).ToString(),
-                        costoDolar = Decimal.Round(costoDolar, 2).ToString(),
+                        precioDolar = Decimal.Round(precioDolar,2).ToString("#,#0.##"),
+                        costoDolar = Decimal.Round(costoDolar, 2).ToString("#,#0.##"),
                         fechaHora = drFecha.GetValue(0).ToString(),
-                        precioBs = Decimal.Round(precioBs, 2).ToString(),
-                        precioBsEfect = Decimal.Round(precioBsEfect, 2).ToString()
+                        precioBs = Decimal.Round(precioBs, 2).ToString("#,#0.##"),
+                        precioBsEfect = Decimal.Round(precioBsEfect, 2).ToString("#,#0.##")
                     };
 
                     drFecha.Close();
@@ -99,7 +99,7 @@ namespace Inventario_y_Contabilidad
             }
             dr_art.Close();
 
-            lblValorInventario.Content = valorInventario.ToString() + "$ - Bs.S. " + (valorInventario * tasa).ToString();
+            lblValorInventario.Content = valorInventario.ToString("#,#0.##") + "$ - Bs.S. " + (valorInventario * tasa).ToString("#,#0.##");
 
         }
 

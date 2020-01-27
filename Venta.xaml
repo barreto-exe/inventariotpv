@@ -39,6 +39,7 @@
                  Margin="10,96,0,0" 
                  TextWrapping="Wrap" 
                  VerticalAlignment="Top" 
+                 KeyDown="txtIdArt_KeyDown"
                  Width="250" 
                  FontSize="20"/>
 

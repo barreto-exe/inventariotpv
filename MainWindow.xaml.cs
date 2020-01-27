@@ -30,7 +30,9 @@ namespace Inventario_y_Contabilidad
             conn = new SqlCeConnection("Data Source =" + dataSource + "; Password = contabilidad");
         }
 
+        //FORMATOS
         //String.Format("{0:#,#.00}",  )
+        //decimal.Parse( ).ToString("#,#.#;(#,#.#)")
 
         public MainWindow()
         {
@@ -67,14 +69,9 @@ namespace Inventario_y_Contabilidad
             SqlCeCommand command = new SqlCeCommand("SELECT TOP 1 * FROM c_tasa ORDER BY id DESC", conn);
             SqlCeDataReader dr = command.ExecuteReader();
             dr.Read();
-            lblTasaDia.Content = "Bs.S. " + String.Format("{0:#,#.00}", dr["tasaDolar"].ToString());
+            lblTasaDia.Content = "Bs.S. " + decimal.Parse(dr["tasaDolar"].ToString()).ToString("#,#0.##");
             lblPorcentaje.Content = dr["porcentajeEfectivo"].ToString()+"%";
             dr.Close();
-        }
-
-        private void btnDetalle_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void actualizaVentas()
@@ -162,10 +159,10 @@ namespace Inventario_y_Contabilidad
             }
 
             //Seteando Etiquetas
-            lblIngresoDia.Content  = "$ " + Decimal.Round(ingresos, 2).ToString();
-            lblGananciaDia.Content = "$ " + Decimal.Round(ganancias, 2).ToString();
-            lblBsEfectivo.Content  = "Bs.S. " + Decimal.Round(ingresoBsEfect, 2).ToString();
-            lblBsPunto.Content     = "Bs.S. " + Decimal.Round(ingresoBsPunto, 2).ToString();
+            lblIngresoDia.Content  = "$ " + Decimal.Round(ingresos, 2).ToString("#,#0.##");
+            lblGananciaDia.Content = "$ " + Decimal.Round(ganancias, 2).ToString("#,#0.##");
+            lblBsEfectivo.Content  = "Bs.S. " + Decimal.Round(ingresoBsEfect, 2).ToString("#,#0.##");
+            lblBsPunto.Content     = "Bs.S. " + Decimal.Round(ingresoBsPunto, 2).ToString("#,#0.##");
         }
 
         private void btnCambiarTasa_Click(object sender, RoutedEventArgs e)
@@ -198,7 +195,7 @@ namespace Inventario_y_Contabilidad
         private string RoundDecimalString(string num)
         {
             decimal dec = Decimal.Parse(num);
-            return decimal.Round(dec, 2).ToString();
+            return decimal.Round(dec, 2).ToString("#,#0.##");
         }
     }
 }

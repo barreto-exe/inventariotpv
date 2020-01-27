@@ -177,7 +177,10 @@ namespace Inventario_y_Contabilidad
 
         private void txtPrecioDolar_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Tab)
+            //Oculta el cursor
+            txtPrecioDolar.CaretBrush = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+
+            if (e.Key == Key.Tab)
             {
                 txtCostoDolar.Focus();
             }
@@ -201,6 +204,9 @@ namespace Inventario_y_Contabilidad
 
         private void txtCostoDolar_KeyDown(object sender, KeyEventArgs e)
         {
+            //Oculta el cursor
+            txtCostoDolar.CaretBrush = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+
             if (e.Key == Key.Tab)
             {
                 txtCantidadAgg.Focus();
@@ -220,6 +226,21 @@ namespace Inventario_y_Contabilidad
                 decimal numNuevo = decimal.Parse(strNumNuevo) / 100;
 
                 txtCostoDolar.Text = String.Format("{0:#,0.00}", numNuevo);
+            }
+        }
+
+        private void txtPrecioDolar_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Back || e.Key == Key.Delete)
+            {
+                txtPrecioDolar.Text = "";
+            }
+        }
+        private void txtCostoDolar_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Back || e.Key == Key.Delete)
+            {
+                txtCostoDolar.Text = "";
             }
         }
     }

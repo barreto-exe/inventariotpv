@@ -15,6 +15,9 @@
                  Margin="10,50,0,0" 
                  TextWrapping="Wrap" 
                  Width="250" 
+                 KeyDown="txtMontoTasa_KeyDown"
+                 KeyUp="txtMontoTasa_KeyUp"                 
+                 GotFocus="txtMontoTasa_GotFocus"
                  FontSize="20" Height="40" VerticalAlignment="Top"/>
 
         <Label 
@@ -35,6 +38,7 @@
                  Margin="10,152,0,0" 
                  TextWrapping="Wrap" 
                  VerticalAlignment="Top" 
+                 GotFocus="txtPorcentajeBS_GotFocus"
                  Width="250" 
                  FontSize="20"/>
 

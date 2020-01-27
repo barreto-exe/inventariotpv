@@ -83,7 +83,64 @@ namespace Inventario_y_Contabilidad
 
             actualizaDatos();
         }
-       
+        private void txtIdArt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            //Este if es redundante con la función btnBuscar
+            {
+                string query = "SELECT * FROM c_articulos WHERE id = " + txtIdArt.Text;
+                SqlCeCommand command = new SqlCeCommand(query, MainWindow.conn);
+                SqlCeDataReader dr = command.ExecuteReader();
+                txtIdArt.Text = "";
+
+                //Si no seleccionó artículo
+                if (!dr.Read())
+                {
+                    MessageBox.Show("No existe el artículo buscado");
+                    dr.Close();
+                    return;
+                }
+
+                var articulo = new ArticuloClase
+                {
+                    id = dr["id"].ToString(),
+                    descripcion = dr["descripcion"].ToString(),
+                    precioDolar = dr["precioDolar"].ToString(),
+                    costoDolar  = dr["costoDolar"].ToString()
+                };
+
+                //Seleccionando cantidad
+                VentaCantidad cantidad = new VentaCantidad();
+                cantidad.Owner = this;
+                cantidad.ShowDialog();
+                articulo.cantAct = cantidad.txtCant.Text;
+
+                //Seteando monto * cantidad
+                decimal subtotalDolar = decimal.Parse(articulo.precioDolar) * decimal.Parse(articulo.cantAct);
+                decimal costoDolar = decimal.Parse(articulo.costoDolar) * decimal.Parse(articulo.cantAct);
+                decimal subtotalBs = subtotalDolar * tasa;
+
+                articulo.precioDolar = Decimal.Round(subtotalDolar, 2).ToString();
+                articulo.costoDolar = Decimal.Round(costoDolar, 2).ToString();
+                articulo.precioBs = Decimal.Round(subtotalBs, 2).ToString();
+                if (checkEfectivo.IsChecked == true)
+                {
+                    articulo.precioBs = Decimal.Round(((subtotalBs * tasa * 100) / porcentaje), 2).ToString();
+                }
+
+                dataArticulosVenta.Items.Add(articulo);
+                dr.Close();
+
+                actualizaDatos();
+            }
+
+            if ((e.Key >= Key.D0 && e.Key <= Key.D9)
+                || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9))
+                e.Handled = false;
+            else
+                e.Handled = true;
+        }
+
         private void actualizaDatos()
         {
             int cantArt = dataArticulosVenta.Items.Count;
@@ -101,17 +158,17 @@ namespace Inventario_y_Contabilidad
                 articulo = dataArticulosVenta.ItemContainerGenerator.Items[i] as ArticuloClase;
 
                 subtotalDolar = decimal.Parse(articulo.precioDolar);
-                costoDolar =    decimal.Parse(articulo.costoDolar);
-                subtotalBs = subtotalDolar * tasa;
+                costoDolar    = decimal.Parse(articulo.costoDolar);
+                subtotalBs    = subtotalDolar * tasa;
                 totalVentaDolar += subtotalDolar;
                 costoVenta      += costoDolar;
 
-                articulo.precioDolar = Decimal.Round(subtotalDolar, 2).ToString();
-                articulo.costoDolar  = Decimal.Round(costoDolar, 2).ToString();
-                articulo.precioBs = Decimal.Round(subtotalBs, 2).ToString();
+                articulo.precioDolar = Decimal.Round(subtotalDolar, 2).ToString("#,#0.##");
+                articulo.costoDolar  = Decimal.Round(costoDolar, 2).ToString("#,#0.##");
+                articulo.precioBs    = Decimal.Round(subtotalBs, 2).ToString("#,#0.##");
                 if (checkEfectivo.IsChecked == true)
                 {
-                    articulo.precioBs = Decimal.Round(((subtotalBs * 100) / porcentaje), 2).ToString();
+                    articulo.precioBs = Decimal.Round(((subtotalBs * 100) / porcentaje), 2).ToString("#,#0.##");
                 }
 
                 aux.Items.Add(articulo);
@@ -123,13 +180,15 @@ namespace Inventario_y_Contabilidad
                 dataArticulosVenta.Items.Add(articulo);
             }
 
-            lblTotalDolar.Content = "$ "  + Decimal.Round(totalVentaDolar, 2).ToString();
-            lblTotalBs.Content = "Bs.S. " + Decimal.Round((totalVentaDolar * tasa), 2).ToString();
+            lblTotalDolar.Content = "$ "  + Decimal.Round(totalVentaDolar, 2).ToString("#,#0.##");
+            lblTotalBs.Content = "Bs.S. " + Decimal.Round((totalVentaDolar * tasa), 2).ToString("#,#0.##");
             
             if (checkEfectivo.IsChecked == true)
             {
-                lblTotalBs.Content = "Bs.S. " + Decimal.Round(((totalVentaDolar * tasa * 100) / porcentaje), 2).ToString();
+                lblTotalBs.Content = "Bs.S. " + Decimal.Round(((totalVentaDolar * tasa * 100) / porcentaje), 2).ToString("#,#0.##");
             }
+
+            txtIdArt.Focus();
         }
        
         private void aceptarCompra(object sender, RoutedEventArgs e)
@@ -227,6 +286,5 @@ namespace Inventario_y_Contabilidad
             strSinComillas = strSinComillas.Replace("'", "''");
             return "'" + strSinComillas + "'";
         }
-
     }
 }

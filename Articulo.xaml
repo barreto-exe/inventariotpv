@@ -45,6 +45,7 @@
             VerticalAlignment="Top" 
             Width="200" 
             KeyDown="txtPrecioDolar_KeyDown"
+            KeyUp="txtPrecioDolar_KeyUp"
             FontSize="20"/>
         <Label 
             Content="Precio $: " 
@@ -62,6 +63,7 @@
             VerticalAlignment="Top" 
             Width="223" 
             FontSize="20"
+            KeyUp="txtCostoDolar_KeyUp"
             KeyDown="txtCostoDolar_KeyDown"/>
         <Label 
             Content="Costo $: " 

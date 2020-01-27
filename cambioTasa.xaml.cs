@@ -30,7 +30,7 @@ namespace Inventario_y_Contabilidad
             SqlCeDataReader dr = command.ExecuteReader();
             dr.Read();
 
-            txtMontoTasa.Text    = dr["tasaDolar"].ToString();
+            txtMontoTasa.Text    = decimal.Parse(dr["tasaDolar"].ToString()).ToString("#,#0.##");
             txtPorcentajeBS.Text = dr["porcentajeEfectivo"].ToString();
 
             dr.Close();
@@ -49,8 +49,8 @@ namespace Inventario_y_Contabilidad
 
             string query = "INSERT INTO c_tasa (tasaDolar,porcentajeEfectivo,fechaHora) " +
                             "VALUES(" 
-                            + CS(txtMontoTasa.Text) + "," 
-                            + CS(txtPorcentajeBS.Text) + "," 
+                            + decimal.Parse(txtMontoTasa.Text).ToString().Replace(",",".") + "," 
+                            + txtPorcentajeBS.Text + "," 
                             + CS(String.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.Now)) + ")";
 
             SqlCeCommand command = new SqlCeCommand(query, MainWindow.conn);
@@ -58,11 +58,55 @@ namespace Inventario_y_Contabilidad
 
             this.Close();
         }
+        
         private string CS(string strSinComillas)
         {
             //Añade comillas simples
             strSinComillas = strSinComillas.Replace("'", "''");
             return "'" + strSinComillas + "'";
+        }
+
+        private void txtMontoTasa_KeyDown(object sender, KeyEventArgs e)
+        {
+            //Oculta el cursor
+            txtMontoTasa.CaretBrush = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+
+            if (e.Key == Key.Tab)
+            {
+                txtPorcentajeBS.Focus();
+            }
+
+            e.Handled = true;
+
+            if ((e.Key >= Key.D0 && e.Key <= Key.D9) || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9))
+            {
+                string tecla = e.Key.ToString().Substring(e.Key.ToString().Length - 1, 1);
+                decimal numAnterior = 0;
+                if (txtMontoTasa.Text != "")
+                {
+                    numAnterior = Decimal.Parse(txtMontoTasa.Text) * 100;
+                }
+                string strNumNuevo = numAnterior.ToString().Replace(",00", "") + tecla;
+                decimal numNuevo = decimal.Parse(strNumNuevo) / 100;
+
+                txtMontoTasa.Text = String.Format("{0:#,0.00}", numNuevo);
+            }
+        }
+        private void txtMontoTasa_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Back || e.Key == Key.Delete)
+            {
+                txtMontoTasa.Text = "";
+            }
+        }
+        private void txtMontoTasa_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtMontoTasa.SelectAll();
+        }
+
+        private void txtPorcentajeBS_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtPorcentajeBS.SelectAll();
         }
     }
 }

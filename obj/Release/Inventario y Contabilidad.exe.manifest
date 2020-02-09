@@ -50,7 +50,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>scptfPmAaB/sSm3YEVikIFWsxMDThuAVmkDoLPrsxYk=</dsig:DigestValue>
+        <dsig:DigestValue>qy/SiGGw8rIoTD7XTrRh6Df7Z2wUOB367qTyF0TF8N4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -72,7 +72,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>FJ4omsHWz6J23b3PUqG9quG6pWCMHwykqMHNhNbVfUs=</dsig:DigestValue>
+      <dsig:DigestValue>E5Bur6fkD1jYm0AmfFsUAncfEOwiwamOAl021G8Q7mg=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Inventario y Contabilidad.exe.config" size="187">

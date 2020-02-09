@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlServerCe;
 using System.Linq;
@@ -21,6 +21,7 @@ namespace Inventario_y_Contabilidad
     public partial class Venta : Window
     {
         public decimal totalVentaDolar;
+        public decimal totalVentaBs;
         public decimal costoVenta;
         public decimal tasa;
         public decimal porcentaje;
@@ -31,14 +32,8 @@ namespace Inventario_y_Contabilidad
             totalVentaDolar = 0;
             costoVenta = 0;
 
-            SqlCeCommand command = new SqlCeCommand("SELECT TOP 1 * FROM c_tasa ORDER BY id DESC", MainWindow.conn);
-            SqlCeDataReader dr = command.ExecuteReader();
-            dr.Read();
-
-            tasa = decimal.Parse(dr["tasaDolar"].ToString());
-            porcentaje = decimal.Parse(dr["porcentajeEfectivo"].ToString())+100;
-
-            dr.Close();
+            tasa = cambioTasa.tasas()[0];
+            porcentaje = cambioTasa.tasas()[1];
 
             actualizaDatos();
         }
@@ -69,15 +64,13 @@ namespace Inventario_y_Contabilidad
             //Seteando monto * cantidad
             decimal subtotalDolar = decimal.Parse(articulo.precioDolar) * decimal.Parse(articulo.cantAct);
             decimal costoDolar    = decimal.Parse(articulo.costoDolar)  * decimal.Parse(articulo.cantAct);
-            decimal subtotalBs = subtotalDolar * tasa;
+            decimal subtotalBs    = decimal.Parse(articulo.precioBs)    * decimal.Parse(articulo.cantAct);
+            decimal subtotalBsEfect    = decimal.Parse(articulo.precioBsEfect) * decimal.Parse(articulo.cantAct);
 
             articulo.precioDolar = Decimal.Round(subtotalDolar, 2).ToString();
             articulo.costoDolar  = Decimal.Round(costoDolar, 2).ToString();
             articulo.precioBs    = Decimal.Round(subtotalBs, 2).ToString();
-            if (checkEfectivo.IsChecked == true)
-            {
-                articulo.precioBs = Decimal.Round(((subtotalBs * tasa * 100) / porcentaje), 2).ToString();
-            }
+            articulo.precioBsEfect = Decimal.Round(subtotalBsEfect, 2).ToString();
 
             dataArticulosVenta.Items.Add(articulo);
 
@@ -145,6 +138,7 @@ namespace Inventario_y_Contabilidad
         {
             int cantArt = dataArticulosVenta.Items.Count;
             totalVentaDolar = 0;
+            totalVentaBs = 0;
             costoVenta = 0;
             ArticuloClase articulo;
             decimal subtotalDolar;
@@ -157,19 +151,50 @@ namespace Inventario_y_Contabilidad
             {
                 articulo = dataArticulosVenta.ItemContainerGenerator.Items[i] as ArticuloClase;
 
+                string query;
+                SqlCeCommand command;
+                SqlCeDataReader dr;
+                query = "SELECT * FROM c_articulos WHERE id = " + articulo.id;
+                command = new SqlCeCommand(query, MainWindow.conn);
+                dr = command.ExecuteReader();
+                dr.Read();
+
+                if(dr["precioBs"].ToString() != "")
+                {
+                    if (checkEfectivo.IsChecked == true)
+                    {
+                        articulo.precioBs = dr["precioBsEfect"].ToString();
+                    }
+                    else
+                    {
+                        articulo.precioBs = dr["precioBs"].ToString();
+                    }
+                }
+                else
+                {
+                    if (checkEfectivo.IsChecked == true)
+                    {
+                        articulo.precioBs = (Decimal.Parse(dr["precioDolar"].ToString()) * tasa * 100 / porcentaje).ToString();
+                    }
+                    else
+                    {
+                        articulo.precioBs = (Decimal.Parse(dr["precioDolar"].ToString()) * tasa).ToString();
+                    }
+                }
+
+                dr.Close();
+
                 subtotalDolar = decimal.Parse(articulo.precioDolar);
-                costoDolar    = decimal.Parse(articulo.costoDolar);
-                subtotalBs    = subtotalDolar * tasa;
+                costoDolar = decimal.Parse(articulo.costoDolar);
+                subtotalBs = decimal.Parse(articulo.precioBs);
+
                 totalVentaDolar += subtotalDolar;
+                totalVentaBs    += subtotalBs;
                 costoVenta      += costoDolar;
 
                 articulo.precioDolar = Decimal.Round(subtotalDolar, 2).ToString("#,#0.##");
                 articulo.costoDolar  = Decimal.Round(costoDolar, 2).ToString("#,#0.##");
                 articulo.precioBs    = Decimal.Round(subtotalBs, 2).ToString("#,#0.##");
-                if (checkEfectivo.IsChecked == true)
-                {
-                    articulo.precioBs = Decimal.Round(((subtotalBs * 100) / porcentaje), 2).ToString("#,#0.##");
-                }
 
                 aux.Items.Add(articulo);
             }
@@ -181,13 +206,8 @@ namespace Inventario_y_Contabilidad
             }
 
             lblTotalDolar.Content = "$ "  + Decimal.Round(totalVentaDolar, 2).ToString("#,#0.##");
-            lblTotalBs.Content = "Bs.S. " + Decimal.Round((totalVentaDolar * tasa), 2).ToString("#,#0.##");
+            lblTotalBs.Content = "Bs.S. " + Decimal.Round(totalVentaBs, 2).ToString("#,#0.##");
             
-            if (checkEfectivo.IsChecked == true)
-            {
-                lblTotalBs.Content = "Bs.S. " + Decimal.Round(((totalVentaDolar * tasa * 100) / porcentaje), 2).ToString("#,#0.##");
-            }
-
             txtIdArt.Focus();
         }
        
@@ -200,17 +220,11 @@ namespace Inventario_y_Contabilidad
             if (messageBoxResult != MessageBoxResult.Yes)
                 return;
 
-            decimal totalVentaBs;
             int pagoEnEfectivo = 0;
 
             if(checkEfectivo.IsChecked == true)
             {
-                totalVentaBs = (totalVentaDolar * tasa * 100) / porcentaje;
                 pagoEnEfectivo = 1;
-            }
-            else
-            {
-                totalVentaBs = totalVentaDolar * tasa;
             }
 
             string query = "INSERT INTO c_ventas (fechaHora,pagoDolar,conversionBs,pagoBsEfect,costoVenta,tasaVenta,porcentajeEfectivoVenta) " +

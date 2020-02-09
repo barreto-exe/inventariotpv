@@ -161,7 +161,7 @@
                                 Header="Tasa" 
                                 Binding="{Binding tasaVenta}"/>
                 <DataGridTextColumn 
-                                Header="Conversión Bs." 
+                                Header="Total Bs." 
                                 Binding="{Binding conversionBs}"/>
                 <DataGridTextColumn 
                                 Header="Pagó Bs. Efectivo" 

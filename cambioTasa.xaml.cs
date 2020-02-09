@@ -36,6 +36,26 @@ namespace Inventario_y_Contabilidad
             dr.Close();
         }
 
+        public static decimal[] tasas()
+        {
+            string tasaStr, porcentajeStr;
+
+            //Consultando Tasa Actual
+            string query = "SELECT TOP 1 * FROM c_tasa ORDER BY id DESC";
+            SqlCeCommand command = new SqlCeCommand(query, MainWindow.conn);
+            SqlCeDataReader dr = command.ExecuteReader();
+            dr.Read();
+            tasaStr = dr["tasaDolar"].ToString();
+            porcentajeStr = dr["porcentajeEfectivo"].ToString();
+            dr.Close();
+
+            decimal[] tasaArray = new decimal[2];
+            tasaArray[0] = decimal.Parse(tasaStr);
+            tasaArray[1] = decimal.Parse(porcentajeStr) + 100;
+
+            return tasaArray;
+        }
+
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
             decimal n = 0;

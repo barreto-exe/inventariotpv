@@ -16,6 +16,8 @@ namespace Inventario_y_Contabilidad
         public string precioDolar { get; set; }
         public string precioBs { get; set; }
         public string precioBsEfect { get; set; }
+        public string precioBsRec { get; set; }
+        public string precioBsEfectRec { get; set; }
         public int LineaRow { get; set; }
     }
 }

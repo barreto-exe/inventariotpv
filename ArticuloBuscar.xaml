@@ -9,10 +9,17 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         WindowState="Normal"
-        Height="340"  Width="600">
+        Height="460"  Width="780">
     <Grid>
+        <TextBox x:Name="txtBuscar" 
+                 FontSize="22"
+                 Margin="10,10,219,0"
+                 TextChanged="txtBuscar_TextChanged"
+                 VerticalContentAlignment="Center" Height="40" VerticalAlignment="Top"
+                 />
+
         <DataGrid x:Name="dataBuscarArt" 
-                  Margin="10" 
+                  Margin="10,60,10,10" 
                   IsReadOnly="True"
                   CanUserAddRows="False"
                   CanUserDeleteRows="False" FontSize="16"
@@ -24,13 +31,22 @@
                 <DataGridTextColumn 
                                 Header="Descripción" 
                                 SortDirection="Ascending"
+                                Width="1*"
                                 Binding="{Binding descripcion}"/>
                 <DataGridTextColumn 
+                                Header="Precio P/Venta" 
+                                Width="0.5*"
+                                Binding="{Binding precioBs}"/>
+                <DataGridTextColumn 
+                                Header="Precio Efectivo" 
+                                Width="0.5*"
+                                Binding="{Binding precioBsEfect}"/>
+                <!--<DataGridTextColumn 
                                 Header="Precio $/Unidad" 
                                 Binding="{Binding precioDolar}"/>
                 <DataGridTextColumn 
                                 Header="Costo $/Unidad" 
-                                Binding="{Binding costoDolar}"/>
+                                Binding="{Binding costoDolar}"/>-->
 
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>

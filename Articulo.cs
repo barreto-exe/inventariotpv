@@ -46,7 +46,8 @@ namespace Inventario_y_Contabilidad
             decimal n = 0; 
 
             if( txtCantidadAgg.Text == "" || txtCostoDolar.Text == ""  ||
-                txtDescArt.Text == ""        || txtPrecioDolar.Text == "" ||
+                txtDescArt.Text == ""     || txtPrecioDolar.Text == "" ||
+                txtPrecioBs.Text == ""    || txtPrecioBsEfect.Text == "" ||
                 !decimal.TryParse(txtPrecioDolar.Text,out n) ||
                 !decimal.TryParse(txtCostoDolar.Text, out n) ||
                 !decimal.TryParse(txtCantidadAgg.Text, out n)
@@ -66,11 +67,13 @@ namespace Inventario_y_Contabilidad
         private void crearArticulo()
         {
             //Insertando en tabla artículos
-            string query = "INSERT INTO c_articulos (descripcion,precioDolar,costoDolar) " +
+            string query = "INSERT INTO c_articulos (descripcion,precioDolar,costoDolar,precioBs,precioBsEfect) " +
                            "VALUES("
                            + CS(txtDescArt.Text) + ","
                            + txtPrecioDolar.Text.Replace(",",".") + ","
-                           + txtCostoDolar.Text.Replace(",", ".") + ")";
+                           + txtCostoDolar.Text.Replace(",", ".") + ","
+                           + QC(txtPrecioBs.Text) + ","
+                           + QC(txtPrecioBsEfect.Text) + ")";
             SqlCeCommand command = new SqlCeCommand(query, MainWindow.conn);
             command.ExecuteReader();
 
@@ -99,9 +102,11 @@ namespace Inventario_y_Contabilidad
             //Actualizando info de articulo seleccionado
             string idArt = lblIdArt.Content.ToString().Replace("#", "");
             string query = "UPDATE c_articulos SET " +
-                           "precioDolar = " + decimal.Parse(txtPrecioDolar.Text).ToString().Replace(",",".") + "," +
-                           "costoDolar = "  + decimal.Parse(txtCostoDolar.Text).ToString().Replace(",",".") + " " +
-                           "WHERE id = "    + idArt;
+                           "precioDolar = "   + decimal.Parse(txtPrecioDolar.Text).ToString().Replace(",",".")    + "," +
+                           "costoDolar = "    + decimal.Parse(txtCostoDolar.Text).ToString().Replace(",",".")     + "," +
+                           "precioBs = "      + decimal.Parse(txtPrecioBs.Text).ToString().Replace(",", ".")      + "," +
+                           "precioBsEfect = " + decimal.Parse(txtPrecioBsEfect.Text).ToString().Replace(",", ".") + " " +
+                           "WHERE id = " + idArt;
             SqlCeCommand command = new SqlCeCommand(query, MainWindow.conn);
             command.ExecuteReader();
 
@@ -140,8 +145,11 @@ namespace Inventario_y_Contabilidad
                 txtDescArt.Text = articulo.descripcion;
                 txtDescArt.IsEnabled = false;
 
-                txtCostoDolar.Text = articulo.costoDolar;
-                txtPrecioDolar.Text = articulo.precioDolar;
+                txtCostoDolar.Text    = articulo.costoDolar;
+                txtPrecioDolar.Text   = articulo.precioDolar;
+                txtPrecioBs.Text      = articulo.precioBs;
+                txtPrecioBsEfect.Text = articulo.precioBsEfect;
+
                 txtCantidadAgg.Text = "0";
             }
             catch(Exception e)
@@ -182,7 +190,7 @@ namespace Inventario_y_Contabilidad
 
             if (e.Key == Key.Tab)
             {
-                txtCostoDolar.Focus();
+                txtPrecioBs.Focus();
             }
 
             e.Handled = true;
@@ -199,9 +207,14 @@ namespace Inventario_y_Contabilidad
                 decimal numNuevo = decimal.Parse(strNumNuevo) / 100;
 
                 txtPrecioDolar.Text = String.Format("{0:#,0.00}", numNuevo);
+
+                decimal precioBs = numNuevo * cambioTasa.tasas()[0];
+                decimal precioBsEfect = (precioBs * 100) / cambioTasa.tasas()[1];
+
+                txtPrecioBs.Text    = String.Format("{0:#,0.00}", precioBs);
+                txtPrecioBsEfect.Text = String.Format("{0:#,0.00}", precioBsEfect);
             }
         }
-
         private void txtCostoDolar_KeyDown(object sender, KeyEventArgs e)
         {
             //Oculta el cursor
@@ -209,7 +222,7 @@ namespace Inventario_y_Contabilidad
 
             if (e.Key == Key.Tab)
             {
-                txtCantidadAgg.Focus();
+                txtPrecioDolar.Focus();
             }
 
             e.Handled = true;
@@ -242,6 +255,80 @@ namespace Inventario_y_Contabilidad
             {
                 txtCostoDolar.Text = "";
             }
+        }
+
+        private void txtPrecioBs_KeyDown(object sender, KeyEventArgs e)
+        {
+            //Oculta el cursor
+            txtPrecioBs.CaretBrush = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+
+            if (e.Key == Key.Tab)
+            {
+                txtPrecioBsEfect.Focus();
+            }
+
+            e.Handled = true;
+
+            if ((e.Key >= Key.D0 && e.Key <= Key.D9) || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9))
+            {
+                string tecla = e.Key.ToString().Substring(e.Key.ToString().Length - 1, 1);
+                decimal numAnterior = 0;
+                if (txtPrecioBs.Text != "")
+                {
+                    numAnterior = Decimal.Parse(txtPrecioBs.Text) * 100;
+                }
+                string strNumNuevo = numAnterior.ToString().Replace(",00", "") + tecla;
+                decimal numNuevo = decimal.Parse(strNumNuevo) / 100;
+
+                txtPrecioBs.Text = String.Format("{0:#,0.00}", numNuevo);
+            }
+        }
+        private void txtPrecioBs_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Back || e.Key == Key.Delete)
+            {
+                txtPrecioBs.Text = "";
+            }
+        }
+
+        private void txtPrecioBsEfect_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Back || e.Key == Key.Delete)
+            {
+                txtPrecioBsEfect.Text = "";
+            }
+        }
+        private void txtPrecioBsEfect_KeyDown(object sender, KeyEventArgs e)
+        {
+            //Oculta el cursor
+            txtPrecioBsEfect.CaretBrush = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+
+            if (e.Key == Key.Tab)
+            {
+                txtCantidadAgg.Focus();
+            }
+
+            e.Handled = true;
+
+            if ((e.Key >= Key.D0 && e.Key <= Key.D9) || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9))
+            {
+                string tecla = e.Key.ToString().Substring(e.Key.ToString().Length - 1, 1);
+                decimal numAnterior = 0;
+                if (txtPrecioBsEfect.Text != "")
+                {
+                    numAnterior = Decimal.Parse(txtPrecioBsEfect.Text) * 100;
+                }
+                string strNumNuevo = numAnterior.ToString().Replace(",00", "") + tecla;
+                decimal numNuevo = decimal.Parse(strNumNuevo) / 100;
+
+                txtPrecioBsEfect.Text = String.Format("{0:#,0.00}", numNuevo);
+            }
+        }
+
+        private string QC(string decimalConComa)
+        {
+            string decimalConPunto = decimalConComa.Replace(".","").Replace(",", ".");
+            return decimalConPunto;
         }
     }
 }

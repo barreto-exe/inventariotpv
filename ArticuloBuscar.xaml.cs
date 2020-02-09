@@ -28,29 +28,9 @@ namespace Inventario_y_Contabilidad
         {
             InitializeComponent();
 
-            string query = "SELECT * FROM c_articulos";
-            SqlCeCommand command = new SqlCeCommand(query, MainWindow.conn);
-            SqlCeDataReader dr = command.ExecuteReader();
-
-            int cuentaLinea = 0;
-
-            while(dr.Read())
-            {
-                var articulo = new ArticuloClase
-                {
-                    id = dr["id"].ToString(),
-                    descripcion = dr["descripcion"].ToString(),
-                    precioDolar = dr["precioDolar"].ToString(),
-                    costoDolar = dr["costoDolar"].ToString(),
-                    LineaRow = cuentaLinea++
-                };
-
-                dataBuscarArt.Items.Add(articulo);
-            }
-            SortDataGrid(dataBuscarArt,1);
-            dr.Close();
+            txtBuscar_TextChanged(null, null);
+            txtBuscar.Focus();
         }
-
         private void btnSeleccionar_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
@@ -78,6 +58,57 @@ namespace Inventario_y_Contabilidad
 
             // Refresh items to display sort
             dataGrid.Items.Refresh();
+        }
+
+        private void txtBuscar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            dataBuscarArt.Items.Clear();
+
+            decimal tasa = cambioTasa.tasas()[0],
+            porcentaje = cambioTasa.tasas()[1],
+            precioDolar, precioBs, precioBsEfect;
+
+            string query;
+            SqlCeCommand command;
+            SqlCeDataReader dr;
+
+            query = "SELECT * FROM c_articulos WHERE descripcion like '%"+ txtBuscar.Text +"%'";
+            command = new SqlCeCommand(query, MainWindow.conn);
+            dr = command.ExecuteReader();
+
+            int cuentaLinea = 0;
+
+            while (dr.Read())
+            {
+                precioDolar = Decimal.Parse(dr["precioDolar"].ToString());
+
+                if(dr["precioBs"].ToString() != "")
+                {
+                    precioBs = Decimal.Parse(dr["precioBs"].ToString());
+                    precioBsEfect = Decimal.Parse(dr["precioBsEfect"].ToString());
+                }
+                else
+                {
+                    precioBs = precioDolar * tasa;
+                    precioBsEfect = (precioBs * 100) / porcentaje;
+                }
+
+                var articulo = new ArticuloClase
+                {
+                    id = dr["id"].ToString(),
+                    descripcion = dr["descripcion"].ToString(),
+                    precioDolar = Decimal.Round(precioDolar, 2).ToString("#,#0.##"),
+                    costoDolar = dr["costoDolar"].ToString(),
+                    precioBs = Decimal.Round(precioBs, 2).ToString("#,#0.##"),
+                    precioBsEfect = Decimal.Round(precioBsEfect, 2).ToString("#,#0.##"),
+                    LineaRow = cuentaLinea++
+                };
+
+                dataBuscarArt.Items.Add(articulo);
+            }
+
+            SortDataGrid(dataBuscarArt, 1);
+            dr.Close();
         }
     }
 }

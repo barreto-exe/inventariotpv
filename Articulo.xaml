@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize"
         WindowState="Normal"
-        Height="340"  Width="500">
+        Height="450"  Width="500">
     <Grid>
 
         <TextBox 
@@ -37,59 +37,99 @@
             Width="136" Height="40" VerticalAlignment="Top"
         />
         <TextBox 
-            x:Name="txtPrecioDolar"
+            x:Name="txtCostoDolar"
             HorizontalAlignment="Left" 
             Height="40" 
             Margin="10,150,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             Width="200" 
-            KeyDown="txtPrecioDolar_KeyDown"
-            KeyUp="txtPrecioDolar_KeyUp"
-            FontSize="20"/>
+            FontSize="20"
+            KeyUp="txtCostoDolar_KeyUp"
+            KeyDown="txtCostoDolar_KeyDown"/>
         <Label 
-            Content="Precio $: " 
+            Content="Costo $: " 
             Margin="10,110,0,0" 
             FontSize="20" 
             HorizontalAlignment="Left" 
-            Width="223" Height="40" VerticalAlignment="Top"
+            Width="200" Height="40" VerticalAlignment="Top"
         />
+
         <TextBox 
-            x:Name="txtCostoDolar"
+            x:Name="txtPrecioDolar"
             HorizontalAlignment="Left" 
             Height="40" 
             Margin="246,150,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             Width="223" 
-            FontSize="20"
-            KeyUp="txtCostoDolar_KeyUp"
-            KeyDown="txtCostoDolar_KeyDown"/>
+            KeyDown="txtPrecioDolar_KeyDown"
+            KeyUp="txtPrecioDolar_KeyUp"
+            FontSize="20"/>
         <Label 
-            Content="Costo $: " 
+            Content="Precio $: " 
             Margin="246,110,0,0" 
             FontSize="20" 
             HorizontalAlignment="Left" 
             Width="223" Height="40" VerticalAlignment="Top"
         />
+
+
+        <TextBox 
+            x:Name="txtPrecioBs"
+            HorizontalAlignment="Left" 
+            Height="40" 
+            Margin="10,245,0,0" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            Width="200" 
+            KeyDown="txtPrecioBs_KeyDown"
+            KeyUp="txtPrecioBs_KeyUp"
+            FontSize="20"/>
+        <Label 
+            Content="Precio Bs: " 
+            Margin="10,205,0,0" 
+            FontSize="20" 
+            HorizontalAlignment="Left" 
+            Width="200" Height="40" VerticalAlignment="Top"
+        />
+        <TextBox 
+            x:Name="txtPrecioBsEfect"
+            HorizontalAlignment="Left" 
+            Height="40" 
+            Margin="246,245,0,0" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            Width="223" 
+            KeyUp="txtPrecioBsEfect_KeyUp"
+            KeyDown="txtPrecioBsEfect_KeyDown"
+            FontSize="20"/>
+        <Label 
+            Content="Precio Bs. Efect.: " 
+            Margin="246,205,0,0" 
+            FontSize="20" 
+            HorizontalAlignment="Left" 
+            Width="223" Height="40" VerticalAlignment="Top"
+        />
+
         <TextBox 
             x:Name="txtCantidadAgg"
             HorizontalAlignment="Left" 
-            Margin="10,250,0,0" 
+            Margin="10,355,0,0" 
             TextWrapping="Wrap" 
             Width="200" 
             FontSize="20" Height="40" VerticalAlignment="Top"
             KeyDown="soloNum"/>
         <Label 
             Content="Unidades Agregadas:" 
-            Margin="10,210,0,0" 
+            Margin="10,315,0,0" 
             FontSize="20" 
             HorizontalAlignment="Left" 
             Width="223" Height="40" VerticalAlignment="Top"
         />
 
         <Button x:Name="btnAceptar"
-            Content="Aceptar" Margin="0,260,25,0" HorizontalAlignment="Right" Width="100" Height="30" VerticalAlignment="Top" Click="btnAceptar_Click"/>
+            Content="Aceptar" Margin="0,365,25,0" HorizontalAlignment="Right" Width="100" Height="30" VerticalAlignment="Top" Click="btnAceptar_Click"/>
 
         <Button 
             x:Name="btnBuscar" 

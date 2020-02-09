@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -30,19 +31,12 @@ namespace Inventario_y_Contabilidad
         {
             dataReportePrin.Items.Clear();
 
-            string tasaStr, porcentajeStr;
+            decimal tasa = cambioTasa.tasas()[0],
+            porcentaje   = cambioTasa.tasas()[1];
 
-            //Consultando Tasa Actual
-            string query = "SELECT TOP 1 * FROM c_tasa ORDER BY id DESC";
-            SqlCeCommand command = new SqlCeCommand(query, MainWindow.conn);
-            SqlCeDataReader dr = command.ExecuteReader();
-            dr.Read();
-            tasaStr = dr["tasaDolar"].ToString();
-            porcentajeStr = dr["porcentajeEfectivo"].ToString();
-            dr.Close();
-
-            decimal tasa = decimal.Parse(tasaStr),
-            porcentaje = decimal.Parse(porcentajeStr) + 100;
+            string query;
+            SqlCeCommand command;
+            SqlCeDataReader dr;
 
             //Consultando artículos
             query = "SELECT * FROM c_articulos";
@@ -74,10 +68,20 @@ namespace Inventario_y_Contabilidad
 
                     decimal precioDolar = decimal.Parse(dr_art["precioDolar"].ToString());
                     decimal costoDolar = decimal.Parse(dr_art["costoDolar"].ToString());
-                    decimal precioBs = precioDolar * tasa;
-                    decimal precioBsEfect = (precioBs * 100) / porcentaje;
-                    
+                    decimal precioBsRec = precioDolar * tasa;
+                    decimal precioBsEfectRec = (precioBsRec * 100) / porcentaje;
+                    decimal precioBs, precioBsEfect;
 
+                    if(dr_art["precioBs"].ToString() != "")
+                    {
+                        precioBs = Decimal.Parse(dr_art["precioBs"].ToString());
+                        precioBsEfect = Decimal.Parse(dr_art["precioBsEfect"].ToString());
+                    }
+                    else
+                    {
+                        precioBs = precioBsRec; 
+                        precioBsEfect = precioBsEfectRec;
+                    }
 
                     var articulo = new ArticuloClase
                     {
@@ -88,7 +92,9 @@ namespace Inventario_y_Contabilidad
                         costoDolar = Decimal.Round(costoDolar, 2).ToString("#,#0.##"),
                         fechaHora = drFecha.GetValue(0).ToString(),
                         precioBs = Decimal.Round(precioBs, 2).ToString("#,#0.##"),
-                        precioBsEfect = Decimal.Round(precioBsEfect, 2).ToString("#,#0.##")
+                        precioBsEfect = Decimal.Round(precioBsEfect, 2).ToString("#,#0.##"),
+                        precioBsRec = Decimal.Round(precioBsRec, 2).ToString("#,#0.##"),
+                        precioBsEfectRec = Decimal.Round(precioBsEfectRec, 2).ToString("#,#0.##")
                     };
 
                     drFecha.Close();
@@ -101,6 +107,42 @@ namespace Inventario_y_Contabilidad
 
             lblValorInventario.Content = valorInventario.ToString("#,#0.##") + "$ - Bs.S. " + (valorInventario * tasa).ToString("#,#0.##");
 
+
+            //Advertir de precio no recomendado
+            advertencia();
+        }
+
+        private void advertencia()
+        {
+            int cantArt = dataReportePrin.Items.Count;
+            ArticuloClase art;
+
+            DataGrid aux = new DataGrid();
+
+            for (int i = 0; i < cantArt; i++)
+            {
+                art = dataReportePrin.ItemContainerGenerator.Items[i] as ArticuloClase;
+                aux.Items.Add(art);
+            }
+
+            dataReportePrin.Items.Clear();
+
+            for (int i = 0; i < cantArt; i++)
+            {
+                art = aux.ItemContainerGenerator.Items[i] as ArticuloClase;
+
+                if (Decimal.Parse(art.precioBs) < Decimal.Parse(art.precioBsRec) ||
+                    Decimal.Parse(art.precioBsEfect) < Decimal.Parse(art.precioBsEfectRec))
+                {
+                    art.LineaRow = 1;
+                }
+                else
+                {
+                    art.LineaRow = 0;
+                }
+
+                dataReportePrin.Items.Add(art);
+            }
         }
 
         private void imgAgregarArt_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

@@ -10,7 +10,7 @@
         WindowState="Maximized"
         WindowStartupLocation="CenterOwner"
         MinHeight="550"  MinWidth="650"
-        Height="332"  Width="800">
+        Height="622"  Width="1284">
     <Grid>
         <Label x:Name="lblValorInventario"
                Content="999$ - Bs.S. 999.999" 
@@ -34,6 +34,15 @@
                   CanUserDeleteRows="False"
                   CanUserReorderColumns="False" FontSize="16"
                   >
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding LineaRow}" Value="1">
+                            <Setter Property="Background" Value="LightSalmon"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn 
                                 Header="Id" 
@@ -43,11 +52,8 @@
                                 Header="Descripción" 
                                 Binding="{Binding descripcion}"/>
                 <DataGridTextColumn 
-                                Header="Cantidad Act." 
+                                Header="Cantidad" 
                                 Binding="{Binding cantAct}"/>
-                <DataGridTextColumn 
-                                Header="Última Actualización" 
-                                Binding="{Binding fechaHora}"/>
                 <DataGridTextColumn 
                                 Header="Costo $/Unidad" 
                                 Binding="{Binding costoDolar}"/>
@@ -55,11 +61,24 @@
                                 Header="Precio $/Unidad" 
                                 Binding="{Binding precioDolar}"/>
                 <DataGridTextColumn 
-                                Header="Precio Bs.S/Unidad" 
+                                Header="Precio P/Venta" 
                                 Binding="{Binding precioBs}"/>
                 <DataGridTextColumn 
-                                Header="Precio Efectivo Bs.S/Unidad" 
+                                Header="Precio Efectivo" 
                                 Binding="{Binding precioBsEfect}"/>
+                <DataGridTextColumn 
+                                Header="Precio P/Venta (Recom.)" 
+                                Binding="{Binding precioBsRec}"/>
+                <DataGridTextColumn 
+                                Header="Precio Efectivo (Recom.)" 
+                                Binding="{Binding precioBsEfectRec}"/>
+                <DataGridTextColumn 
+                                Header="Última Actualización" 
+                                Binding="{Binding fechaHora}"/>
+                <DataGridTextColumn 
+                                Header="Advertencia"
+                                Visibility="Collapsed"
+                                Binding="{Binding LineaRow}"/>
 
                 <!--<DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
@@ -87,7 +106,7 @@
                Source="agregar.png" 
                MouseLeftButtonDown="imgAgregarArt_MouseLeftButtonDown"
                Cursor="Hand"/>
-        
+
         <Image x:Name="imgEditar"
                HorizontalAlignment="Right" 
                Height="80" 

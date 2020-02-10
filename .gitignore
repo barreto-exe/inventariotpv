@@ -4,3 +4,9 @@ png/
 publish/
 
 bin/
+
+obj/
+
+.vs/
+
+packages/

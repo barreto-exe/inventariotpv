@@ -9,21 +9,20 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         WindowState="Normal"
-        Height="170"  Width="250">
+        Height="171"  Width="250">
     <Grid>
         <Label Content="Cantidad:"
-               HorizontalContentAlignment="Center" Margin="10,10,0,0" FontSize="18" HorizontalAlignment="Left" Width="224" Height="44" VerticalAlignment="Top"
+               HorizontalContentAlignment="Center" Margin="10,10,0,0" FontSize="14pt" HorizontalAlignment="Left" Width="224" Height="44" VerticalAlignment="Top"
                />
         <TextBox x:Name="txtCant" 
-                 Margin="10,51,10,0" 
+                 Margin="10,45,10,0" 
                  TextWrapping="Wrap" 
                  Text="1"
                  HorizontalContentAlignment="Center"
-                 VerticalContentAlignment="Center"
-                 KeyDown="txtCant_KeyDown" FontSize="16" Height="35" VerticalAlignment="Top"/>
+                 KeyDown="txtCant_KeyDown" FontSize="16pt" Height="37" VerticalAlignment="Top"/>
 
         <Button x:Name="btnAceptar"
-                Content="Aceptar" Margin="10,91,10,0" Height="28" VerticalAlignment="Top" Click="btnAceptar_Click"/>
+                Content="Aceptar" Margin="10,95,10,0" Height="28" VerticalAlignment="Top" Click="btnAceptar_Click" Foreground="White"/>
 
     </Grid>
 </Window>

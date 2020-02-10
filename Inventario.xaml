@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:local="clr-namespace:Inventario_y_Contabilidad"
         mc:Ignorable="d"
         Title="Inventario" 
@@ -28,17 +29,25 @@
         />
 
         <DataGrid x:Name="dataReportePrin" 
-                  Margin="10,85,105,10" 
+                  Margin="10,85,10,10" 
                   IsReadOnly="True"
                   CanUserAddRows="False"
                   CanUserDeleteRows="False"
-                  CanUserReorderColumns="False" FontSize="16"
+                  CanUserReorderColumns="False" 
+                  Background="WhiteSmoke"
+                  VerticalGridLinesBrush="LightGray"
+                  GridLinesVisibility="Vertical"
+                  FontSize="13pt"
                   >
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="White"></Setter>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding LineaRow}" Value="1">
-                            <Setter Property="Background" Value="LightSalmon"></Setter>
+                            <Setter Property="Background" Value="LightPink"></Setter>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding LineaRow}" Value="2">
+                            <Setter Property="Background" Value="Yellow"></Setter>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
@@ -95,27 +104,31 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Rectangle Fill="#FF43B05C" HorizontalAlignment="Left" Height="6" Margin="10,56,0,0" Stroke="Black" VerticalAlignment="Top" Width="416"/>
+        <Rectangle Fill="#FF2196F3" HorizontalAlignment="Left" Height="6" Margin="10,56,0,0" Stroke="Black" VerticalAlignment="Top" Width="416"/>
 
-        <Image x:Name="imgAgregarArt"
-               HorizontalAlignment="Right" 
-               Height="80" 
-               Margin="0,85,10,0" 
-               VerticalAlignment="Top" 
-               Width="80" 
-               Source="agregar.png" 
-               MouseLeftButtonDown="imgAgregarArt_MouseLeftButtonDown"
-               Cursor="Hand"/>
+        <Button x:Name="btnAgregar"
+                Foreground="White" 
+                Style="{DynamicResource MaterialDesignFloatingActionButton}" Margin="0,0,39,120" 
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Bottom" 
+                Click="btnAgregar_Click" Height="72" Width="72"
+                >
+            <Button.Content>
+                <iconPacks:PackIconMaterialDesign Kind="Add" Width="28" Height="28"/>
+            </Button.Content>
+        </Button>
 
-        <Image x:Name="imgEditar"
-               HorizontalAlignment="Right" 
-               Height="80" 
-               Margin="0,185,10,0" 
-               VerticalAlignment="Top" 
-               Width="80" 
-               Source="editar.png" 
-               MouseLeftButtonDown="imgEditar_MouseLeftButtonDown"
-               Cursor="Hand"/>
+        <Button x:Name="btnEditar"
+                Foreground="White" 
+                Style="{DynamicResource MaterialDesignFloatingActionButton}" Margin="0,0,47,46" 
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Bottom" 
+                Click="btnEditar_Click" Height="55" Width="55"
+                >
+            <Button.Content>
+                <iconPacks:PackIconMaterialDesign Kind="Edit" />
+            </Button.Content>
+        </Button>
 
 
     </Grid>

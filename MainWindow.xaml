@@ -11,7 +11,7 @@
         WindowState="Maximized"
         Closing="Window_Closing"
         MinHeight="550" MinWidth="900"
-        Height="371"  Width="900">
+        Height="312"  Width="684">
     <Grid>
         <Label Content="Tasa del Día:" 
                Margin="10,73,0,0" 
@@ -32,9 +32,9 @@
                 Margin="16,118,0,0"
                 Content="Cambiar" 
                 HorizontalAlignment="Left" 
-                Width="100" Height="30" 
+                Width="100" Height="32" 
                 VerticalAlignment="Top" 
-                Click="btnCambiarTasa_Click"
+                Click="btnCambiarTasa_Click" Foreground="White"
                 />
         <Grid Margin="350,31,218,0" Height="179" VerticalAlignment="Top">
 
@@ -57,28 +57,28 @@
                 Margin="145,19,0,0" 
                 FontSize="20" 
                 HorizontalAlignment="Left" 
-                Width="224" Height="40" VerticalAlignment="Top"
+                Width="179" Height="40" VerticalAlignment="Top"
                />
             <Label x:Name="lblGananciaDia"
                 Content="Bs.S. 999.999" 
                 Margin="145,59,0,0" 
                 FontSize="20" 
                 HorizontalAlignment="Left" 
-                Width="224" Height="40" VerticalAlignment="Top"
+                Width="179" Height="40" VerticalAlignment="Top"
                />
             <Label x:Name="lblBsEfectivo"
                 Content="Bs.S. 999.999" 
                 Margin="145,99,0,0" 
                 FontSize="20" 
                 HorizontalAlignment="Left" 
-                Width="224" Height="40" VerticalAlignment="Top"
+                Width="179" Height="40" VerticalAlignment="Top"
                />
             <Label x:Name="lblBsPunto"
                 Content="Bs.S. 999.999" 
                 Margin="145,139,0,0" 
                 FontSize="20" 
                 HorizontalAlignment="Left" 
-                Width="224" Height="40" VerticalAlignment="Top"
+                Width="179" Height="40" VerticalAlignment="Top"
                />
             <Label
                 Content="Bs.S. Efectivo:" 
@@ -103,7 +103,7 @@
                />
         </Grid>
 
-        <Image x:Name="imgVender"
+        <!--<Image x:Name="imgVender"
                Margin="0,19,10,0" 
                Source="013-cpu.png" 
                HorizontalAlignment="Right"
@@ -121,7 +121,7 @@
                MouseLeftButtonUp="imgCargar_MouseLeftButtonUp"
                Width="100" Height="100" VerticalAlignment="Top"/>
 
-        <!--<Image x:Name="imgReporte" 
+        <Image x:Name="imgReporte" 
                Height="100"
                Margin="0,331,10,0" 
                VerticalAlignment="Top" 
@@ -130,6 +130,27 @@
                HorizontalAlignment="Right" 
                Width="100"/>-->
 
+        <StackPanel HorizontalAlignment="Right" Width="200" Margin="0,0,20,0" Height="257" VerticalAlignment="Top" Background="White">
+            <Button x:Name="btnVender" 
+                    Margin="0,20,0,0"
+                    Content="Vender" 
+                    FontSize="15pt"
+                    Background="LightGray"
+                    BorderBrush="LightGray"
+                    Foreground="Black"
+                    Height="45" Click="btnVender_Click"/>
+            <Button x:Name="btnInventario"
+                    Margin="0,20,0,0"
+                    Content="Inventario"
+                    FontSize="15 pt"
+                    Background="LightGray"
+                    BorderBrush="LightGray"
+                    Foreground="Black" 
+                    Height="45" Click="btnInventario_Click"/>
+
+        </StackPanel>
+
+
         <Label x:Name="lblFechaHora"
                Content="Jue. 20/01/2020 - 12:59:59 pm" 
                Margin="10,10,0,0" 
@@ -137,15 +158,25 @@
                HorizontalAlignment="Left" 
                Width="350" Height="52" VerticalAlignment="Top"
                />
-        <Rectangle Fill="#FF43B05C" HorizontalAlignment="Left" Height="5" Margin="10,161,0,0" Stroke="Black" VerticalAlignment="Top" Width="289"/>
-        <Rectangle Fill="#FF43B05C" HorizontalAlignment="Left" Height="6" Margin="10,62,0,0" Stroke="Black" VerticalAlignment="Top" Width="289"/>
+
+
+        <Rectangle Fill="#FF2196F3" HorizontalAlignment="Left" Height="5" Margin="10,161,0,0" Stroke="Black" VerticalAlignment="Top" Width="289"/>
+        <Rectangle Fill="#FF2196F3" HorizontalAlignment="Left" Height="6" Margin="10,62,0,0" Stroke="Black" VerticalAlignment="Top" Width="289"/>
 
         <DataGrid x:Name="dataReportePrin" 
                   Margin="10,257,10,10" 
                   IsReadOnly="True"
                   CanUserAddRows="False"
                   CanUserDeleteRows="False" FontSize="16"
+                  Background="WhiteSmoke"
+                  VerticalGridLinesBrush="LightGray"
+                  GridLinesVisibility="Vertical"                  
                   >
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="White"></Setter>
+                </Style>
+            </DataGrid.RowStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn 
                                 Header="Hora" 
@@ -157,15 +188,18 @@
                 <DataGridTextColumn 
                                 Header="Total $" 
                                 Binding="{Binding pagoDolar}"/>
-                <DataGridTextColumn 
+                <!--<DataGridTextColumn 
                                 Header="Tasa" 
-                                Binding="{Binding tasaVenta}"/>
+                                Binding="{Binding tasaVenta}"/>-->
                 <DataGridTextColumn 
-                                Header="Total Bs." 
+                                Header="Bs. P/Venta" 
                                 Binding="{Binding conversionBs}"/>
                 <DataGridTextColumn 
-                                Header="Pagó Bs. Efectivo" 
+                                Header="Bs. Efectivo" 
                                 Binding="{Binding pagoBsEfect}"/>
+                <DataGridTextColumn 
+                                Header="Detalle" 
+                                Binding="{Binding detalle}"/>
 
 
                 <!--<DataGridTemplateColumn>
@@ -192,7 +226,6 @@
                />
 
         <!--<TextBox x:Name="txtTest" Margin="16,189,593,278" />-->
-
 
     </Grid>
 </Window>

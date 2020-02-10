@@ -136,6 +136,12 @@ namespace Inventario_y_Contabilidad
                 {
                     art.LineaRow = 1;
                 }
+                else 
+                if (Decimal.Parse(art.precioBs) == Decimal.Parse(art.precioBsRec) ||
+                    Decimal.Parse(art.precioBsEfect) == Decimal.Parse(art.precioBsEfectRec))
+                {
+                    art.LineaRow = 2;
+                }
                 else
                 {
                     art.LineaRow = 0;
@@ -145,7 +151,7 @@ namespace Inventario_y_Contabilidad
             }
         }
 
-        private void imgAgregarArt_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void btnAgregar_Click(object sender, RoutedEventArgs e)
         {
             Articulo articulo = new Articulo(1);
             articulo.Owner = this;
@@ -154,7 +160,7 @@ namespace Inventario_y_Contabilidad
             cargarInventario();
         }
 
-        private void imgEditar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void btnEditar_Click(object sender, RoutedEventArgs e)
         {
             Articulo articulo = new Articulo(2);
             articulo.Owner = this;

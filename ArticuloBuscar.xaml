@@ -3,6 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"             
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:local="clr-namespace:Inventario_y_Contabilidad"
         mc:Ignorable="d"
         Title="Buscar Artículo" 
@@ -15,6 +17,7 @@
                  FontSize="22"
                  Margin="10,10,219,0"
                  TextChanged="txtBuscar_TextChanged"
+                 materialDesign:HintAssist.Hint="Buscar"
                  VerticalContentAlignment="Center" Height="40" VerticalAlignment="Top"
                  />
 
@@ -22,8 +25,15 @@
                   Margin="10,60,10,10" 
                   IsReadOnly="True"
                   CanUserAddRows="False"
-                  CanUserDeleteRows="False" FontSize="16"
+                  CanUserDeleteRows="False" 
+                  FontSize="16"
+                  Background="WhiteSmoke"
                   >
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="White"></Setter>
+                </Style>
+            </DataGrid.RowStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn 
                                 Header="Id" 
@@ -52,9 +62,11 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button x:Name="btnSeleccionar"
+                                    Style="{DynamicResource MaterialDesignFloatingActionButton}"
+                                    Width="45" Height="45"
                                     Click="btnSeleccionar_Click">
                                 <Button.Content>
-                                    <Label Content="●"/>
+                                    <iconPacks:PackIconMaterialDesign Kind="OpenInBrowser" Foreground="White" />
                                 </Button.Content>
                             </Button>
                         </DataTemplate>

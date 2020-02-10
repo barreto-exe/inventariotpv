@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:local="clr-namespace:Inventario_y_Contabilidad"
         mc:Ignorable="d"
         Title="Venta" 
@@ -19,7 +20,33 @@
                HorizontalAlignment="Right" 
                Width="118"/>
 
-        <Image x:Name="imgAceptarCompra" 
+        <Button x:Name="btnAceptar"
+                Foreground="White" 
+                Style="{DynamicResource MaterialDesignFloatingActionButton}"
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Bottom" 
+                Click="aceptarCompra"
+                Height="40" Width="40" Margin="0,0,312,376"
+                >
+            <Button.Content>
+                <iconPacks:PackIconMaterialDesign Kind="Check" />
+            </Button.Content>
+        </Button>
+
+        <Button x:Name="btnCancelar"
+                Foreground="White" 
+                Style="{DynamicResource MaterialDesignFloatingActionButton}"
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Bottom" 
+                Click="cancelarCompra"
+                Height="40" Width="40" Margin="0,0,255,376"
+                >
+            <Button.Content>
+                <iconPacks:PackIconMaterialDesign Kind="Clear" />
+            </Button.Content>
+        </Button>
+
+        <!--<Image x:Name="imgAceptarCompra" 
                Margin="348,75,0,0" 
                Source="035-shopping cart.png" 
                HorizontalAlignment="Left" 
@@ -31,9 +58,9 @@
                Source="037-shopping cart.png" 
                HorizontalAlignment="Left" 
                MouseLeftButtonDown="cancelarCompra"
-               Width="60" Cursor="Hand" Height="61" VerticalAlignment="Top"/>
+               Width="60" Cursor="Hand" Height="61" VerticalAlignment="Top"/>-->
 
-        <TextBox x:Name="txtIdArt"
+        <!--<TextBox x:Name="txtIdArt"
                  HorizontalAlignment="Left" 
                  Height="40" 
                  Margin="10,96,0,0" 
@@ -41,15 +68,15 @@
                  VerticalAlignment="Top" 
                  KeyDown="txtIdArt_KeyDown"
                  Width="250" 
-                 FontSize="20"/>
+                 FontSize="20"/>-->
 
         <Button x:Name="btnBuscar" 
-                Margin="265,96,0,0"
+                Margin="10,96,0,0"
                 Content="Buscar"
                 HorizontalAlignment="Left" 
-                Width="78" Height="40" 
+                Width="250" Height="40" 
                 VerticalAlignment="Top" 
-                Click="btnBuscar_Click"
+                Click="btnBuscar_Click" Foreground="White"
                 
                 />
 
@@ -79,7 +106,16 @@
                   CanUserDeleteRows="False"
                   CanUserReorderColumns="False"
                   CanUserSortColumns="False"
+                  Background="WhiteSmoke"
+                  VerticalGridLinesBrush="LightGray"
+                  GridLinesVisibility="Vertical"
+                  FontSize="13pt"
                   >
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="White"></Setter>
+                </Style>
+            </DataGrid.RowStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn 
                                 Header="Id. Articulo" 
@@ -97,13 +133,18 @@
                                 Header="Conversión Bs." 
                                 Binding="{Binding precioBs}"/>
 
-                <DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button x:Name="btnBorrar"
+                                    BorderBrush="IndianRed"
+                                    Background="IndianRed"
+                                    Height="40" Width="40"
+                                    VerticalContentAlignment="Center"
+                                    Style="{DynamicResource MaterialDesignFloatingActionButton}"
                                     Click="btnBorrar_Click">
                                 <Button.Content>
-                                    <Label Content="X"/>
+                                    <iconPacks:PackIconMaterialDesign Kind="Clear" Foreground="Wheat"/>
                                 </Button.Content>
                             </Button>
                         </DataTemplate>
@@ -116,7 +157,7 @@
                   x:Name="checkEfectivo"
                   HorizontalAlignment="Left" 
                   VerticalContentAlignment="Center"
-                  Margin="265,28,0,0" 
+                  Margin="290,25,0,0" 
                   VerticalAlignment="Top" Width="80" Height="20" FontSize="14" 
                   Checked="checkEfectivo_Checked"
                   Unchecked="checkEfectivo_Checked"/>

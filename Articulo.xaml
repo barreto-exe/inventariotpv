@@ -9,21 +9,21 @@
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize"
         WindowState="Normal"
-        Height="450"  Width="500">
+        Height="480"  Width="525">
     <Grid>
 
         <TextBox 
             x:Name="txtDescArt"
             HorizontalAlignment="Left" 
             Height="40" 
-            Margin="10,50,0,0" 
+            Margin="29,65,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             Width="459" 
             FontSize="20"/>
         <Label 
             Content="Descripción del Artículo:" 
-            Margin="10,10,0,0" 
+            Margin="29,25,0,0" 
             FontSize="20" 
             HorizontalAlignment="Left" 
             Width="223" Height="40" VerticalAlignment="Top"
@@ -31,7 +31,7 @@
         <Label 
             x:Name="lblIdArt"
             Content="#id" 
-            Margin="233,10,0,0" 
+            Margin="252,25,0,0" 
             FontSize="20" 
             HorizontalAlignment="Left" 
             Width="136" Height="40" VerticalAlignment="Top"
@@ -40,7 +40,7 @@
             x:Name="txtCostoDolar"
             HorizontalAlignment="Left" 
             Height="40" 
-            Margin="10,150,0,0" 
+            Margin="29,165,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             Width="200" 
@@ -49,7 +49,7 @@
             KeyDown="txtCostoDolar_KeyDown"/>
         <Label 
             Content="Costo $: " 
-            Margin="10,110,0,0" 
+            Margin="29,125,0,0" 
             FontSize="20" 
             HorizontalAlignment="Left" 
             Width="200" Height="40" VerticalAlignment="Top"
@@ -59,7 +59,7 @@
             x:Name="txtPrecioDolar"
             HorizontalAlignment="Left" 
             Height="40" 
-            Margin="246,150,0,0" 
+            Margin="265,165,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             Width="223" 
@@ -68,7 +68,7 @@
             FontSize="20"/>
         <Label 
             Content="Precio $: " 
-            Margin="246,110,0,0" 
+            Margin="265,125,0,0" 
             FontSize="20" 
             HorizontalAlignment="Left" 
             Width="223" Height="40" VerticalAlignment="Top"
@@ -79,7 +79,7 @@
             x:Name="txtPrecioBs"
             HorizontalAlignment="Left" 
             Height="40" 
-            Margin="10,245,0,0" 
+            Margin="29,260,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             Width="200" 
@@ -88,7 +88,7 @@
             FontSize="20"/>
         <Label 
             Content="Precio Bs: " 
-            Margin="10,205,0,0" 
+            Margin="29,220,0,0" 
             FontSize="20" 
             HorizontalAlignment="Left" 
             Width="200" Height="40" VerticalAlignment="Top"
@@ -97,7 +97,7 @@
             x:Name="txtPrecioBsEfect"
             HorizontalAlignment="Left" 
             Height="40" 
-            Margin="246,245,0,0" 
+            Margin="265,260,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             Width="223" 
@@ -106,7 +106,7 @@
             FontSize="20"/>
         <Label 
             Content="Precio Bs. Efect.: " 
-            Margin="246,205,0,0" 
+            Margin="265,220,0,0" 
             FontSize="20" 
             HorizontalAlignment="Left" 
             Width="223" Height="40" VerticalAlignment="Top"
@@ -115,30 +115,30 @@
         <TextBox 
             x:Name="txtCantidadAgg"
             HorizontalAlignment="Left" 
-            Margin="10,355,0,0" 
+            Margin="29,370,0,0" 
             TextWrapping="Wrap" 
             Width="200" 
             FontSize="20" Height="40" VerticalAlignment="Top"
             KeyDown="soloNum"/>
         <Label 
             Content="Unidades Agregadas:" 
-            Margin="10,315,0,0" 
+            Margin="29,330,0,0" 
             FontSize="20" 
             HorizontalAlignment="Left" 
             Width="223" Height="40" VerticalAlignment="Top"
         />
 
         <Button x:Name="btnAceptar"
-            Content="Aceptar" Margin="0,365,25,0" HorizontalAlignment="Right" Width="100" Height="30" VerticalAlignment="Top" Click="btnAceptar_Click"/>
+            Content="Aceptar" Margin="0,380,31,0" HorizontalAlignment="Right" Width="100" Height="30" VerticalAlignment="Top" Click="btnAceptar_Click" Foreground="White"/>
 
         <Button 
             x:Name="btnBuscar" 
-            Margin="369,15,0,0"
+            Margin="388,30,0,0"
             Content="Buscar"
             HorizontalAlignment="Left" 
             Width="100" Height="30" 
             VerticalAlignment="Top" 
-            Click="btnBuscar_Click"
+            Click="btnBuscar_Click" Foreground="White"
         />
     </Grid>
 </Window>

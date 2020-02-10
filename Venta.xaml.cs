@@ -28,7 +28,7 @@ namespace Inventario_y_Contabilidad
         public Venta()
         {
             InitializeComponent();
-            this.txtIdArt.Focus();
+            //this.txtIdArt.Focus();
             totalVentaDolar = 0;
             costoVenta = 0;
 
@@ -76,6 +76,8 @@ namespace Inventario_y_Contabilidad
 
             actualizaDatos();
         }
+
+        /*
         private void txtIdArt_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -99,7 +101,7 @@ namespace Inventario_y_Contabilidad
                     id = dr["id"].ToString(),
                     descripcion = dr["descripcion"].ToString(),
                     precioDolar = dr["precioDolar"].ToString(),
-                    costoDolar  = dr["costoDolar"].ToString()
+                    costoDolar = dr["costoDolar"].ToString()
                 };
 
                 //Seleccionando cantidad
@@ -133,6 +135,7 @@ namespace Inventario_y_Contabilidad
             else
                 e.Handled = true;
         }
+        */
 
         private void actualizaDatos()
         {
@@ -184,6 +187,8 @@ namespace Inventario_y_Contabilidad
 
                 dr.Close();
 
+                articulo.precioBs = (Decimal.Parse(articulo.precioBs) * int.Parse(articulo.cantAct)).ToString();
+
                 subtotalDolar = decimal.Parse(articulo.precioDolar);
                 costoDolar = decimal.Parse(articulo.costoDolar);
                 subtotalBs = decimal.Parse(articulo.precioBs);
@@ -208,7 +213,7 @@ namespace Inventario_y_Contabilidad
             lblTotalDolar.Content = "$ "  + Decimal.Round(totalVentaDolar, 2).ToString("#,#0.##");
             lblTotalBs.Content = "Bs.S. " + Decimal.Round(totalVentaBs, 2).ToString("#,#0.##");
             
-            txtIdArt.Focus();
+            //txtIdArt.Focus();
         }
        
         private void aceptarCompra(object sender, RoutedEventArgs e)
@@ -255,8 +260,8 @@ namespace Inventario_y_Contabilidad
                         + idVenta.ToString() + ","
                         + articulo.id + ","
                         + articulo.cantAct + ","
-                        + articulo.precioDolar.Replace(",", ".") + ","
-                        + articulo.precioBs.Replace(",", ".") + ")";
+                        + QC(articulo.precioDolar) + ","
+                        + QC(articulo.precioBs)    + ")";
                 command = new SqlCeCommand(query, MainWindow.conn);
                 command.ExecuteReader();
 
@@ -293,7 +298,12 @@ namespace Inventario_y_Contabilidad
         {
             actualizaDatos();
         }
-      
+
+        private string QC(string decimalConComa)
+        {
+            string decimalConPunto = decimalConComa.Replace(".","").Replace(",", ".");
+            return decimalConPunto;
+        }
         private string CS(string strSinComillas)
         {
             //Añade comillas simples

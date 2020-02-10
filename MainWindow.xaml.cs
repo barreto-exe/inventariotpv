@@ -90,19 +90,21 @@ namespace Inventario_y_Contabilidad
                 {
                     id = dr["id"].ToString(),
                     fechaHora = dr["fechaHora"].ToString(),
-                    pagoDolar    = RoundDecimalString(dr["pagoDolar"].ToString()),
-                    conversionBs = RoundDecimalString(dr["conversionBs"].ToString()),
-                    tasaVenta    = RoundDecimalString(dr["tasaVenta"].ToString()),
-                    porcentajeEfectivoVenta = RoundDecimalString(dr["porcentajeEfectivoVenta"].ToString())
+                    pagoDolar = RoundDecimalString(dr["pagoDolar"].ToString()),
+                    tasaVenta = RoundDecimalString(dr["tasaVenta"].ToString()),
+                    porcentajeEfectivoVenta = RoundDecimalString(dr["porcentajeEfectivoVenta"].ToString()),
+                    detalle = detalleVenta(dr["id"].ToString())
                 };
                 
                 if (dr["pagoBsEfect"].ToString() == "1")
                 {
-                    venta.pagoBsEfect = "Sí";
+                    venta.pagoBsEfect = RoundDecimalString(dr["conversionBs"].ToString());
+                    venta.conversionBs = "0";
                 }
                 else
                 {
-                    venta.pagoBsEfect = "No";
+                    venta.conversionBs = RoundDecimalString(dr["conversionBs"].ToString());
+                    venta.pagoBsEfect = "0";
                 }
 
                 dataReportePrin.Items.Add(venta);
@@ -128,7 +130,7 @@ namespace Inventario_y_Contabilidad
                 dr.Close();
             }
 
-            decimal tasa = decimal.Parse(lblTasaDia.Content.ToString().Replace("Bs.S. ", ""));
+            //decimal tasa = decimal.Parse(lblTasaDia.Content.ToString().Replace("Bs.S. ", ""));
 
             //Ingresos Bs Punto
             query = "SELECT sum(conversionBs) FROM c_ventas WHERE pagoBsEfect = 0 AND fechaHora BETWEEN '" +
@@ -165,6 +167,29 @@ namespace Inventario_y_Contabilidad
             lblBsPunto.Content     = "Bs.S. " + Decimal.Round(ingresoBsPunto, 2).ToString("#,#0.##");
         }
 
+        private string detalleVenta(string id)
+        {
+            string detalle = "";
+
+            string query = "SELECT * FROM c_ventas_detalles WHERE id_venta = " + id;
+            SqlCeCommand cm = new SqlCeCommand(query, MainWindow.conn);
+            SqlCeDataReader dr = cm.ExecuteReader();
+
+            while(dr.Read())
+            {
+                query = "SELECT * FROM c_articulos WHERE id = " + dr["id_articulo"].ToString();
+                SqlCeCommand cm2 = new SqlCeCommand(query, MainWindow.conn);
+                SqlCeDataReader dr2 = cm2.ExecuteReader();
+                dr2.Read();
+
+                detalle += dr["cantidad"].ToString() + " " + dr2["descripcion"].ToString() + ". ";
+            }
+
+            dr.Close();
+
+            return detalle;
+        }
+
         private void btnCambiarTasa_Click(object sender, RoutedEventArgs e)
         {
             cambioTasa cambio = new cambioTasa();
@@ -172,21 +197,6 @@ namespace Inventario_y_Contabilidad
             cambio.ShowDialog();
         }
 
-        private void imgVender_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            Venta venta = new Venta();
-            venta.Owner = this;
-            venta.ShowDialog();
-
-            actualizaVentas();
-        }
-
-        private void imgCargar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            Inventario inventario = new Inventario();
-            inventario.Owner = this;
-            inventario.ShowDialog();
-        }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             conn.Close();
@@ -196,6 +206,22 @@ namespace Inventario_y_Contabilidad
         {
             decimal dec = Decimal.Parse(num);
             return decimal.Round(dec, 2).ToString("#,#0.##");
+        }
+
+        private void btnVender_Click(object sender, RoutedEventArgs e)
+        {
+            Venta venta = new Venta();
+            venta.Owner = this;
+            venta.ShowDialog();
+
+            actualizaVentas();
+        }
+
+        private void btnInventario_Click(object sender, RoutedEventArgs e)
+        {
+            Inventario inventario = new Inventario();
+            inventario.Owner = this;
+            inventario.ShowDialog();
         }
     }
 }

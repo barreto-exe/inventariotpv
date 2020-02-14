@@ -37,7 +37,7 @@ namespace Inventario_y_Contabilidad
             //Actualizar cantidad y precio artículo
             if(tipo == 2)
             {
-                txtPrecioDolar.Focus();
+                txtDescArt.Focus();
                 setArticuloBuscado();
             }
         }
@@ -102,6 +102,7 @@ namespace Inventario_y_Contabilidad
             //Actualizando info de articulo seleccionado
             string idArt = lblIdArt.Content.ToString().Replace("#", "");
             string query = "UPDATE c_articulos SET " +
+                           "descripcion = "   + CS(txtDescArt.Text) + "," +
                            "precioDolar = "   + decimal.Parse(txtPrecioDolar.Text).ToString().Replace(",",".")    + "," +
                            "costoDolar = "    + decimal.Parse(txtCostoDolar.Text).ToString().Replace(",",".")     + "," +
                            "precioBs = "      + decimal.Parse(txtPrecioBs.Text).ToString().Replace(",", ".")      + "," +
@@ -143,12 +144,25 @@ namespace Inventario_y_Contabilidad
             {
                 lblIdArt.Content = "#" + articulo.id;
                 txtDescArt.Text = articulo.descripcion;
-                txtDescArt.IsEnabled = false;
+                //txtDescArt.IsEnabled = false;
 
                 txtCostoDolar.Text    = articulo.costoDolar;
                 txtPrecioDolar.Text   = articulo.precioDolar;
                 txtPrecioBs.Text      = articulo.precioBs;
                 txtPrecioBsEfect.Text = articulo.precioBsEfect;
+
+                decimal precio = Decimal.Parse(txtPrecioDolar.Text);
+                decimal costo = Decimal.Parse(txtCostoDolar.Text);
+                decimal ganancia = precio / costo * 100 - 100;
+
+                if (ganancia > 0)
+                {
+                    txtGananciaDolar.Text = ganancia.ToString("#,#0.##");
+                }
+                else
+                {
+                    txtGananciaDolar.Text = "";
+                }
 
                 txtCantidadAgg.Text = "0";
             }
@@ -190,7 +204,7 @@ namespace Inventario_y_Contabilidad
 
             if (e.Key == Key.Tab)
             {
-                txtPrecioBs.Focus();
+                txtGananciaDolar.Focus();
             }
 
             e.Handled = true;
@@ -211,8 +225,20 @@ namespace Inventario_y_Contabilidad
                 decimal precioBs = numNuevo * cambioTasa.tasas()[0];
                 decimal precioBsEfect = (precioBs * 100) / cambioTasa.tasas()[1];
 
-                txtPrecioBs.Text    = String.Format("{0:#,0.00}", precioBs);
+                txtPrecioBs.Text      = String.Format("{0:#,0.00}", precioBs);
                 txtPrecioBsEfect.Text = String.Format("{0:#,0.00}", precioBsEfect);
+                decimal precio = Decimal.Parse(txtPrecioDolar.Text);
+                decimal costo  = Decimal.Parse(txtCostoDolar.Text);
+                decimal ganancia = precio / costo * 100 - 100;
+
+                if(ganancia > 0)
+                {
+                    txtGananciaDolar.Text = ganancia.ToString("#,#0.##");
+                }
+                else
+                {
+                    txtGananciaDolar.Text = "";
+                }
             }
         }
         private void txtCostoDolar_KeyDown(object sender, KeyEventArgs e)
@@ -241,12 +267,63 @@ namespace Inventario_y_Contabilidad
                 txtCostoDolar.Text = String.Format("{0:#,0.00}", numNuevo);
             }
         }
+        private void txtPrecioDolar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            decimal precioD;
+            decimal precioBs;
+            decimal precioBsEfect;
+
+            if(Decimal.TryParse(txtPrecioDolar.Text, out precioD))
+            {
+                precioBs = precioD * cambioTasa.tasas()[0];
+                precioBsEfect = (precioBs * 100) / cambioTasa.tasas()[1];
+
+                txtPrecioBs.Text = String.Format("{0:#,0.00}", precioBs);
+                txtPrecioBsEfect.Text = String.Format("{0:#,0.00}", precioBsEfect);
+            }
+            else
+            {
+                txtPrecioDolar.Text = "";
+            }
+        }
+
+        private void txtGananciaDolar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Tab)
+            {
+                txtPrecioBs.Focus();
+            }
+
+            if ((e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key == Key.OemMinus)
+                || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9))
+                e.Handled = false;
+            else
+                e.Handled = true;
+
+            decimal porcentaje;
+            decimal costo;
+            
+            if(Decimal.TryParse(txtCostoDolar.Text, out costo) && 
+               Decimal.TryParse(txtGananciaDolar.Text + e.Key.ToString().Replace("D", ""), out porcentaje))
+            {
+                decimal precio = costo + costo * porcentaje / 100;
+                txtPrecioDolar.Text = precio.ToString("#,#0.##");
+            }
+        }
+        private void txtGananciaDolar_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Back || e.Key == Key.Delete)
+            {
+                txtGananciaDolar.Text = "";
+            }
+        }
 
         private void txtPrecioDolar_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Back || e.Key == Key.Delete)
             {
-                txtPrecioDolar.Text = "";
+                txtPrecioDolar.Text   = "";
+                txtGananciaDolar.Text = "";
             }
         }
         private void txtCostoDolar_KeyUp(object sender, KeyEventArgs e)
@@ -330,5 +407,7 @@ namespace Inventario_y_Contabilidad
             string decimalConPunto = decimalConComa.Replace(".","").Replace(",", ".");
             return decimalConPunto;
         }
+
+
     }
 }

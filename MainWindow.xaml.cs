@@ -29,10 +29,31 @@ namespace Inventario_y_Contabilidad
             string dataSource = Environment.CurrentDirectory + "\\bd.sdf";
             conn = new SqlCeConnection("Data Source =" + dataSource + "; Password = contabilidad");
         }
+        private void ModificaBD()
+        {
+            string dir = Environment.CurrentDirectory;
+            string directorio = dir + "\\bdmodificado.txt";
 
-        //FORMATOS
-        //String.Format("{0:#,#.00}",  )
-        //decimal.Parse( ).ToString("#,#.#;(#,#.#)")
+            if (File.Exists(directorio))
+            {
+                return;
+            }
+            File.WriteAllText(directorio,"Modificado");
+
+            int cant = 5;
+            string[] query = new string[cant];
+            query[0] = "ALTER TABLE c_ventas ALTER COLUMN pagoBsEfect float;";
+            query[1] = "ALTER TABLE c_ventas ADD COLUMN pagoBsPunto float NULL;";
+            query[2] = "UPDATE c_ventas SET pagoBsPunto = conversionBs;";
+            query[3] = "UPDATE c_ventas SET pagoBsEfect = conversionBs, pagoBsPunto=0 WHERE pagoBsEfect = 1;";
+            query[4] = "ALTER TABLE c_ventas DROP COLUMN conversionBs;";
+
+            for(int i=0; i<cant; i++)
+            {
+                SqlCeCommand cm = new SqlCeCommand(query[i], conn);
+                cm.ExecuteNonQuery();
+            }
+        }
 
         public MainWindow()
         {
@@ -44,6 +65,7 @@ namespace Inventario_y_Contabilidad
 
             ConectarBD();
             conn.Open();
+            ModificaBD();
 
             InitializeComponent();
 
@@ -52,14 +74,11 @@ namespace Inventario_y_Contabilidad
             timer.Tick += timer_Tick;
             timer.Start();
 
-            actualizaVentas();
-        }
+            txtFechaDesde.SelectedDate = DateTime.Now;
+            txtFechaHasta.SelectedDate = DateTime.Now;
 
-        //private void test(object sender, RoutedEventArgs e)
-        //{
-        //    decimal num = decimal.Parse(txtTest.Text);
-        //    lblBsPunto.Content = num.ToString("#,#.00#;(#,#.00#)");
-        //}
+            actualizaVentas(DateTime.Now, DateTime.Now);
+        }
 
         void timer_Tick(object sender, EventArgs e)
         {
@@ -74,13 +93,13 @@ namespace Inventario_y_Contabilidad
             dr.Close();
         }
 
-        private void actualizaVentas()
+        private void actualizaVentas(DateTime desde, DateTime hasta)
         {
             dataReportePrin.Items.Clear();
 
             string query = "SELECT * FROM c_ventas WHERE fechaHora BETWEEN '" +
-                           String.Format("{0:yyyy-MM-dd}", DateTime.Now) + "'  AND '" +
-                           String.Format("{0:yyyy-MM-dd}", DateTime.Now) + " 23:59:59' ORDER BY id DESC; ";
+                           String.Format("{0:yyyy-MM-dd}", desde) + "'  AND '" +
+                           String.Format("{0:yyyy-MM-dd}", hasta) + " 23:59:59' ORDER BY id DESC; ";
             SqlCeCommand command = new SqlCeCommand(query, conn);
             SqlCeDataReader dr = command.ExecuteReader();
 
@@ -92,20 +111,11 @@ namespace Inventario_y_Contabilidad
                     fechaHora = dr["fechaHora"].ToString(),
                     pagoDolar = RoundDecimalString(dr["pagoDolar"].ToString()),
                     tasaVenta = RoundDecimalString(dr["tasaVenta"].ToString()),
+                    pagoBsEfect = RoundDecimalString(dr["pagoBsEfect"].ToString()),
+                    conversionBs = RoundDecimalString(dr["pagoBsPunto"].ToString()),
                     porcentajeEfectivoVenta = RoundDecimalString(dr["porcentajeEfectivoVenta"].ToString()),
                     detalle = detalleVenta(dr["id"].ToString())
                 };
-                
-                if (dr["pagoBsEfect"].ToString() == "1")
-                {
-                    venta.pagoBsEfect = RoundDecimalString(dr["conversionBs"].ToString());
-                    venta.conversionBs = "0";
-                }
-                else
-                {
-                    venta.conversionBs = RoundDecimalString(dr["conversionBs"].ToString());
-                    venta.pagoBsEfect = "0";
-                }
 
                 dataReportePrin.Items.Add(venta);
             }
@@ -114,8 +124,8 @@ namespace Inventario_y_Contabilidad
 
             //Seteando Ingresos y Ganancias
             query = "SELECT sum(costoVenta), sum(pagoDolar) FROM c_ventas WHERE fechaHora BETWEEN '" +
-                     String.Format("{0:yyyy-MM-dd}", DateTime.Now) + "'  AND '" +
-                     String.Format("{0:yyyy-MM-dd}", DateTime.Now) + " 23:59:59'";
+                     String.Format("{0:yyyy-MM-dd}", desde) + "'  AND '" +
+                     String.Format("{0:yyyy-MM-dd}", hasta) + " 23:59:59'";
             command = new SqlCeCommand(query, conn);
             dr = command.ExecuteReader();
 
@@ -133,9 +143,9 @@ namespace Inventario_y_Contabilidad
             //decimal tasa = decimal.Parse(lblTasaDia.Content.ToString().Replace("Bs.S. ", ""));
 
             //Ingresos Bs Punto
-            query = "SELECT sum(conversionBs) FROM c_ventas WHERE pagoBsEfect = 0 AND fechaHora BETWEEN '" +
-                     String.Format("{0:yyyy-MM-dd}", DateTime.Now) + "'  AND '" +
-                     String.Format("{0:yyyy-MM-dd}", DateTime.Now) + " 23:59:59'";
+            query = "SELECT sum(pagoBsPunto) FROM c_ventas WHERE fechaHora BETWEEN '" +
+                     String.Format("{0:yyyy-MM-dd}", desde) + "'  AND '" +
+                     String.Format("{0:yyyy-MM-dd}", hasta) + " 23:59:59'";
             command = new SqlCeCommand(query, conn);
             dr = command.ExecuteReader();
             decimal ingresoBsPunto = 0;
@@ -147,9 +157,9 @@ namespace Inventario_y_Contabilidad
             }
 
             //Ingresos Bs Efectivo
-            query = "SELECT sum(conversionBs) FROM c_ventas WHERE pagoBsEfect = 1 AND fechaHora BETWEEN '" +
-                     String.Format("{0:yyyy-MM-dd}", DateTime.Now) + "'  AND '" +
-                     String.Format("{0:yyyy-MM-dd}", DateTime.Now) + " 23:59:59'";
+            query = "SELECT sum(pagoBsEfect) FROM c_ventas WHERE fechaHora BETWEEN '" +
+                     String.Format("{0:yyyy-MM-dd}", desde) + "'  AND '" +
+                     String.Format("{0:yyyy-MM-dd}", hasta) + " 23:59:59'";
             command = new SqlCeCommand(query, conn);
             dr = command.ExecuteReader();
             decimal ingresoBsEfect = 0;
@@ -161,6 +171,14 @@ namespace Inventario_y_Contabilidad
             }
 
             //Seteando Etiquetas
+            if(desde.Date == DateTime.Now.Date && hasta.Date == DateTime.Now.Date)
+            {
+                lblMontosRango.Text = "Montos\n"+ "de hoy " + String.Format("{0:dddd, dd-MM-yyyy}", DateTime.Now) + ":";
+            }
+            else
+            {
+                lblMontosRango.Text = "Montos:\n"+ "Desde " + String.Format("{0:dd-MM-yyyy}", desde) + ", hasta " + String.Format("{0:dd-MM-yyyy}", hasta) +":";
+            }
             lblIngresoDia.Content  = "$ " + Decimal.Round(ingresos, 2).ToString("#,#0.##");
             lblGananciaDia.Content = "$ " + Decimal.Round(ganancias, 2).ToString("#,#0.##");
             lblBsEfectivo.Content  = "Bs.S. " + Decimal.Round(ingresoBsEfect, 2).ToString("#,#0.##");
@@ -214,7 +232,7 @@ namespace Inventario_y_Contabilidad
             venta.Owner = this;
             venta.ShowDialog();
 
-            actualizaVentas();
+            actualizaVentas(DateTime.Now,DateTime.Now);
         }
 
         private void btnInventario_Click(object sender, RoutedEventArgs e)
@@ -222,6 +240,17 @@ namespace Inventario_y_Contabilidad
             Inventario inventario = new Inventario();
             inventario.Owner = this;
             inventario.ShowDialog();
+        }
+
+        private void btnConsultarVentas_Click(object sender, RoutedEventArgs e)
+        {
+            if(txtFechaDesde.SelectedDate != null && txtFechaHasta.SelectedDate != null)
+                actualizaVentas((DateTime)txtFechaDesde.SelectedDate, (DateTime)txtFechaHasta.SelectedDate);
+        }
+
+        private void btnVerMas_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

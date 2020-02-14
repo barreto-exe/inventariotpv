@@ -62,16 +62,42 @@
             Margin="265,165,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
-            Width="223" 
+            Width="118" 
             KeyDown="txtPrecioDolar_KeyDown"
             KeyUp="txtPrecioDolar_KeyUp"
+            TextChanged="txtPrecioDolar_TextChanged"
+            FontSize="20"/>
+        <TextBox 
+            x:Name="txtGananciaDolar"
+            HorizontalAlignment="Left" 
+            Height="40" 
+            Margin="398,165,0,0" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            Width="90" 
+            KeyDown="txtGananciaDolar_KeyDown"
+            KeyUp="txtGananciaDolar_KeyUp"
             FontSize="20"/>
         <Label 
             Content="Precio $: " 
             Margin="265,125,0,0" 
             FontSize="20" 
             HorizontalAlignment="Left" 
-            Width="223" Height="40" VerticalAlignment="Top"
+            Width="118" Height="40" VerticalAlignment="Top"
+        />
+        <Label 
+            Content="Ganancia:" 
+            Margin="394,125,0,0" 
+            FontSize="20" 
+            HorizontalAlignment="Left" 
+            Width="97" Height="40" VerticalAlignment="Top"
+        />
+        <Label 
+            Content="%" 
+            Margin="460,165,0,0" 
+            FontSize="20" 
+            HorizontalAlignment="Left" 
+            Width="28" Height="40" VerticalAlignment="Top"
         />
 
 
@@ -87,7 +113,7 @@
             KeyUp="txtPrecioBs_KeyUp"
             FontSize="20"/>
         <Label 
-            Content="Precio Bs: " 
+            Content="Precio Punto: " 
             Margin="29,220,0,0" 
             FontSize="20" 
             HorizontalAlignment="Left" 
@@ -104,8 +130,9 @@
             KeyUp="txtPrecioBsEfect_KeyUp"
             KeyDown="txtPrecioBsEfect_KeyDown"
             FontSize="20"/>
+
         <Label 
-            Content="Precio Bs. Efect.: " 
+            Content="Precio Efectivo: " 
             Margin="265,220,0,0" 
             FontSize="20" 
             HorizontalAlignment="Left" 

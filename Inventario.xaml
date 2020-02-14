@@ -89,18 +89,23 @@
                                 Visibility="Collapsed"
                                 Binding="{Binding LineaRow}"/>
 
-                <!--<DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="65">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="btnEditar"
-                                    Click="btnEditar_Click">
+                            <Button x:Name="btnBorrar"
+                                    Foreground="White" 
+                                    Style="{DynamicResource MaterialDesignFloatingActionButton}"
+                                    Click="btnBorrar_Click"
+                                    VerticalAlignment="Center"
+                                    Height="40" Width="40"
+                                    >
                                 <Button.Content>
-                                    <Label Content="Editar"/>
+                                    <iconPacks:PackIconMaterialDesign Kind="Clear" />
                                 </Button.Content>
                             </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>-->
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 

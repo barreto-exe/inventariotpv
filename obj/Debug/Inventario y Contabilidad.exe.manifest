@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Inventario y Contabilidad.exe" size="116648">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Inventario y Contabilidad.exe" size="126376">
       <assemblyIdentity name="Inventario y Contabilidad" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ksgfAUriyo4C/vFtGy/LNcBiFL7P6gKsLp+9tZ8fgnI=</dsig:DigestValue>
+        <dsig:DigestValue>Dbh0xbYH0AqtBlsKc5QtzH0lDt2oz1yNKR+72brHNHY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -360,7 +360,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>NS2GT5WNcIeScwBNa+oQ3k4wDqTc1kdsy+v4DrE93YE=</dsig:DigestValue>
+      <dsig:DigestValue>Kvb+ayB9TBSO8aCypypLw2Qd869oX8PGMLlE5AnWhUE=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Inventario y Contabilidad.exe.config" size="187">

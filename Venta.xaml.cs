@@ -34,6 +34,7 @@ namespace Inventario_y_Contabilidad
 
             tasa = cambioTasa.tasas()[0];
             porcentaje = cambioTasa.tasas()[1];
+            rbPunto.IsChecked = true;
 
             actualizaDatos();
         }
@@ -77,66 +78,6 @@ namespace Inventario_y_Contabilidad
             actualizaDatos();
         }
 
-        /*
-        private void txtIdArt_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            //Este if es redundante con la función btnBuscar
-            {
-                string query = "SELECT * FROM c_articulos WHERE id = " + txtIdArt.Text;
-                SqlCeCommand command = new SqlCeCommand(query, MainWindow.conn);
-                SqlCeDataReader dr = command.ExecuteReader();
-                txtIdArt.Text = "";
-
-                //Si no seleccionó artículo
-                if (!dr.Read())
-                {
-                    MessageBox.Show("No existe el artículo buscado");
-                    dr.Close();
-                    return;
-                }
-
-                var articulo = new ArticuloClase
-                {
-                    id = dr["id"].ToString(),
-                    descripcion = dr["descripcion"].ToString(),
-                    precioDolar = dr["precioDolar"].ToString(),
-                    costoDolar = dr["costoDolar"].ToString()
-                };
-
-                //Seleccionando cantidad
-                VentaCantidad cantidad = new VentaCantidad();
-                cantidad.Owner = this;
-                cantidad.ShowDialog();
-                articulo.cantAct = cantidad.txtCant.Text;
-
-                //Seteando monto * cantidad
-                decimal subtotalDolar = decimal.Parse(articulo.precioDolar) * decimal.Parse(articulo.cantAct);
-                decimal costoDolar = decimal.Parse(articulo.costoDolar) * decimal.Parse(articulo.cantAct);
-                decimal subtotalBs = subtotalDolar * tasa;
-
-                articulo.precioDolar = Decimal.Round(subtotalDolar, 2).ToString();
-                articulo.costoDolar = Decimal.Round(costoDolar, 2).ToString();
-                articulo.precioBs = Decimal.Round(subtotalBs, 2).ToString();
-                if (checkEfectivo.IsChecked == true)
-                {
-                    articulo.precioBs = Decimal.Round(((subtotalBs * tasa * 100) / porcentaje), 2).ToString();
-                }
-
-                dataArticulosVenta.Items.Add(articulo);
-                dr.Close();
-
-                actualizaDatos();
-            }
-
-            if ((e.Key >= Key.D0 && e.Key <= Key.D9)
-                || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9))
-                e.Handled = false;
-            else
-                e.Handled = true;
-        }
-        */
-
         private void actualizaDatos()
         {
             int cantArt = dataArticulosVenta.Items.Count;
@@ -164,7 +105,7 @@ namespace Inventario_y_Contabilidad
 
                 if(dr["precioBs"].ToString() != "")
                 {
-                    if (checkEfectivo.IsChecked == true)
+                    if (rbEfectivo.IsChecked == true)
                     {
                         articulo.precioBs = dr["precioBsEfect"].ToString();
                     }
@@ -175,7 +116,7 @@ namespace Inventario_y_Contabilidad
                 }
                 else
                 {
-                    if (checkEfectivo.IsChecked == true)
+                    if (rbEfectivo.IsChecked == true)
                     {
                         articulo.precioBs = (Decimal.Parse(dr["precioDolar"].ToString()) * tasa * 100 / porcentaje).ToString();
                     }
@@ -221,23 +162,44 @@ namespace Inventario_y_Contabilidad
             if (totalVentaDolar == 0)
                 return;
 
+            if(rbMixto.IsChecked == true && (txtEfectivo.Text == "" || txtPunto.Text == ""))
+            {
+                MessageBox.Show("No debe haber montos en blanco.", "Error!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
+            decimal punto = 0, efectivo = 0;
+            if(rbMixto.IsChecked == true)
+            {
+                punto    = Decimal.Parse(txtPunto.Text);
+                efectivo = Decimal.Parse(txtEfectivo.Text);
+
+                if(totalVentaBs != punto + efectivo || punto < 0 || efectivo < 0)
+                {
+                    MessageBox.Show("Los montos no coinciden!", "Error!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    return;
+                }
+            }
+
             MessageBoxResult messageBoxResult = MessageBox.Show("¿Desea confirmar la operación?", "Confirmar", MessageBoxButton.YesNo);
             if (messageBoxResult != MessageBoxResult.Yes)
                 return;
 
-            int pagoEnEfectivo = 0;
 
-            if(checkEfectivo.IsChecked == true)
+            if(rbPunto.IsChecked == true)
             {
-                pagoEnEfectivo = 1;
+                punto = totalVentaBs;
+            }
+            else if(rbEfectivo.IsChecked == true)
+            {
+                efectivo = totalVentaBs;
             }
 
-            string query = "INSERT INTO c_ventas (fechaHora,pagoDolar,conversionBs,pagoBsEfect,costoVenta,tasaVenta,porcentajeEfectivoVenta) " +
+            string query = "INSERT INTO c_ventas (fechaHora,pagoDolar,pagoBsPunto,pagoBsEfect,costoVenta,tasaVenta,porcentajeEfectivoVenta) " +
                            "VALUES("
                            + CS(String.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.Now)) + ","
                            + totalVentaDolar.ToString().Replace(",",".") + ","
-                           + totalVentaBs.ToString().Replace(",",".") + ","
-                           + pagoEnEfectivo.ToString() + ","
+                           + punto.ToString().Replace(",",".") + ","
+                           + efectivo.ToString().Replace(",",".") + ","
                            + costoVenta.ToString().Replace(",", ".") + ","
                            + tasa.ToString().Replace(",", ".") + ","
                            + porcentaje.ToString().Replace(",", ".") + ")";
@@ -261,7 +223,7 @@ namespace Inventario_y_Contabilidad
                         + articulo.id + ","
                         + articulo.cantAct + ","
                         + QC(articulo.precioDolar) + ","
-                        + QC(articulo.precioBs)    + ")";
+                        + QC(articulo.precioBs)    + ");";
                 command = new SqlCeCommand(query, MainWindow.conn);
                 command.ExecuteReader();
 
@@ -269,7 +231,7 @@ namespace Inventario_y_Contabilidad
                         "VALUES("
                         + CS(String.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.Now)) + ","
                         + articulo.id + ","
-                        + "-" + articulo.cantAct + ")";
+                        + "-" + articulo.cantAct + ");";
                 command = new SqlCeCommand(query, MainWindow.conn);
                 command.ExecuteReader();
             }
@@ -293,11 +255,6 @@ namespace Inventario_y_Contabilidad
 
             return buscar.idBuscado;
         }
-     
-        private void checkEfectivo_Checked(object sender, RoutedEventArgs e)
-        {
-            actualizaDatos();
-        }
 
         private string QC(string decimalConComa)
         {
@@ -309,6 +266,99 @@ namespace Inventario_y_Contabilidad
             //Añade comillas simples
             strSinComillas = strSinComillas.Replace("'", "''");
             return "'" + strSinComillas + "'";
+        }
+
+        private void rbPunto_Checked(object sender, RoutedEventArgs e)
+        {
+            gridTxtMixto.Visibility = Visibility.Hidden;
+            actualizaDatos();
+        }
+
+        private void rbEfectivo_Checked(object sender, RoutedEventArgs e)
+        {
+            gridTxtMixto.Visibility = Visibility.Hidden;
+            actualizaDatos();
+        }
+
+        private void rbMixto_Checked(object sender, RoutedEventArgs e)
+        {
+            gridTxtMixto.Visibility = Visibility.Visible;
+            txtEfectivo.Text = "";
+            txtPunto.Text    = "";
+            txtPunto.Focus();
+
+            actualizaDatos();
+        }
+
+        private void txtPunto_KeyDown(object sender, KeyEventArgs e)
+        {
+            //Oculta el cursor
+            txtPunto.CaretBrush = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+
+            if (e.Key == Key.Tab || e.Key == Key.Enter)
+            {
+                txtEfectivo.Focus();
+            }
+
+            e.Handled = true;
+
+            if ((e.Key >= Key.D0 && e.Key <= Key.D9) || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9))
+            {
+                string tecla = e.Key.ToString().Substring(e.Key.ToString().Length - 1, 1);
+                decimal numAnterior = 0;
+                if (txtPunto.Text != "")
+                {
+                    numAnterior = Decimal.Parse(txtPunto.Text) * 100;
+                }
+                string strNumNuevo = numAnterior.ToString().Replace(",00", "") + tecla;
+                decimal numNuevo = decimal.Parse(strNumNuevo) / 100;
+
+                txtPunto.Text    = String.Format("{0:#,0.00}", numNuevo);
+                txtEfectivo.Text = String.Format("{0:#,0.00}", totalVentaBs-numNuevo);
+            }
+        }
+        private void txtPunto_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Back || e.Key == Key.Delete)
+            {
+                txtPunto.Text = "";
+            }
+        }
+
+        private void txtEfectivo_KeyDown(object sender, KeyEventArgs e)
+        {
+            //Oculta el cursor
+            txtEfectivo.CaretBrush = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+
+            if (e.Key == Key.Tab || e.Key == Key.Enter)
+            {
+                aceptarCompra(null, null);
+            }
+
+            e.Handled = true;
+
+            if ((e.Key >= Key.D0 && e.Key <= Key.D9) || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9))
+            {
+                string tecla = e.Key.ToString().Substring(e.Key.ToString().Length - 1, 1);
+                decimal numAnterior = 0;
+                if (txtEfectivo.Text != "")
+                {
+                    numAnterior = Decimal.Parse(txtEfectivo.Text) * 100;
+                }
+                string strNumNuevo = numAnterior.ToString().Replace(",00", "") + tecla;
+                decimal numNuevo = decimal.Parse(strNumNuevo) / 100;
+
+                txtEfectivo.Text = String.Format("{0:#,0.00}", numNuevo);
+                txtPunto.Text = String.Format("{0:#,0.00}", totalVentaBs - numNuevo);
+            }
+        }
+
+        private void txtEfectivo_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Back || e.Key == Key.Delete)
+            {
+                txtEfectivo.Text = "";
+            }
         }
     }
 }

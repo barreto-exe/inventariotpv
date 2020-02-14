@@ -173,5 +173,29 @@ namespace Inventario_y_Contabilidad
 
             cargarInventario();
         }
+
+        private void btnBorrar_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            ArticuloClase itemDelete = button.DataContext as ArticuloClase;
+
+            MessageBoxResult messageBoxResult = MessageBox.Show("¿Desea confirmar la operación?", "Confirmar", MessageBoxButton.YesNo);
+            if (messageBoxResult != MessageBoxResult.Yes)
+                return;
+
+            string query = "DELETE FROM c_articulos WHERE id = " + CS(itemDelete.id);
+            SqlCeCommand cm = new SqlCeCommand(query, MainWindow.conn);
+            cm.ExecuteNonQuery();
+
+            cargarInventario();
+        }
+
+        private string CS(string strSinComillas)
+        {
+            //Añade comillas simples
+            strSinComillas = strSinComillas.Replace("'", "''");
+            return "'" + strSinComillas + "'";
+        }
+
     }
 }

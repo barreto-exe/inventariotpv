@@ -11,10 +11,11 @@
         WindowState="Maximized"
         Closing="Window_Closing"
         MinHeight="550" MinWidth="900"
+        Language="es-VE"
         Height="312"  Width="684">
-    <Grid>
+    <Grid Margin="2,-2,-2,2">
         <Label Content="Tasa del Día:" 
-               Margin="10,73,0,0" 
+               Margin="10,55,0,0" 
                FontSize="20" 
                HorizontalAlignment="Left" 
                Width="134" Height="40" VerticalAlignment="Top"
@@ -22,31 +23,35 @@
 
         <Label x:Name="lblTasaDia"
                Content="Bs.S. 999.999" 
-               Margin="126,73,0,0" 
+               Margin="126,55,0,0" 
                FontSize="20" 
                HorizontalAlignment="Left" 
                Width="204" Height="40" VerticalAlignment="Top"
                />
 
         <Button x:Name="btnCambiarTasa" 
-                Margin="16,118,0,0"
+                Margin="16,100,0,0"
                 Content="Cambiar" 
+                FontSize="10pt"
                 HorizontalAlignment="Left" 
                 Width="100" Height="32" 
                 VerticalAlignment="Top" 
                 Click="btnCambiarTasa_Click" Foreground="White"
                 />
-        <Grid Margin="350,31,218,0" Height="179" VerticalAlignment="Top">
+        <Grid Margin="350,10,218,0" Height="265" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
             <Label
                 Content="Ingresos:" 
                 FontSize="20" 
                 HorizontalAlignment="Left" 
-                Width="145" Height="40" VerticalAlignment="Top" Margin="0,19,0,0"
+                Width="145" Height="40" VerticalAlignment="Top" Margin="0,54,0,0"
                />
             <Label
                 Content="Ganancias:" 
-                Margin="0,59,0,0" 
+                Margin="0,94,0,0" 
                 FontSize="20" 
                 HorizontalAlignment="Left" 
                 Width="145" Height="40" VerticalAlignment="Top"
@@ -54,83 +59,64 @@
 
             <Label x:Name="lblIngresoDia"
                 Content="Bs.S. 999.999" 
-                Margin="145,19,0,0" 
+                Margin="145,54,0,0" 
                 FontSize="20" 
                 HorizontalAlignment="Left" 
                 Width="179" Height="40" VerticalAlignment="Top"
                />
             <Label x:Name="lblGananciaDia"
                 Content="Bs.S. 999.999" 
-                Margin="145,59,0,0" 
+                Margin="145,94,0,0" 
                 FontSize="20" 
                 HorizontalAlignment="Left" 
                 Width="179" Height="40" VerticalAlignment="Top"
                />
             <Label x:Name="lblBsEfectivo"
                 Content="Bs.S. 999.999" 
-                Margin="145,99,0,0" 
+                Margin="145,134,0,0" 
                 FontSize="20" 
                 HorizontalAlignment="Left" 
                 Width="179" Height="40" VerticalAlignment="Top"
                />
             <Label x:Name="lblBsPunto"
                 Content="Bs.S. 999.999" 
-                Margin="145,139,0,0" 
+                Margin="145,174,0,0" 
                 FontSize="20" 
                 HorizontalAlignment="Left" 
                 Width="179" Height="40" VerticalAlignment="Top"
                />
             <Label
                 Content="Bs.S. Efectivo:" 
-                Margin="0,99,0,0" 
+                Margin="0,134,0,0" 
                 FontSize="20" 
                 HorizontalAlignment="Left" 
                 Width="145" Height="40" VerticalAlignment="Top"
                />
             <Label
                 Content="Bs.S. Punto:" 
-                Margin="0,139,0,0" 
+                Margin="0,174,0,0" 
                 FontSize="20" 
                 HorizontalAlignment="Left" 
                 Width="145" Height="40" VerticalAlignment="Top"
                />
-            <Label
-                Content="Montos del Día:" 
-                FontSize="20" 
+            <TextBlock x:Name="lblMontosRango" 
+                FontSize="12pt" 
                 HorizontalAlignment="Left" 
-                Width="165" Height="40" VerticalAlignment="Top"
-               Margin="0,-21,0,0"
-               />
+                Width="270" Height="55" VerticalAlignment="Top" TextAlignment="Left" Margin="5,0,0,0"
+               ><Run Text="Montos"/><Run Text=": "/><LineBreak/><Run Text="Desde"/><Run Text=" "/><Run Text="10/10/2020"/><Run Text=","/><Run Text=" "/><Run Text="h"/><Run Text="a"/><Run Text="st"/><Run Text="a "/><Run Text="10/10/2020."/></TextBlock>
+            <!--<Button x:Name="btnVerMas" 
+                Margin="5,223,0,0"
+                Content="Ver más" 
+                FontSize="10pt"
+                HorizontalAlignment="Left" 
+                Width="100" Height="32" 
+                VerticalAlignment="Top" 
+                Click="btnVerMas_Click" Foreground="White"
+                />-->
+
         </Grid>
 
-        <!--<Image x:Name="imgVender"
-               Margin="0,19,10,0" 
-               Source="013-cpu.png" 
-               HorizontalAlignment="Right"
-               Width="100" 
-               Height="100" 
-               Cursor="Hand"
-               MouseLeftButtonUp="imgVender_MouseLeftButtonUp"
-               VerticalAlignment="Top"/>
-
-        <Image x:Name="imgCargar"
-               Margin="0,141,10,0" 
-               Source="018-package.png" 
-               Cursor="Hand"
-               HorizontalAlignment="Right" 
-               MouseLeftButtonUp="imgCargar_MouseLeftButtonUp"
-               Width="100" Height="100" VerticalAlignment="Top"/>
-
-        <Image x:Name="imgReporte" 
-               Height="100"
-               Margin="0,331,10,0" 
-               VerticalAlignment="Top" 
-               Cursor="Hand"
-               Source="003-curriculum.png" 
-               HorizontalAlignment="Right" 
-               Width="100"/>-->
-
-        <StackPanel HorizontalAlignment="Right" Width="200" Margin="0,0,20,0" Height="257" VerticalAlignment="Top" Background="White">
+        <StackPanel HorizontalAlignment="Right" Width="200" Margin="0,10,20,0" Height="247" VerticalAlignment="Top" Background="White">
             <Button x:Name="btnVender" 
                     Margin="0,20,0,0"
                     Content="Vender" 
@@ -153,18 +139,66 @@
 
         <Label x:Name="lblFechaHora"
                Content="Jue. 20/01/2020 - 12:59:59 pm" 
-               Margin="10,10,0,0" 
+               Margin="10,4,0,0" 
                FontSize="20" 
                HorizontalAlignment="Left" 
                Width="350" Height="52" VerticalAlignment="Top"
                />
 
 
-        <Rectangle Fill="#FF2196F3" HorizontalAlignment="Left" Height="5" Margin="10,161,0,0" Stroke="Black" VerticalAlignment="Top" Width="289"/>
-        <Rectangle Fill="#FF2196F3" HorizontalAlignment="Left" Height="6" Margin="10,62,0,0" Stroke="Black" VerticalAlignment="Top" Width="289"/>
+        <Rectangle Fill="#FF2196F3" HorizontalAlignment="Left" Height="5" Margin="10,143,0,0" Stroke="Black" VerticalAlignment="Top" Width="289"/>
+        <Rectangle Fill="#FF2196F3" HorizontalAlignment="Left" Height="6" Margin="10,44,0,0" Stroke="Black" VerticalAlignment="Top" Width="289"/>
+
+        <Label Content="Consultar Ventas:" 
+               Margin="35,163,0,0" 
+               FontSize="12pt" 
+               HorizontalAlignment="Left" 
+               Width="170" Height="31" VerticalAlignment="Top"
+               />
+        <Label Content="Desde:" 
+               Margin="35,201,0,0" 
+               FontSize="12pt" 
+               HorizontalAlignment="Left" 
+               VerticalContentAlignment="Center"
+               Width="70" Height="30" 
+               VerticalAlignment="Top"
+               />
+        <Label Content="Hasta:" 
+               Margin="35,241,0,0" 
+               FontSize="12pt" 
+               HorizontalAlignment="Left" 
+               VerticalContentAlignment="Center"
+               Width="70" Height="30" 
+               VerticalAlignment="Top"
+               />
+
+        <DatePicker x:Name="txtFechaDesde" 
+                    FontSize="12pt"
+                    Margin="105,199,0,0" 
+                    Height="30" 
+                    Width="164"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left" />
+        <DatePicker x:Name="txtFechaHasta" 
+                    FontSize="12pt"
+                    Margin="105,239,0,0"
+                    Height="32"
+                    Width="164"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"  />
+
+        <Button x:Name="btnConsultarVentas" 
+                Margin="169,162,0,0"
+                Content="Consultar" 
+                FontSize="10pt"
+                HorizontalAlignment="Left" 
+                Width="100" Height="32" 
+                VerticalAlignment="Top" 
+                Click="btnConsultarVentas_Click" Foreground="White"
+                />
 
         <DataGrid x:Name="dataReportePrin" 
-                  Margin="10,257,10,10" 
+                  Margin="10,295,10,10" 
                   IsReadOnly="True"
                   CanUserAddRows="False"
                   CanUserDeleteRows="False" FontSize="16"
@@ -201,7 +235,6 @@
                                 Header="Detalle" 
                                 Binding="{Binding detalle}"/>
 
-
                 <!--<DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -218,7 +251,7 @@
         </DataGrid>
         <Label x:Name="lblPorcentaje"
             Content="100%" 
-            Margin="126,113,0,0" 
+            Margin="126,95,0,0" 
             FontSize="20" 
             HorizontalAlignment="Left" 
             VerticalContentAlignment="Top"

@@ -18,6 +18,7 @@ namespace Inventario_y_Contabilidad
         public string precioBsEfect { get; set; }
         public string precioBsRec { get; set; }
         public string precioBsEfectRec { get; set; }
+        public string codBarras { get; set; }
         public int LineaRow { get; set; }
     }
 }

@@ -21,13 +21,26 @@
                HorizontalAlignment="Right" 
                Width="118"/>
 
+        <TextBox x:Name="txtIdArt"
+                 HorizontalAlignment="Left" 
+                 VerticalAlignment="Top" 
+                 VerticalContentAlignment="Center"
+                 HorizontalContentAlignment="Center"
+                 FontSize="13pt"
+                 Height="40" 
+                 Width="210" 
+                 TextWrapping="Wrap" 
+                 KeyDown="txtIdArt_KeyDown"
+                 Margin="10,112,0,0" 
+                 />
+
         <Button x:Name="btnAceptar"
                 Foreground="White" 
                 Style="{DynamicResource MaterialDesignFloatingActionButton}"
                 HorizontalAlignment="Right" 
                 VerticalAlignment="Bottom" 
                 Click="aceptarCompra"
-                Height="40" Width="40" Margin="0,0,309,367"
+                Height="40" Width="40" Margin="0,0,242,367"
                 >
             <Button.Content>
                 <iconPacks:PackIconMaterialDesign Kind="Check" />
@@ -40,7 +53,7 @@
                 HorizontalAlignment="Right" 
                 VerticalAlignment="Bottom" 
                 Click="cancelarCompra"
-                Height="40" Width="40" Margin="0,0,252,367"
+                Height="40" Width="40" Margin="0,0,182,367"
                 >
             <Button.Content>
                 <iconPacks:PackIconMaterialDesign Kind="Clear" />
@@ -48,10 +61,10 @@
         </Button>
 
         <Button x:Name="btnBuscar" 
-                Margin="12,112,0,0"
+                Margin="240,112,0,0"
                 Content="Buscar"
                 HorizontalAlignment="Left" 
-                Width="250" Height="40" 
+                Width="100" Height="40" 
                 VerticalAlignment="Top" 
                 Click="btnBuscar_Click" Foreground="White"
                 
@@ -67,14 +80,14 @@
                HorizontalAlignment="Left" 
                HorizontalContentAlignment="Right"
                Margin="71,17,0,0" 
-               VerticalAlignment="Top" FontSize="20" Width="189"/>
+               VerticalAlignment="Top" FontSize="20" Width="149"/>
 
         <Label x:Name="lblTotalDolar"
                Content="$ 999.999" 
                HorizontalAlignment="Left"
                HorizontalContentAlignment="Right"
                Margin="71,54,0,0" 
-               VerticalAlignment="Top" FontSize="20" Width="189"/>
+               VerticalAlignment="Top" FontSize="20" Width="149"/>
 
         <DataGrid x:Name="dataArticulosVenta" 
                   Margin="10,170,10,10" 
@@ -130,7 +143,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Orientation="Vertical" x:Name="grupoRbMixto" Margin="293,17,0,0" Height="67" VerticalAlignment="Top" HorizontalAlignment="Left" Width="82">
+        <StackPanel Orientation="Vertical" x:Name="grupoRbMixto" Margin="240,17,0,0" Height="67" VerticalAlignment="Top" HorizontalAlignment="Left" Width="82">
             <RadioButton 
                             x:Name="rbPunto"
                             GroupName="grbTipoPago"
@@ -153,8 +166,8 @@
                             Content="Mixto" 
                             Checked="rbMixto_Checked" Cursor="Hand"/>
         </StackPanel>
-        <Grid x:Name="gridTxtMixto" Margin="375,10,128,412">
-            <StackPanel Orientation="Vertical" Margin="5,0,14,0">
+        <Grid x:Name="gridTxtMixto" Margin="345,10,128,412">
+            <StackPanel Orientation="Vertical" Margin="0,0,39,0">
                 <TextBox x:Name="txtPunto"
                          FontSize="12pt"
                          HorizontalContentAlignment="Center"

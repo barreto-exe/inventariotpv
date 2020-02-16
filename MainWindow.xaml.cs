@@ -32,7 +32,7 @@ namespace Inventario_y_Contabilidad
         private void ModificaBD()
         {
             string dir = Environment.CurrentDirectory;
-            string directorio = dir + "\\bdmodificado.txt";
+            string directorio = dir + "\\bdmodificado2.txt";
 
             if (File.Exists(directorio))
             {
@@ -40,13 +40,9 @@ namespace Inventario_y_Contabilidad
             }
             File.WriteAllText(directorio,"Modificado");
 
-            int cant = 5;
+            int cant = 1;
             string[] query = new string[cant];
-            query[0] = "ALTER TABLE c_ventas ALTER COLUMN pagoBsEfect float;";
-            query[1] = "ALTER TABLE c_ventas ADD COLUMN pagoBsPunto float NULL;";
-            query[2] = "UPDATE c_ventas SET pagoBsPunto = conversionBs;";
-            query[3] = "UPDATE c_ventas SET pagoBsEfect = conversionBs, pagoBsPunto=0 WHERE pagoBsEfect = 1;";
-            query[4] = "ALTER TABLE c_ventas DROP COLUMN conversionBs;";
+            query[0] = "ALTER TABLE c_articulos ADD COLUMN codBarras nvarchar(150) NULL;";
 
             for(int i=0; i<cant; i++)
             {
@@ -248,9 +244,31 @@ namespace Inventario_y_Contabilidad
                 actualizaVentas((DateTime)txtFechaDesde.SelectedDate, (DateTime)txtFechaHasta.SelectedDate);
         }
 
-        private void btnVerMas_Click(object sender, RoutedEventArgs e)
+        private void btnBorrar_Click(object sender, RoutedEventArgs e)
         {
+            var button = sender as Button;
+            VentaClase itemDelete = button.DataContext as VentaClase;
 
+            MessageBoxResult messageBoxResult = MessageBox.Show("¿Desea confirmar la operación?", "Confirmar", MessageBoxButton.YesNo);
+            if (messageBoxResult != MessageBoxResult.Yes)
+                return;
+
+            string query = "DELETE FROM c_ventas WHERE id = " + CS(itemDelete.id);
+            SqlCeCommand cm = new SqlCeCommand(query, MainWindow.conn);
+            cm.ExecuteNonQuery();
+
+            query = "DELETE FROM c_ventas_detalles WHERE id_venta = " + CS(itemDelete.id);
+            cm = new SqlCeCommand(query, MainWindow.conn);
+            cm.ExecuteNonQuery();
+
+            actualizaVentas((DateTime)txtFechaDesde.SelectedDate, (DateTime)txtFechaHasta.SelectedDate);
         }
+        private string CS(string strSinComillas)
+        {
+            //Añade comillas simples
+            strSinComillas = strSinComillas.Replace("'", "''");
+            return "'" + strSinComillas + "'";
+        }
+
     }
 }

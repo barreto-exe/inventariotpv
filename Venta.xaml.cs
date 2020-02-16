@@ -28,8 +28,8 @@ namespace Inventario_y_Contabilidad
         public Venta()
         {
             InitializeComponent();
-            //this.txtIdArt.Focus();
-            totalVentaDolar = 0;
+            this.txtIdArt.Focus();
+            totalVentaDolar = 0;     
             costoVenta = 0;
 
             tasa = cambioTasa.tasas()[0];
@@ -153,8 +153,8 @@ namespace Inventario_y_Contabilidad
 
             lblTotalDolar.Content = "$ "  + Decimal.Round(totalVentaDolar, 2).ToString("#,#0.##");
             lblTotalBs.Content = "Bs.S. " + Decimal.Round(totalVentaBs, 2).ToString("#,#0.##");
-            
-            //txtIdArt.Focus();
+
+            txtIdArt.Focus();
         }
        
         private void aceptarCompra(object sender, RoutedEventArgs e)
@@ -253,7 +253,7 @@ namespace Inventario_y_Contabilidad
             buscar.Owner = this.Owner;
             buscar.ShowDialog();
 
-            return buscar.idBuscado;
+            return buscar.buscado;
         }
 
         private string QC(string decimalConComa)
@@ -358,6 +358,57 @@ namespace Inventario_y_Contabilidad
             if (e.Key == Key.Back || e.Key == Key.Delete)
             {
                 txtEfectivo.Text = "";
+            }
+        }
+
+        private void txtIdArt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            //Este if es redundante con la función btnBuscar
+            {
+                string query = "SELECT * FROM c_articulos WHERE id = " + CS(txtIdArt.Text) + " OR codBarras = " + CS(txtIdArt.Text);
+                SqlCeCommand command = new SqlCeCommand(query, MainWindow.conn);
+                SqlCeDataReader dr = command.ExecuteReader();
+                txtIdArt.Text = "";
+
+                //Si no seleccionó artículo
+                if (!dr.Read())
+                {
+                    MessageBox.Show("No existe el artículo buscado");
+                    dr.Close();
+                    return;
+                }
+
+                var articulo = new ArticuloClase
+                {
+                    id = dr["id"].ToString(),
+                    descripcion = dr["descripcion"].ToString(),
+                    precioDolar = dr["precioDolar"].ToString(),
+                    costoDolar  = dr["costoDolar"].ToString(),
+                    precioBsEfect  = dr["precioBsEfect"].ToString(),
+                    precioBs  = dr["precioBs"].ToString()
+                };
+
+                //Seleccionando cantidad
+                VentaCantidad cantidad = new VentaCantidad();
+                cantidad.Owner = this;
+                cantidad.ShowDialog();
+                articulo.cantAct = cantidad.txtCant.Text;
+
+                //Seteando monto * cantidad
+                decimal subtotalDolar = decimal.Parse(articulo.precioDolar) * decimal.Parse(articulo.cantAct);
+                decimal costoDolar = decimal.Parse(articulo.costoDolar) * decimal.Parse(articulo.cantAct);
+                decimal subtotalBs = decimal.Parse(articulo.precioBs) * decimal.Parse(articulo.cantAct);
+                decimal subtotalBsEfect = decimal.Parse(articulo.precioBsEfect) * decimal.Parse(articulo.cantAct);
+
+                articulo.precioDolar = Decimal.Round(subtotalDolar, 2).ToString();
+                articulo.costoDolar = Decimal.Round(costoDolar, 2).ToString();
+                articulo.precioBs = Decimal.Round(subtotalBs, 2).ToString();
+                articulo.precioBsEfect = Decimal.Round(subtotalBsEfect, 2).ToString();
+
+                dataArticulosVenta.Items.Add(articulo);
+
+                actualizaDatos();
             }
         }
     }

@@ -67,9 +67,10 @@ namespace Inventario_y_Contabilidad
         private void crearArticulo()
         {
             //Insertando en tabla artículos
-            string query = "INSERT INTO c_articulos (descripcion,precioDolar,costoDolar,precioBs,precioBsEfect) " +
+            string query = "INSERT INTO c_articulos (descripcion,codBarras,precioDolar,costoDolar,precioBs,precioBsEfect) " +
                            "VALUES("
                            + CS(txtDescArt.Text) + ","
+                           + CS(txtCodBarras.Text) + ","
                            + txtPrecioDolar.Text.Replace(",",".") + ","
                            + txtCostoDolar.Text.Replace(",", ".") + ","
                            + QC(txtPrecioBs.Text) + ","
@@ -102,7 +103,8 @@ namespace Inventario_y_Contabilidad
             //Actualizando info de articulo seleccionado
             string idArt = lblIdArt.Content.ToString().Replace("#", "");
             string query = "UPDATE c_articulos SET " +
-                           "descripcion = "   + CS(txtDescArt.Text) + "," +
+                           "descripcion = "   + CS(txtDescArt.Text)   + "," +
+                           "codBarras = "     + CS(txtCodBarras.Text) + "," +
                            "precioDolar = "   + decimal.Parse(txtPrecioDolar.Text).ToString().Replace(",",".")    + "," +
                            "costoDolar = "    + decimal.Parse(txtCostoDolar.Text).ToString().Replace(",",".")     + "," +
                            "precioBs = "      + decimal.Parse(txtPrecioBs.Text).ToString().Replace(",", ".")      + "," +
@@ -130,7 +132,7 @@ namespace Inventario_y_Contabilidad
             buscar.Owner = this.Owner;
             buscar.ShowDialog();
 
-            return buscar.idBuscado;
+            return buscar.buscado;
         }
         private void btnBuscar_Click(object sender, RoutedEventArgs e)
         {
@@ -150,6 +152,7 @@ namespace Inventario_y_Contabilidad
                 txtPrecioDolar.Text   = articulo.precioDolar;
                 txtPrecioBs.Text      = articulo.precioBs;
                 txtPrecioBsEfect.Text = articulo.precioBsEfect;
+                txtCodBarras.Text     = articulo.codBarras;
 
                 decimal precio = Decimal.Parse(txtPrecioDolar.Text);
                 decimal costo = Decimal.Parse(txtCostoDolar.Text);
@@ -187,7 +190,7 @@ namespace Inventario_y_Contabilidad
         {
             if (e.Key == Key.Tab)
             {
-                btnAceptar.Focus();
+                txtCodBarras.Focus();
             }
 
             if ((e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key == Key.OemMinus) 

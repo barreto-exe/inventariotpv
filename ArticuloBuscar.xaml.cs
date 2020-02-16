@@ -23,7 +23,7 @@ namespace Inventario_y_Contabilidad
     public partial class ArticuloBuscar : Window
     {
 
-        public ArticuloClase idBuscado;
+        public ArticuloClase buscado;
         public ArticuloBuscar()
         {
             InitializeComponent();
@@ -36,7 +36,7 @@ namespace Inventario_y_Contabilidad
             var button = sender as Button;
             ArticuloClase itemSelecto = button.DataContext as ArticuloClase;
 
-            idBuscado = itemSelecto;
+            buscado = itemSelecto;
             this.Close();
         }
         void SortDataGrid(DataGrid dataGrid, int columnIndex = 0, ListSortDirection sortDirection = ListSortDirection.Ascending)
@@ -101,6 +101,7 @@ namespace Inventario_y_Contabilidad
                     costoDolar = dr["costoDolar"].ToString(),
                     precioBs = Decimal.Round(precioBs, 2).ToString("#,#0.##"),
                     precioBsEfect = Decimal.Round(precioBsEfect, 2).ToString("#,#0.##"),
+                    codBarras = dr["codBarras"].ToString(),
                     LineaRow = cuentaLinea++
                 };
 

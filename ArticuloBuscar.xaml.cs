@@ -72,7 +72,7 @@ namespace Inventario_y_Contabilidad
             SqlCeCommand command;
             SqlCeDataReader dr;
 
-            query = "SELECT * FROM c_articulos WHERE descripcion like '%"+ txtBuscar.Text +"%'";
+            query = "SELECT * FROM c_articulos WHERE activo = 1 AND descripcion like '%"+ txtBuscar.Text +"%'";
             command = new SqlCeCommand(query, MainWindow.conn);
             dr = command.ExecuteReader();
 

@@ -29,27 +29,6 @@ namespace Inventario_y_Contabilidad
             string dataSource = Environment.CurrentDirectory + "\\bd.sdf";
             conn = new SqlCeConnection("Data Source =" + dataSource + "; Password = contabilidad");
         }
-        private void ModificaBD()
-        {
-            string dir = Environment.CurrentDirectory;
-            string directorio = dir + "\\bdmodificado2.txt";
-
-            if (File.Exists(directorio))
-            {
-                return;
-            }
-            File.WriteAllText(directorio,"Modificado");
-
-            int cant = 1;
-            string[] query = new string[cant];
-            query[0] = "ALTER TABLE c_articulos ADD COLUMN codBarras nvarchar(150) NULL;";
-
-            for(int i=0; i<cant; i++)
-            {
-                SqlCeCommand cm = new SqlCeCommand(query[i], conn);
-                cm.ExecuteNonQuery();
-            }
-        }
 
         public MainWindow()
         {
@@ -61,7 +40,6 @@ namespace Inventario_y_Contabilidad
 
             ConectarBD();
             conn.Open();
-            ModificaBD();
 
             InitializeComponent();
 
@@ -75,7 +53,6 @@ namespace Inventario_y_Contabilidad
 
             actualizaVentas(DateTime.Now, DateTime.Now);
         }
-
         void timer_Tick(object sender, EventArgs e)
         {
             this.lblFechaHora.Content = String.Format("{0:dddd, dd/MM/yyyy - hh:mm:ss tt}", DateTime.Now);
@@ -257,10 +234,24 @@ namespace Inventario_y_Contabilidad
             SqlCeCommand cm = new SqlCeCommand(query, MainWindow.conn);
             cm.ExecuteNonQuery();
 
-            query = "DELETE FROM c_ventas_detalles WHERE id_venta = " + CS(itemDelete.id);
+            query = "SELECT * FROM c_ventas_detalles WHERE id_venta = " + CS(itemDelete.id);
             cm = new SqlCeCommand(query, MainWindow.conn);
-            cm.ExecuteNonQuery();
+            SqlCeDataReader dr = cm.ExecuteReader();
 
+            while (dr.Read())
+            {
+                query = "INSERT INTO c_inventario (id_articulo,cantidad,fechaHora) " +
+                "VALUES("
+                + dr["id_articulo"].ToString() + ","
+                + dr["cantidad"].ToString()    + ","
+                + CS(String.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.Now)) + ")";
+                SqlCeCommand cm2 = new SqlCeCommand(query, MainWindow.conn);
+                cm2.ExecuteNonQuery();
+
+                query = "DELETE FROM c_ventas_detalles WHERE id_venta = " + CS(itemDelete.id);
+                cm2 = new SqlCeCommand(query, MainWindow.conn);
+                cm2.ExecuteNonQuery();
+            }
             actualizaVentas((DateTime)txtFechaDesde.SelectedDate, (DateTime)txtFechaHasta.SelectedDate);
         }
         private string CS(string strSinComillas)

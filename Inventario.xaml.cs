@@ -39,7 +39,7 @@ namespace Inventario_y_Contabilidad
             SqlCeDataReader dr;
 
             //Consultando artículos
-            query = "SELECT * FROM c_articulos";
+            query = "SELECT * FROM c_articulos WHERE activo = 1";
             command = new SqlCeCommand(query, MainWindow.conn);
             SqlCeDataReader dr_art = command.ExecuteReader();
 
@@ -183,7 +183,7 @@ namespace Inventario_y_Contabilidad
             if (messageBoxResult != MessageBoxResult.Yes)
                 return;
 
-            string query = "DELETE FROM c_articulos WHERE id = " + CS(itemDelete.id);
+            string query = "UPDATE c_articulos SET activo = 0 WHERE id = " + CS(itemDelete.id);
             SqlCeCommand cm = new SqlCeCommand(query, MainWindow.conn);
             cm.ExecuteNonQuery();
 

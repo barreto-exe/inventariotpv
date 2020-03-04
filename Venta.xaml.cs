@@ -36,6 +36,7 @@ namespace Inventario_y_Contabilidad
             porcentaje = cambioTasa.tasas()[1];
             rbPunto.IsChecked = true;
 
+            seleFecha.SelectedDate = DateTime.Today;
             actualizaDatos();
         }
         
@@ -183,7 +184,7 @@ namespace Inventario_y_Contabilidad
             MessageBoxResult messageBoxResult = MessageBox.Show("¿Desea confirmar la operación?", "Confirmar", MessageBoxButton.YesNo);
             if (messageBoxResult != MessageBoxResult.Yes)
                 return;
-
+              
 
             if(rbPunto.IsChecked == true)
             {
@@ -196,7 +197,7 @@ namespace Inventario_y_Contabilidad
 
             string query = "INSERT INTO c_ventas (fechaHora,pagoDolar,pagoBsPunto,pagoBsEfect,costoVenta,tasaVenta,porcentajeEfectivoVenta) " +
                            "VALUES("
-                           + CS(String.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.Now)) + ","
+                           + CS(String.Format("{0:yyyy-MM-dd}", (DateTime)seleFecha.SelectedDate) + " " + String.Format("{0:HH:mm:ss}", DateTime.Now)) + ","
                            + totalVentaDolar.ToString().Replace(",",".") + ","
                            + punto.ToString().Replace(",",".") + ","
                            + efectivo.ToString().Replace(",",".") + ","
@@ -285,9 +286,9 @@ namespace Inventario_y_Contabilidad
             gridTxtMixto.Visibility = Visibility.Visible;
             txtEfectivo.Text = "";
             txtPunto.Text    = "";
-            txtPunto.Focus();
 
             actualizaDatos();
+            txtPunto.Focus();
         }
 
         private void txtPunto_KeyDown(object sender, KeyEventArgs e)

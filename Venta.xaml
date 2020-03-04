@@ -6,6 +6,7 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"      
         xmlns:local="clr-namespace:Inventario_y_Contabilidad"
+        Language="es-VE"
         mc:Ignorable="d"
         Title="Venta" 
         WindowStartupLocation="CenterOwner"
@@ -14,12 +15,12 @@
         MinHeight="550"  MinWidth="650"
         Height="390"  Width="450">
     <Grid>
-        <Image Height="119" 
-               Margin="0,17,10,0" 
+        <Image Height="100" 
+               Margin="0,10,19,0" 
                VerticalAlignment="Top" 
                Source="051-online payment.png" 
                HorizontalAlignment="Right" 
-               Width="118"/>
+               Width="100"/>
 
         <TextBox x:Name="txtIdArt"
                  HorizontalAlignment="Left" 
@@ -40,7 +41,7 @@
                 HorizontalAlignment="Right" 
                 VerticalAlignment="Bottom" 
                 Click="aceptarCompra"
-                Height="40" Width="40" Margin="0,0,242,367"
+                Height="40" Width="40" Margin="0,0,242,360"
                 >
             <Button.Content>
                 <iconPacks:PackIconMaterialDesign Kind="Check" />
@@ -53,7 +54,7 @@
                 HorizontalAlignment="Right" 
                 VerticalAlignment="Bottom" 
                 Click="cancelarCompra"
-                Height="40" Width="40" Margin="0,0,182,367"
+                Height="40" Width="40" Margin="0,0,182,360"
                 >
             <Button.Content>
                 <iconPacks:PackIconMaterialDesign Kind="Clear" />
@@ -185,6 +186,16 @@
                          />
             </StackPanel>
         </Grid>
+
+        <DatePicker x:Name="seleFecha" 
+                    FontSize="13pt"
+                    Margin="0,117,10,0" 
+                    Height="35" 
+                    Width="115"
+                    HorizontalContentAlignment="Center"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Right"
+                    />
 
     </Grid>
 </Window>

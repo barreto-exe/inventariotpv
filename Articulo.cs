@@ -76,7 +76,7 @@ namespace Inventario_y_Contabilidad
                            + QC(txtPrecioBs.Text) + ","
                            + QC(txtPrecioBsEfect.Text) + ")";
             SqlCeCommand command = new SqlCeCommand(query, MainWindow.conn);
-            command.ExecuteReader();
+            command.ExecuteNonQuery();
 
             //Generando existencia en inventario
             query = "SELECT TOP 1 id FROM c_articulos ORDER BY id DESC";
@@ -94,7 +94,7 @@ namespace Inventario_y_Contabilidad
                     + txtCantidadAgg.Text + ","
                     + CS(String.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.Now)) + ")";
             command = new SqlCeCommand(query, MainWindow.conn);
-            command.ExecuteReader();
+            command.ExecuteNonQuery();
 
             this.Close();
         }
@@ -111,7 +111,7 @@ namespace Inventario_y_Contabilidad
                            "precioBsEfect = " + decimal.Parse(txtPrecioBsEfect.Text).ToString().Replace(",", ".") + " " +
                            "WHERE id = " + idArt;
             SqlCeCommand command = new SqlCeCommand(query, MainWindow.conn);
-            command.ExecuteReader();
+            command.ExecuteNonQuery();
 
             //Agregando inventario, de ser necesario.
             if(txtCantidadAgg.Text != "0")
@@ -122,7 +122,7 @@ namespace Inventario_y_Contabilidad
                         + txtCantidadAgg.Text + ","
                         + CS(String.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.Now)) + ")";
                 command = new SqlCeCommand(query, MainWindow.conn);
-                command.ExecuteReader();
+                command.ExecuteNonQuery();
             }
         }
       

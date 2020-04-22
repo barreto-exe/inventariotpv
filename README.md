@@ -2,7 +2,14 @@
 Un pequeño programa POS para pequeñas y medianas empresas. Está orientado y adaptado a la economía venezolana.
 
 ## Funcionalidades🧰
--Cálculo de costos, ingresos y ganancias. -Uso de $ y Bs. simultáneamente, con tasas y porcentajes. -Establecer tasas del día. -Inventario y clasificación de productos. -Uso de código de barras. -Registro de ventas. -Consulta histórica de ventas, ingresos y ganancias.
+- Cálculo de costos, ingresos y ganancias. 
+- Uso de $ y Bs. simultáneamente, con tasas y porcentajes. 
+- Indicadores de precios bajos y recomendados según la tasa del dólar.
+- Establecer tasas del día. 
+- Inventario y clasificación de productos. 
+- Uso de código de barras. 
+- Registro de ventas. 
+- Consulta histórica de ventas, ingresos y ganancias.
 
 ## Tecnologías💻
 - Escrito en C#

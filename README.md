@@ -6,8 +6,8 @@ Un pequeño programa POS para pequeñas y medianas empresas. Está orientado y a
 
 ## Tecnologías💻
 - Escrito en C#
-- .Net Framerwork 4.7.2
-- SQL Server Compact
+- [.Net Framework 4.7.2](https://dotnet.microsoft.com/download/dotnet-framework/net472)
+- [SQL Server Compact](https://www.microsoft.com/es-es/download/details.aspx?id=30709)
 
 ## Screenshots📷
 

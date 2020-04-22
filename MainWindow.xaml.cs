@@ -84,8 +84,9 @@ namespace Inventario_y_Contabilidad
                     fechaHora = dr["fechaHora"].ToString(),
                     pagoDolar = RoundDecimalString(dr["pagoDolar"].ToString()),
                     tasaVenta = RoundDecimalString(dr["tasaVenta"].ToString()),
-                    pagoBsEfect = RoundDecimalString(dr["pagoBsEfect"].ToString()),
+                    pagoBsEfect  = RoundDecimalString(dr["pagoBsEfect"].ToString()),
                     conversionBs = RoundDecimalString(dr["pagoBsPunto"].ToString()),
+                    pagoMovil    = RoundDecimalString(dr["pagoMovil"].ToString()),
                     porcentajeEfectivoVenta = RoundDecimalString(dr["porcentajeEfectivoVenta"].ToString()),
                     detalle = detalleVenta(dr["id"].ToString())
                 };

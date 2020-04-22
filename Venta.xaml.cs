@@ -163,18 +163,19 @@ namespace Inventario_y_Contabilidad
             if (totalVentaDolar == 0)
                 return;
 
-            if(rbMixto.IsChecked == true && (txtEfectivo.Text == "" || txtPunto.Text == ""))
+            if(rbMixto.IsChecked == true && (txtEfectivo.Text == "" || txtPunto.Text == "" || txtMovil.Text == ""))
             {
                 MessageBox.Show("No debe haber montos en blanco.", "Error!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 return;
             }
-            decimal punto = 0, efectivo = 0;
+            decimal punto = 0, efectivo = 0, movil = 0;
             if(rbMixto.IsChecked == true)
             {
                 punto    = Decimal.Parse(txtPunto.Text);
                 efectivo = Decimal.Parse(txtEfectivo.Text);
+                movil    = Decimal.Parse(txtMovil.Text);
 
-                if(totalVentaBs != punto + efectivo || punto < 0 || efectivo < 0)
+                if (totalVentaBs != punto + efectivo + movil || punto < 0 || efectivo < 0 || movil < 0)
                 {
                     MessageBox.Show("Los montos no coinciden!", "Error!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     return;
@@ -190,17 +191,22 @@ namespace Inventario_y_Contabilidad
             {
                 punto = totalVentaBs;
             }
+            else if(rbMovil.IsChecked == true)
+            {
+                movil = totalVentaBs;
+            }
             else if(rbEfectivo.IsChecked == true)
             {
                 efectivo = totalVentaBs;
             }
 
-            string query = "INSERT INTO c_ventas (fechaHora,pagoDolar,pagoBsPunto,pagoBsEfect,costoVenta,tasaVenta,porcentajeEfectivoVenta) " +
+            string query = "INSERT INTO c_ventas (fechaHora,pagoDolar,pagoBsPunto,pagoBsEfect,pagoMovil,costoVenta,tasaVenta,porcentajeEfectivoVenta) " +
                            "VALUES("
                            + CS(String.Format("{0:yyyy-MM-dd}", (DateTime)seleFecha.SelectedDate) + " " + String.Format("{0:HH:mm:ss}", DateTime.Now)) + ","
                            + totalVentaDolar.ToString().Replace(",",".") + ","
                            + punto.ToString().Replace(",",".") + ","
                            + efectivo.ToString().Replace(",",".") + ","
+                           + movil.ToString().Replace(",",".") + ","
                            + costoVenta.ToString().Replace(",", ".") + ","
                            + tasa.ToString().Replace(",", ".") + ","
                            + porcentaje.ToString().Replace(",", ".") + ")";
@@ -290,50 +296,28 @@ namespace Inventario_y_Contabilidad
             actualizaDatos();
             txtPunto.Focus();
         }
-
-        private void txtPunto_KeyDown(object sender, KeyEventArgs e)
+        private void rbMovil_Checked(object sender, RoutedEventArgs e)
         {
-            //Oculta el cursor
-            txtPunto.CaretBrush = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
-
-            if (e.Key == Key.Tab || e.Key == Key.Enter)
-            {
-                txtEfectivo.Focus();
-            }
-
-            e.Handled = true;
-
-            if ((e.Key >= Key.D0 && e.Key <= Key.D9) || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9))
-            {
-                string tecla = e.Key.ToString().Substring(e.Key.ToString().Length - 1, 1);
-                decimal numAnterior = 0;
-                if (txtPunto.Text != "")
-                {
-                    numAnterior = Decimal.Parse(txtPunto.Text) * 100;
-                }
-                string strNumNuevo = numAnterior.ToString().Replace(",00", "") + tecla;
-                decimal numNuevo = decimal.Parse(strNumNuevo) / 100;
-
-                txtPunto.Text    = String.Format("{0:#,0.00}", numNuevo);
-                txtEfectivo.Text = String.Format("{0:#,0.00}", totalVentaBs-numNuevo);
-            }
-        }
-        private void txtPunto_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Back || e.Key == Key.Delete)
-            {
-                txtPunto.Text = "";
-            }
+            gridTxtMixto.Visibility = Visibility.Hidden;
+            actualizaDatos();
         }
 
-        private void txtEfectivo_KeyDown(object sender, KeyEventArgs e)
+        private void txt_KeyDown(object sender, KeyEventArgs e)
         {
-            //Oculta el cursor
-            txtEfectivo.CaretBrush = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+            TextBox text = (TextBox)sender;
 
-            if (e.Key == Key.Tab || e.Key == Key.Enter)
+            //Oculta el cursor
+            text.CaretBrush = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+
+            if(e.Key == Key.Tab)
+            {
+                return;
+            }
+
+            if (e.Key == Key.Enter)
             {
                 aceptarCompra(null, null);
+                return;
             }
 
             e.Handled = true;
@@ -342,23 +326,22 @@ namespace Inventario_y_Contabilidad
             {
                 string tecla = e.Key.ToString().Substring(e.Key.ToString().Length - 1, 1);
                 decimal numAnterior = 0;
-                if (txtEfectivo.Text != "")
+                if (text.Text != "")
                 {
-                    numAnterior = Decimal.Parse(txtEfectivo.Text) * 100;
+                    numAnterior = Decimal.Parse(text.Text) * 100;
                 }
                 string strNumNuevo = numAnterior.ToString().Replace(",00", "") + tecla;
                 decimal numNuevo = decimal.Parse(strNumNuevo) / 100;
 
-                txtEfectivo.Text = String.Format("{0:#,0.00}", numNuevo);
-                txtPunto.Text = String.Format("{0:#,0.00}", totalVentaBs - numNuevo);
+                text.Text    = String.Format("{0:#,0.00}", numNuevo);
             }
         }
-
-        private void txtEfectivo_KeyUp(object sender, KeyEventArgs e)
+        private void txt_KeyUp(object sender, KeyEventArgs e)
         {
+            TextBox text = (TextBox)sender;
             if (e.Key == Key.Back || e.Key == Key.Delete)
             {
-                txtEfectivo.Text = "";
+                text.Text = "";
             }
         }
 
@@ -412,5 +395,7 @@ namespace Inventario_y_Contabilidad
                 actualizaDatos();
             }
         }
+
+
     }
 }

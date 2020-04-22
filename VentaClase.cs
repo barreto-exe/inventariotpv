@@ -13,6 +13,7 @@ namespace Inventario_y_Contabilidad
         public string pagoDolar { get; set; }
         public string conversionBs { get; set; }
         public string pagoBsEfect { get; set; }
+        public string pagoMovil { get; set; }
         public string tasaVenta { get; set; }
         public string porcentajeEfectivoVenta { get; set; }
         public string detalle { get; set; }

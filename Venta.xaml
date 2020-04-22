@@ -144,7 +144,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Orientation="Vertical" x:Name="grupoRbMixto" Margin="240,17,0,0" Height="67" VerticalAlignment="Top" HorizontalAlignment="Left" Width="82">
+        <StackPanel Orientation="Vertical" x:Name="grupoRbMixto" Margin="240,17,0,0" Height="90" VerticalAlignment="Top" HorizontalAlignment="Left" Width="82">
             <RadioButton 
                             x:Name="rbPunto"
                             GroupName="grbTipoPago"
@@ -160,6 +160,14 @@
                             FontSize="10pt"
                             Checked="rbEfectivo_Checked" Cursor="Hand" />
             <RadioButton 
+                            x:Name="rbMovil"
+                            GroupName="grbTipoPago"
+                            VerticalContentAlignment="Center"
+                            Content="Móvil" 
+                            FontSize="10pt"
+                            Checked="rbMovil_Checked" 
+                            Cursor="Hand" />
+            <RadioButton 
                             x:Name="rbMixto"
                             GroupName="grbTipoPago"
                             FontSize="10pt"
@@ -167,22 +175,30 @@
                             Content="Mixto" 
                             Checked="rbMixto_Checked" Cursor="Hand"/>
         </StackPanel>
-        <Grid x:Name="gridTxtMixto" Margin="345,10,128,412">
-            <StackPanel Orientation="Vertical" Margin="0,0,39,0">
+        <Grid x:Name="gridTxtMixto" Margin="345,1,128,409">
+            <StackPanel Orientation="Vertical" Margin="0,0,39,-13">
                 <TextBox x:Name="txtPunto"
                          FontSize="12pt"
                          HorizontalContentAlignment="Center"
                          materialDesign:HintAssist.Hint="Punto"
-                         KeyDown="txtPunto_KeyDown"
-                         KeyUp="txtPunto_KeyUp"
+                         KeyDown="txt_KeyDown"
+                         KeyUp="txt_KeyUp"
+                         />
+                <TextBox x:Name="txtMovil"
+                         HorizontalContentAlignment="Center"
+                         materialDesign:HintAssist.Hint="Móvil"
+                         FontSize="12pt "
+                         Margin="0,10,0,0"
+                         KeyDown="txt_KeyDown"
+                         KeyUp="txt_KeyUp"
                          />
                 <TextBox x:Name="txtEfectivo"
                          HorizontalContentAlignment="Center"
                          materialDesign:HintAssist.Hint="Efectivo"
                          FontSize="12pt "
                          Margin="0,10,0,0"
-                         KeyDown="txtEfectivo_KeyDown"
-                         KeyUp="txtEfectivo_KeyUp"
+                         KeyDown="txt_KeyDown"
+                         KeyUp="txt_KeyUp"
                          />
             </StackPanel>
         </Grid>

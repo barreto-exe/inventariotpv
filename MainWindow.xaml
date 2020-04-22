@@ -233,6 +233,9 @@
                                 Header="Bs. Efectivo" 
                                 Binding="{Binding pagoBsEfect}"/>
                 <DataGridTextColumn 
+                                Header="Bs. Pago Móvil" 
+                                Binding="{Binding pagoMovil}"/>
+                <DataGridTextColumn 
                                 Header="Detalle" 
                                 Binding="{Binding detalle}"/>
 

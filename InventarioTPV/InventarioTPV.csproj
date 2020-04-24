@@ -21,4 +21,12 @@
   <ItemGroup>
     <PackageReference Include="HandyControl" Version="2.4.0" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Clases\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Recursos\Strings\Idiomas\en-EN.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
 </Project>

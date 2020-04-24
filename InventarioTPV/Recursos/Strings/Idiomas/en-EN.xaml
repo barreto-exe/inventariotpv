@@ -3,5 +3,11 @@
                     xmlns:local="clr-namespace:InventarioTPV.Recursos.Strings.Idiomas"
                     xmlns:system="clr-namespace:System;assembly=System.Runtime">
 
+
+    <system:String x:Key="NombrePrograma">POS</system:String>
+    <system:String x:Key="Modo_Oscuro">Dark Mode</system:String>
+    <system:String x:Key="Idioma">Language</system:String>
+    <system:String x:Key="Ingles">English</system:String>
+    <system:String x:Key="Espanol_VE">Spanish (VE)</system:String>
     
 </ResourceDictionary>

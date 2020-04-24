@@ -4,5 +4,9 @@
                     xmlns:system="clr-namespace:System;assembly=System.Runtime">
 
     <system:String x:Key="NombrePrograma">InventarioTPV</system:String>
+    <system:String x:Key="Modo_Oscuro">Modo Oscuro</system:String>
+    <system:String x:Key="Idioma">Idioma</system:String>
+    <system:String x:Key="Ingles">Inglés</system:String>
+    <system:String x:Key="Espanol_VE">Español (VE)</system:String>
     
 </ResourceDictionary>

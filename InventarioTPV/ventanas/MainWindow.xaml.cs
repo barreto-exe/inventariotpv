@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace InventarioTPV
 {
@@ -15,6 +16,12 @@ namespace InventarioTPV
         }
 
         #region IDIOMAS
+        private void ElegirIdiomaClick(object sender, RoutedEventArgs e)
+        {
+            var seleccion = (MenuItem)e.OriginalSource;
+            SelectRegion((string)seleccion.DataContext);
+        }
+
         public static void SelectRegion(string culture)
         {
             if (String.IsNullOrEmpty(culture))
@@ -51,5 +58,7 @@ namespace InventarioTPV
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
         }
         #endregion
+
+
     }
 }

@@ -19,13 +19,24 @@
             Margin="10,0,0,0"
             Height="30">
             
-            <!--<Menu HorizontalAlignment="Left">
-                <MenuItem Header="Header1">
-                    <MenuItem Header="Header1"/>
-                    <MenuItem Header="Header2"/>
-                    <MenuItem Header="Header2"/>
+            <Menu 
+                HorizontalAlignment="Left">
+                
+                <MenuItem Header="{DynamicResource Idioma}">
+                    
+                    <MenuItem 
+                        Click="ElegirIdiomaClick"
+                        DataContext="en-EN"
+                        Header="{DynamicResource Ingles}"/>
+                    
+                    <MenuItem 
+                        Click="ElegirIdiomaClick"
+                        DataContext="es-VE"
+                        Header="{DynamicResource Espanol_VE}"/>
+
                 </MenuItem>
-                <MenuItem Header="Header2">
+                
+                <!--<MenuItem Header="Header2">
                     <MenuItem Header="Header1"/>
                     <MenuItem Header="Header2"/>
                     <MenuItem Header="Header2"/>
@@ -34,13 +45,18 @@
                     <MenuItem Header="Header1"/>
                     <MenuItem Header="Header2"/>
                     <MenuItem Header="Header2"/>
-                </MenuItem>
-            </Menu>-->
-
-            <ToggleButton
-                x:Name="btnModoOscuro"
+                </MenuItem>-->
                 
-                />
+                <ToggleButton
+                    x:Name="btnModoOscuro"
+                    FontSize="14"
+                    Height="20"
+                    Width="Auto"
+                    Content="{DynamicResource Modo_Oscuro}"
+                    Style="{StaticResource ToggleButtonSwitch}"
+                    />
+            </Menu>
+
 
         </StackPanel>
         

@@ -8,5 +8,18 @@
     <system:String x:Key="Idioma">Idioma</system:String>
     <system:String x:Key="Ingles">Inglés</system:String>
     <system:String x:Key="Espanol_VE">Español (VE)</system:String>
+    <system:String x:Key="Tasa_del_Dia">Tasas del Día</system:String>
+    <system:String x:Key="Dolar">Dólar</system:String>
+    <system:String x:Key="Efectivo">Efectivo</system:String>
+    <system:String x:Key="Cambiar">Cambiar</system:String>
+    <system:String x:Key="Consultar_Ventas">Consultar Ventas</system:String>
+    <system:String x:Key="Desde">Desde</system:String>
+    <system:String x:Key="Hasta">Hasta</system:String>
+    <system:String x:Key="Consultar">Consultar</system:String>
+    <system:String x:Key="Informacion_Contable">Información Contable</system:String>
+    <system:String x:Key="Ingresos">Ingresos</system:String>
+    <system:String x:Key="Ganancias">Ganancias</system:String>
+    <system:String x:Key="BsSEfectivo">Bs.S. Efectivo</system:String>
+    <system:String x:Key="BsSPunto">Bs.S. Punto</system:String>
     
 </ResourceDictionary>

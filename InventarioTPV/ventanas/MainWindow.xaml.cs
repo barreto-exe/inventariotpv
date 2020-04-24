@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HandyControl.Tools;
+using System;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
@@ -12,6 +13,7 @@ namespace InventarioTPV
         public MainWindow()
         {
             SelectRegion("es-VE");
+            ConfigHelper.Instance.SetLang("en");
             InitializeComponent();
         }
 

@@ -9,5 +9,5 @@
     <system:String x:Key="Idioma">Language</system:String>
     <system:String x:Key="Ingles">English</system:String>
     <system:String x:Key="Espanol_VE">Spanish (VE)</system:String>
-    
+
 </ResourceDictionary>

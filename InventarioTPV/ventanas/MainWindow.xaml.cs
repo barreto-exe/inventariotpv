@@ -1,4 +1,5 @@
-﻿using HandyControl.Tools;
+﻿using HandyControl.Data;
+using HandyControl.Tools;
 using System;
 using System.Globalization;
 using System.Linq;
@@ -61,6 +62,30 @@ namespace InventarioTPV
         }
         #endregion
 
+        #region TEMAS
 
+        public void UpdateSkin(SkinType skin)
+        {
+            Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri($"pack://application:,,,/HandyControl;component/Themes/Skin{skin.ToString()}.xaml")
+            });
+            Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri("pack://application:,,,/HandyControl;component/Themes/Theme.xaml")
+            });
+        }
+
+        #endregion
+
+        private void ActivarModoOscuro(object sender, RoutedEventArgs e)
+        {
+            UpdateSkin(SkinType.Dark);
+        }
+
+        private void ApagarModoOscuro(object sender, RoutedEventArgs e)
+        {
+            UpdateSkin(SkinType.Default);
+        }
     }
 }

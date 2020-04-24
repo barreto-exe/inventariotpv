@@ -53,7 +53,9 @@
                     Height="20"
                     Width="Auto"
                     Content="{DynamicResource Modo_Oscuro}"
-                    Style="{StaticResource ToggleButtonSwitch}"
+                    Style="{DynamicResource ToggleButtonSwitch}"
+                    Checked="ActivarModoOscuro"
+                    Unchecked="ApagarModoOscuro"
                     />
             </Menu>
         </StackPanel>
@@ -74,28 +76,28 @@
                 x:Name="txtFechaHora"
                 FontSize="16"
                 Text="Viernes, 24/04/2020 - 24:00:00 a.m."
-                Foreground="{StaticResource PrimaryTextBrush}"
+                Foreground="{DynamicResource PrimaryTextBrush}"
                 />
 
             <hc:Divider
                 Margin="10"
                 Orientation="Horizontal"
                 LineStrokeThickness="2"
-                LineStroke="{StaticResource PrimaryBrush}"
+                LineStroke="{DynamicResource PrimaryBrush}"
                 />
 
             <Expander 
                 IsExpanded="True"
                 Header="{DynamicResource Tasa_del_Dia}"
                 BorderThickness="1" 
-                BorderBrush="{StaticResource PrimaryBrush}">
+                BorderBrush="{DynamicResource PrimaryBrush}">
 
                 <Border 
                     Height="Auto" 
                     Padding="10"
                     BorderThickness="1" 
-                    BorderBrush="{StaticResource PrimaryBrush}"
-                    Background="{StaticResource RegionBrush}">
+                    BorderBrush="{DynamicResource PrimaryBrush}"
+                    Background="{DynamicResource BorderBrush}">
 
                     <StackPanel
                         Tag="StackTasasDelDia"
@@ -115,13 +117,13 @@
                                     HorizontalAlignment="Left"
                                     Width="Auto"
                                     Height="Auto"
-                                    Foreground="{StaticResource PrimaryTextBrush}" d:IsLocked="True"/>
+                                    Foreground="{DynamicResource PrimaryTextBrush}" d:IsLocked="True"/>
                                 <TextBlock
                                     Text=":"
                                     FontSize="15"
                                     Width="Auto"
                                     Height="Auto"
-                                    Foreground="{StaticResource PrimaryTextBrush}" d:IsLocked="True"/>
+                                    Foreground="{DynamicResource PrimaryTextBrush}" d:IsLocked="True"/>
                             </StackPanel>
 
                             <TextBlock
@@ -131,7 +133,7 @@
                                 FontSize="15"
                                 Width="Auto"
                                 Height="Auto"
-                                Foreground="{StaticResource PrimaryTextBrush}" 
+                                Foreground="{DynamicResource PrimaryTextBrush}" 
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Right"
                                 />
@@ -151,13 +153,13 @@
                                     HorizontalAlignment="Left"
                                     Width="Auto"
                                     Height="Auto"
-                                    Foreground="{StaticResource PrimaryTextBrush}" d:IsLocked="True"/>
+                                    Foreground="{DynamicResource PrimaryTextBrush}" d:IsLocked="True"/>
                                 <TextBlock
                                     Text=":"
                                     FontSize="15"
                                     Width="Auto"
                                     Height="Auto"
-                                    Foreground="{StaticResource PrimaryTextBrush}" 
+                                    Foreground="{DynamicResource PrimaryTextBrush}" 
                                     d:IsLocked="True"/>
                             </StackPanel>
 
@@ -168,7 +170,7 @@
                                 FontSize="15"
                                 Width="Auto"
                                 Height="Auto"
-                                Foreground="{StaticResource PrimaryTextBrush}" 
+                                Foreground="{DynamicResource PrimaryTextBrush}" 
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Right"
                                 />
@@ -176,6 +178,8 @@
 
                         <Button
                             x:Name="btnCambiarTasas"
+                            Background="{DynamicResource PrimaryBrush}" 
+                            Foreground="{DynamicResource TextIconBrush}" 
                             Content="{DynamicResource Cambiar}"
                             />
                     </StackPanel>
@@ -187,14 +191,14 @@
                 Header="{DynamicResource Consultar_Ventas}"
                 Margin="0,1,0,0"
                 BorderThickness="1" 
-                BorderBrush="{StaticResource PrimaryBrush}">
+                BorderBrush="{DynamicResource PrimaryBrush}">
 
                 <Border 
                     Height="Auto" 
                     Padding="10"
                     BorderThickness="1" 
-                    BorderBrush="{StaticResource PrimaryBrush}"
-                    Background="{StaticResource RegionBrush}">
+                    BorderBrush="{DynamicResource PrimaryBrush}"
+                    Background="{DynamicResource BorderBrush}">
 
                     <StackPanel 
                         x:Name="stkConsultaVentas"
@@ -215,14 +219,14 @@
                                     HorizontalAlignment="Left"
                                     Width="Auto"
                                     Height="Auto"
-                                    Foreground="{StaticResource PrimaryTextBrush}" 
+                                    Foreground="{DynamicResource PrimaryTextBrush}" 
                                     d:IsLocked="True"/>
                                 <TextBlock
                                     Text=":"
                                     FontSize="15"
                                     Width="Auto"
                                     Height="Auto"
-                                    Foreground="{StaticResource PrimaryTextBrush}" d:IsLocked="True"/>
+                                    Foreground="{DynamicResource PrimaryTextBrush}" d:IsLocked="True"/>
                             </StackPanel>
 
                             <DatePicker
@@ -250,13 +254,13 @@
                                     HorizontalAlignment="Left"
                                     Width="Auto"
                                     Height="Auto"
-                                    Foreground="{StaticResource PrimaryTextBrush}" d:IsLocked="True"/>
+                                    Foreground="{DynamicResource PrimaryTextBrush}" d:IsLocked="True"/>
                                 <TextBlock
                                     Text=":"
                                     FontSize="15"
                                     Width="Auto"
                                     Height="Auto"
-                                    Foreground="{StaticResource PrimaryTextBrush}" d:IsLocked="True"/>
+                                    Foreground="{DynamicResource PrimaryTextBrush}" d:IsLocked="True"/>
                             </StackPanel>
 
                             <DatePicker
@@ -273,6 +277,8 @@
                             Margin="0,10,0,0"
                             x:Name="btnConsultarVentas"
                             Content="{DynamicResource Consultar}"
+                            Background="{DynamicResource PrimaryBrush}" 
+                            Foreground="{DynamicResource TextIconBrush}" 
                             />
 
                     </StackPanel>
@@ -294,6 +300,7 @@
                 Width="Auto" 
                 Height="Auto"
                 Header = "{DynamicResource Informacion_Contable}"
+                Background = "{DynamicResource BorderBrush}" 
                 Padding = "10" 
                 Margin = "16">
 
@@ -307,7 +314,7 @@
 
                         <TextBlock
                             x:Name="txtFechasConsultadas"
-                            Foreground="{StaticResource TextIconBrush}" 
+                            Foreground="{DynamicResource TextIconBrush}" 
                             FontSize="16"
                             Text="Montos de hoy viernes, 24-24-2020:"/>
                         
@@ -315,7 +322,7 @@
                             Orientation="Horizontal"
                             LineStrokeThickness="2"
                             Margin="10"
-                            LineStroke="{StaticResource DefaultBrush}" 
+                            LineStroke="{DynamicResource DefaultBrush}" 
                             />
 
                         <Grid
@@ -329,10 +336,10 @@
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Left"
                                     FontSize="16"
-                                    Foreground="{StaticResource TextIconBrush}" 
+                                    Foreground="{DynamicResource TextIconBrush}" 
                                     Text="{DynamicResource Ingresos}"/>
                                 <TextBlock
-                                    Foreground="{StaticResource TextIconBrush}" 
+                                    Foreground="{DynamicResource TextIconBrush}" 
                                     FontSize="16"
                                     Text=":"/>
                             </StackPanel>
@@ -341,7 +348,7 @@
                                 x:Name="txtIngresos"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Right"
-                                Foreground="{StaticResource TextIconBrush}" 
+                                Foreground="{DynamicResource TextIconBrush}" 
                                 FontSize="16"
                                 Text="$ 9.999"/>
                         </Grid>
@@ -357,10 +364,10 @@
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Left"
                                     FontSize="16"
-                                    Foreground="{StaticResource TextIconBrush}" 
+                                    Foreground="{DynamicResource TextIconBrush}" 
                                     Text="{DynamicResource Ganancias}"/>
                                 <TextBlock
-                                    Foreground="{StaticResource TextIconBrush}" 
+                                    Foreground="{DynamicResource TextIconBrush}" 
                                     FontSize="16"
                                     Text=":"/>
                             </StackPanel>
@@ -369,7 +376,7 @@
                                 x:Name="txtGanancias"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Right"
-                                Foreground="{StaticResource TextIconBrush}" 
+                                Foreground="{DynamicResource TextIconBrush}" 
                                 FontSize="16"
                                 Text="$ 9.999"/>
                         </Grid>
@@ -385,10 +392,10 @@
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Left"
                                     FontSize="16"
-                                    Foreground="{StaticResource TextIconBrush}" 
+                                    Foreground="{DynamicResource TextIconBrush}" 
                                     Text="{DynamicResource BsSEfectivo}"/>
                                 <TextBlock
-                                    Foreground="{StaticResource TextIconBrush}" 
+                                    Foreground="{DynamicResource TextIconBrush}" 
                                     FontSize="16"
                                     Text=":"/>
                             </StackPanel>
@@ -397,7 +404,7 @@
                                 x:Name="txtIngresEfectivo"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Right"
-                                Foreground="{StaticResource TextIconBrush}" 
+                                Foreground="{DynamicResource TextIconBrush}" 
                                 FontSize="16"
                                 Text="$ 9.999"/>
                         </Grid>
@@ -413,10 +420,10 @@
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Left"
                                     FontSize="16"
-                                    Foreground="{StaticResource TextIconBrush}" 
+                                    Foreground="{DynamicResource TextIconBrush}" 
                                     Text="{DynamicResource BsSPunto}"/>
                                 <TextBlock
-                                    Foreground="{StaticResource TextIconBrush}" 
+                                    Foreground="{DynamicResource TextIconBrush}" 
                                     FontSize="16"
                                     Text=":"/>
                             </StackPanel>
@@ -425,7 +432,7 @@
                                 x:Name="txtIngresPunto"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Right"
-                                Foreground="{StaticResource TextIconBrush}" 
+                                Foreground="{DynamicResource TextIconBrush}" 
                                 FontSize="16"
                                 Text="$ 9.999"/>
                         </Grid>

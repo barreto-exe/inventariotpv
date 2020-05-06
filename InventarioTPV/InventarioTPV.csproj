@@ -20,6 +20,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="HandyControl" Version="2.4.0" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.112.2" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Clases\" />
@@ -35,6 +36,9 @@
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Recursos\db.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>

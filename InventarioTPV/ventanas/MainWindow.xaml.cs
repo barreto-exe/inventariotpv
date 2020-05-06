@@ -1,16 +1,21 @@
 ﻿using HandyControl.Data;
 using HandyControl.Tools;
 using System;
+using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.IO;
+using System.Data.SQLite;
 
 namespace InventarioTPV
 {
     public partial class MainWindow
     {
+        public const string BaseDatos = "Recursos\\db.db";
+
         public MainWindow()
         {
             InitializeComponent();
@@ -18,6 +23,44 @@ namespace InventarioTPV
             CargarSkin();
             SelectRegion("es-VE");
             ConfigHelper.Instance.SetLang("en");
+
+            CodigoTest();
+        }
+
+        public void CodigoTest()
+        {
+
+            SQLiteConnectionStringBuilder strConn = new SQLiteConnectionStringBuilder()
+            {
+                DataSource = BaseDatos
+            };
+
+            if (!File.Exists(BaseDatos))
+            {
+                return;
+            }
+
+            var connection_string = String.Format("Data Source={0};ServerVersion=3;", BaseDatos);
+
+            SQLiteConnection conn = new SQLiteConnection(connection_string);
+            conn.Open();
+
+            SQLiteCommand command = new SQLiteCommand
+            {
+                CommandText = "SELECT @Efectivo as tipopago, @Monto as monto FROM c_tasa",
+                Connection = conn
+            };
+            command.Parameters.AddWithValue("Efectivo", "Efectivo");
+            command.Parameters.AddWithValue("Monto", "Bs. 99.999.999");
+
+            SQLiteDataReader dr = command.ExecuteReader();
+
+            DataTable data = new DataTable();
+            data.Clear();
+            data.Load(dr);
+
+            listIngresosMonedas.ItemsSource = data.DefaultView;
+            dgVentas.ItemsSource = data.DefaultView;
         }
 
         #region IDIOMAS

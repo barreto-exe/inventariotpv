@@ -9,12 +9,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.IO;
 using System.Data.SQLite;
+using InventarioTPV.Clases;
 
 namespace InventarioTPV
 {
     public partial class MainWindow
     {
-        public const string BaseDatos = "Recursos\\db.db";
 
         public MainWindow()
         {
@@ -27,40 +27,32 @@ namespace InventarioTPV
             CodigoTest();
         }
 
+        private void ConsultarTasa()
+        {
+            string query = "SELECT * FROM c_tasa";
+            BDCon con = new BDCon(query);
+
+            SQLiteDataReader dr = con.ConsultaSqlite();
+            dr.Read();
+
+            txtTasaDolar.Text = ((Double)dr["tasaDolar"]).ToString("#,0.00");
+            txtTasaEfectivo.Text = ((Double)dr["porcentajeEfectivo"]).ToString("#,0.00");
+            txtFechaCambioTasa.Text = dr["fecha"].ToString();
+            txtHoraCambioTasa.Text  = dr["hora"].ToString();
+
+            dr.Close();
+        }
+
         public void CodigoTest()
         {
+            BDCon con = new BDCon("SELECT @Efectivo as tipopago, @Monto as monto FROM c_tasa");
+            con.PasarParametros("Efectivo", "Efectivo");
+            con.PasarParametros("Monto", "Jajajaja");
 
-            SQLiteConnectionStringBuilder strConn = new SQLiteConnectionStringBuilder()
-            {
-                DataSource = BaseDatos
-            };
+            con.ConsultaSqlite(listIngresosMonedas);
+            con.ConsultaSqlite(dgVentas);
 
-            if (!File.Exists(BaseDatos))
-            {
-                return;
-            }
-
-            var connection_string = String.Format("Data Source={0};ServerVersion=3;", BaseDatos);
-
-            SQLiteConnection conn = new SQLiteConnection(connection_string);
-            conn.Open();
-
-            SQLiteCommand command = new SQLiteCommand
-            {
-                CommandText = "SELECT @Efectivo as tipopago, @Monto as monto FROM c_tasa",
-                Connection = conn
-            };
-            command.Parameters.AddWithValue("Efectivo", "Efectivo");
-            command.Parameters.AddWithValue("Monto", "Bs. 99.999.999");
-
-            SQLiteDataReader dr = command.ExecuteReader();
-
-            DataTable data = new DataTable();
-            data.Clear();
-            data.Load(dr);
-
-            listIngresosMonedas.ItemsSource = data.DefaultView;
-            dgVentas.ItemsSource = data.DefaultView;
+            ConsultarTasa();
         }
 
         #region IDIOMAS

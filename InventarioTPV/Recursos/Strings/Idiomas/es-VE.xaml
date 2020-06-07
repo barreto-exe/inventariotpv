@@ -21,5 +21,7 @@
     <system:String x:Key="Ganancias">Ganancias</system:String>
     <system:String x:Key="BsSEfectivo">Bs.S. Efectivo</system:String>
     <system:String x:Key="BsSPunto">Bs.S. Punto</system:String>
+    <system:String x:Key="Fecha_de_Cambio">Fecha de Cambio</system:String>
+    <system:String x:Key="Hora_de_Cambio">Hora de Cambio</system:String>
     
 </ResourceDictionary>

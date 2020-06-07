@@ -23,9 +23,6 @@
     <PackageReference Include="System.Data.SQLite" Version="1.0.112.2" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Clases\" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Update="Properties\Settings.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>

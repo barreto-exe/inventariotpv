@@ -12,7 +12,7 @@
     WindowState="Maximized"
     ShowTitle="True"
     MinHeight="565" 
-    MinWidth="880">
+    MinWidth="880" Height="384">
 
     <hc:Window.NonClientAreaContent>
 
@@ -68,17 +68,170 @@
             <Setter Property="Visibility" Value="Collapsed" />
         </Style>
     </Window.Resources>
-    <Grid>
 
-        <StackPanel
-            Orientation="Vertical" Margin="10,0,10,0">
+    <Grid d:IsLocked="True">
+        <StackPanel x:Name="stkPrincipal"
+            Orientation="Vertical" 
+            Margin="10,0,10,0" 
+            VerticalAlignment="Top" d:IsLocked="True">
 
             <Grid 
                 Margin="10,10,0,0" 
                 Height="Auto" 
                 VerticalAlignment="Top" 
                 HorizontalAlignment="Left" 
-                Width="710">
+                Width="710" d:IsLocked="True">
+
+                <TextBlock
+                    x:Name="txtFechaHora"
+                    FontSize="20"
+                    Text="Viernes, 24/04/2020 - 24:00:00 a.m."
+                    Foreground="{DynamicResource PrimaryTextBrush}" Margin="0,0,400,0" Height="27" VerticalAlignment="Top" d:IsLocked="True"
+                    />
+                <hc:Divider
+                    Margin="10,37,410,0"
+                    Orientation="Horizontal"
+                    LineStrokeThickness="2"
+                    LineStroke="{DynamicResource PrimaryBrush}" Height="2" VerticalAlignment="Top" d:IsLocked="True"
+                    />
+
+                <StackPanel
+                    VerticalAlignment="Top"
+                    Orientation="Vertical" 
+                    Height="Auto" HorizontalAlignment="Left" Width="396" Margin="0,43,0,0" d:IsLocked="True">
+
+                    <GroupBox 
+                        Grid.Row="0" 
+                        Grid.Column="0"
+                        Width="Auto" 
+                        Height="Auto"
+                        Header = "{DynamicResource Informacion_Contable}"
+                        Background = "{DynamicResource BorderBrush}" 
+                        Padding = "10" 
+                        Margin = "16,16,16,0" d:IsLocked="True">
+
+                        <Border
+                            Padding="20"
+                            Background = "{DynamicResource PrimaryBrush}" 
+                            CornerRadius = "4" d:IsLocked="True">
+
+                            <StackPanel
+                                Orientation="Vertical" d:IsLocked="True">
+
+                                <TextBlock
+                                    x:Name="txtFechasConsultadas"
+                                    Foreground="{DynamicResource TextIconBrush}" 
+                                    FontSize="18"
+                                    Text="Montos de hoy viernes, 24-24-2020:" d:IsLocked="True"/>
+
+                                <hc:Divider
+                                    Orientation="Horizontal"
+                                    LineStrokeThickness="2"
+                                    Margin="10"
+                                    LineStroke="{DynamicResource DefaultBrush}" d:IsLocked="True" 
+                                    />
+
+                                <StackPanel
+                                    Orientation="Vertical" Width="265" d:IsLocked="True">
+                                    <Grid
+                                        Height="Auto"
+                                        Width="Auto" d:IsLocked="True">
+
+                                        <StackPanel
+                                            Orientation="Horizontal" d:IsLocked="True">
+
+                                            <TextBlock
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Left"
+                                                FontSize="18"
+                                                Foreground="{DynamicResource TextIconBrush}" 
+                                                Text="{DynamicResource Ingresos}" d:IsLocked="True"/>
+                                            <TextBlock
+                                                Foreground="{DynamicResource TextIconBrush}" 
+                                                FontSize="18"
+                                                Text=":" d:IsLocked="True"/>
+                                        </StackPanel>
+
+                                        <TextBlock
+                                            x:Name="txtIngresos"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Right"
+                                            Foreground="{DynamicResource TextIconBrush}" 
+                                            FontSize="18"
+                                            Text="$ 9.999" d:IsLocked="True"/>
+                                    </Grid>
+                                    <Grid
+                                        Height="Auto"
+                                        Width="Auto" d:IsLocked="True">
+
+                                        <StackPanel
+                                            Orientation="Horizontal" d:IsLocked="True">
+
+                                            <TextBlock
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Left"
+                                                FontSize="18"
+                                                Foreground="{DynamicResource TextIconBrush}" 
+                                                Text="{DynamicResource Ganancias}" d:IsLocked="True"/>
+                                            <TextBlock
+                                                Foreground="{DynamicResource TextIconBrush}" 
+                                                FontSize="18"
+                                                Text=":" d:IsLocked="True"/>
+                                        </StackPanel>
+
+                                        <TextBlock
+                                            x:Name="txtGanancias"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Right"
+                                            Foreground="{DynamicResource TextIconBrush}" 
+                                            FontSize="18"
+                                            Text="$ 9.999" d:IsLocked="True"/>
+                                    </Grid>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </GroupBox>
+                    <Expander 
+                        Margin="10"
+                        x:Name="expIngresoPorMoneda"
+                        IsExpanded="True"
+                        Header="{DynamicResource Ingreso_por_tipo_de_pago}"
+                        BorderThickness="1" 
+                        BorderBrush="{DynamicResource PrimaryBrush}" 
+                        MaxHeight="165"
+                        Width="365" d:IsLocked="True">
+
+                        <Border 
+                            Height="Auto" 
+                            Padding="10"
+                            BorderThickness="1" 
+                            BorderBrush="{DynamicResource PrimaryBrush}"
+                            Background="{DynamicResource BorderBrush}" d:IsLocked="True">
+                            <ScrollViewer
+                                VerticalScrollBarVisibility="Auto" d:IsLocked="True">
+                                <ListView
+                                FontSize="18"
+                                Width="Auto"
+                                Height="Auto"
+                                Background="{DynamicResource BorderBrush}"
+                                x:Name="listIngresosMonedas" d:IsLocked="True">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn 
+                                            Header="Tipo de Pago" 
+                                            Width="130"
+                                            DisplayMemberBinding="{Binding tipopago}"/>
+
+                                            <GridViewColumn 
+                                            Header="Total" 
+                                            DisplayMemberBinding="{Binding monto}"/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </ScrollViewer>
+                        </Border>
+                    </Expander>
+                </StackPanel>
 
                 <StackPanel
                     x:Name="stkFechaTasaConsulta"
@@ -86,60 +239,46 @@
                     Width="310" 
                     Height="Auto" 
                     HorizontalAlignment="Left" 
-                    VerticalAlignment="Top">
-
-                    <TextBlock
-                        x:Name="txtFechaHora"
-                        FontSize="20"
-                        Text="Viernes, 24/04/2020 - 24:00:00 a.m."
-                        Foreground="{DynamicResource PrimaryTextBrush}"
-                        />
-
-                    <hc:Divider
-                        Margin="10"
-                        Orientation="Horizontal"
-                        LineStrokeThickness="2"
-                        LineStroke="{DynamicResource PrimaryBrush}"
-                        />
+                    VerticalAlignment="Top" Margin="400,59,0,0" d:IsLocked="True">
 
                     <Expander 
                         IsExpanded="True"
                         Header="{DynamicResource Tasa_del_Dia}"
                         BorderThickness="1" 
-                        BorderBrush="{DynamicResource PrimaryBrush}">
+                        BorderBrush="{DynamicResource PrimaryBrush}" d:IsLocked="True">
 
                         <Border 
                             Height="Auto" 
                             Padding="10"
                             BorderThickness="1" 
                             BorderBrush="{DynamicResource PrimaryBrush}"
-                            Background="{DynamicResource BorderBrush}">
+                            Background="{DynamicResource BorderBrush}" d:IsLocked="True">
 
                             <StackPanel
                                 Tag="StackTasasDelDia"
-                                Orientation="Vertical">
+                                Orientation="Vertical" d:IsLocked="True">
 
                                 <Grid
                                     Width="Auto"
-                                    Height="Auto">
+                                    Height="Auto" d:IsLocked="True">
 
                                     <StackPanel 
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Center"
-                                        Orientation="Horizontal">
+                                        Orientation="Horizontal" d:IsLocked="True">
                                         <TextBlock
                                             Text="{DynamicResource Dolar}"
                                             FontSize="18"
                                             HorizontalAlignment="Left"
                                             Width="Auto"
                                             Height="Auto"
-                                            Foreground="{DynamicResource PrimaryTextBrush}"/>
+                                            Foreground="{DynamicResource PrimaryTextBrush}" d:IsLocked="True"/>
                                         <TextBlock
                                             Text=":"
                                             FontSize="18"
                                             Width="Auto"
                                             Height="Auto"
-                                            Foreground="{DynamicResource PrimaryTextBrush}"/>
+                                            Foreground="{DynamicResource PrimaryTextBrush}" d:IsLocked="True"/>
                                     </StackPanel>
 
                                     <TextBlock
@@ -151,31 +290,31 @@
                                         Height="Auto"
                                         Foreground="{DynamicResource PrimaryTextBrush}" 
                                         VerticalAlignment="Center"
-                                        HorizontalAlignment="Right"
+                                        HorizontalAlignment="Right" d:IsLocked="True"
                                         />
                                 </Grid>
 
                                 <Grid
                                     Width="Auto"
-                                    Height="Auto">
+                                    Height="Auto" d:IsLocked="True">
 
                                     <StackPanel 
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Center"
-                                        Orientation="Horizontal">
+                                        Orientation="Horizontal" d:IsLocked="True">
                                         <TextBlock
                                             Text="{DynamicResource Efectivo}"
                                             FontSize="18"
                                             HorizontalAlignment="Left"
                                             Width="Auto"
                                             Height="Auto"
-                                            Foreground="{DynamicResource PrimaryTextBrush}"/>
+                                            Foreground="{DynamicResource PrimaryTextBrush}" d:IsLocked="True"/>
                                         <TextBlock
                                             Text=":"
                                             FontSize="18"
                                             Width="Auto"
                                             Height="Auto"
-                                            Foreground="{DynamicResource PrimaryTextBrush}"/>
+                                            Foreground="{DynamicResource PrimaryTextBrush}" d:IsLocked="True"/>
                                     </StackPanel>
 
                                     <TextBlock
@@ -187,30 +326,30 @@
                                         Height="Auto"
                                         Foreground="{DynamicResource PrimaryTextBrush}" 
                                         VerticalAlignment="Center"
-                                        HorizontalAlignment="Right"
+                                        HorizontalAlignment="Right" d:IsLocked="True"
                                         />
                                 </Grid>
                                 <Grid
                                     Width="Auto"
-                                    Height="Auto">
+                                    Height="Auto" d:IsLocked="True">
 
                                     <StackPanel 
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Center"
-                                        Orientation="Horizontal">
+                                        Orientation="Horizontal" d:IsLocked="True">
                                         <TextBlock
                                             Text="{DynamicResource Hora_de_Cambio}"
                                             FontSize="18"
                                             HorizontalAlignment="Left"
                                             Width="Auto"
                                             Height="Auto"
-                                            Foreground="{DynamicResource PrimaryTextBrush}"/>
+                                            Foreground="{DynamicResource PrimaryTextBrush}" d:IsLocked="True"/>
                                         <TextBlock
                                             Text=":"
                                             FontSize="18"
                                             Width="Auto"
                                             Height="Auto"
-                                            Foreground="{DynamicResource PrimaryTextBrush}"/>
+                                            Foreground="{DynamicResource PrimaryTextBrush}" d:IsLocked="True"/>
                                     </StackPanel>
 
                                     <TextBlock
@@ -222,30 +361,30 @@
                                         Height="Auto"
                                         Foreground="{DynamicResource PrimaryTextBrush}" 
                                         VerticalAlignment="Center"
-                                        HorizontalAlignment="Right"
+                                        HorizontalAlignment="Right" d:IsLocked="True"
                                         />
                                 </Grid>
                                 <Grid
                                     Width="Auto"
-                                    Height="Auto">
+                                    Height="Auto" d:IsLocked="True">
 
                                     <StackPanel 
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Center"
-                                        Orientation="Horizontal">
+                                        Orientation="Horizontal" d:IsLocked="True">
                                         <TextBlock
                                             Text="{DynamicResource Fecha_de_Cambio}"
                                             FontSize="18"
                                             HorizontalAlignment="Left"
                                             Width="Auto"
                                             Height="Auto"
-                                            Foreground="{DynamicResource PrimaryTextBrush}"/>
+                                            Foreground="{DynamicResource PrimaryTextBrush}" d:IsLocked="True"/>
                                         <TextBlock
                                             Text=":"
                                             FontSize="18"
                                             Width="Auto"
                                             Height="Auto"
-                                            Foreground="{DynamicResource PrimaryTextBrush}"/>
+                                            Foreground="{DynamicResource PrimaryTextBrush}" d:IsLocked="True"/>
                                     </StackPanel>
 
                                     <TextBlock
@@ -257,7 +396,7 @@
                                         Height="Auto"
                                         Foreground="{DynamicResource PrimaryTextBrush}" 
                                         VerticalAlignment="Center"
-                                        HorizontalAlignment="Right"
+                                        HorizontalAlignment="Right" d:IsLocked="True"
                                         />
                                 </Grid>
 
@@ -266,40 +405,40 @@
                                     Margin="0,10,0,0"
                                     Background="{DynamicResource PrimaryBrush}" 
                                     Foreground="{DynamicResource TextIconBrush}" 
-                                    Content="{DynamicResource Cambiar}"
+                                    Content="{DynamicResource Cambiar}" d:IsLocked="True"
                                     />
                             </StackPanel>
                         </Border>
                     </Expander>
 
                     <Expander 
+                        x:Name="expConsultarVentas" 
                         IsExpanded="True"
                         Header="{DynamicResource Consultar_Ventas}"
-                        Margin="0,1,0,0"
+                        Margin="0,10,0,0"
                         BorderThickness="1" 
-                        BorderBrush="{DynamicResource PrimaryBrush}">
+                        BorderBrush="{DynamicResource PrimaryBrush}" d:IsLocked="True">
 
                         <Border 
-                            Height="Auto" 
                             Padding="10"
                             BorderThickness="1" 
                             BorderBrush="{DynamicResource PrimaryBrush}"
-                            Background="{DynamicResource BorderBrush}">
+                            Background="{DynamicResource BorderBrush}" d:IsLocked="True">
 
                             <StackPanel 
                                 x:Name="stkConsultaVentas"
-                                Orientation="Vertical">
+                                Orientation="Vertical" d:IsLocked="True">
 
                                 <Grid 
                                     x:Name="grdDesde"
                                     Width="Auto"
-                                    Height="Auto">
+                                    Height="Auto" d:IsLocked="True">
 
                                     <StackPanel 
                                         x:Name="Desde" 
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Center"
-                                        Orientation="Horizontal">
+                                        Orientation="Horizontal" d:IsLocked="True">
 
                                         <TextBlock
                                             Text="{DynamicResource Desde}"
@@ -307,13 +446,13 @@
                                             HorizontalAlignment="Left"
                                             Width="Auto"
                                             Height="Auto"
-                                            Foreground="{DynamicResource PrimaryTextBrush}"/>
+                                            Foreground="{DynamicResource PrimaryTextBrush}" d:IsLocked="True"/>
                                         <TextBlock
                                             Text=":"
                                             FontSize="18"
                                             Width="Auto"
                                             Height="Auto"
-                                            Foreground="{DynamicResource PrimaryTextBrush}"/>
+                                            Foreground="{DynamicResource PrimaryTextBrush}" d:IsLocked="True"/>
                                     </StackPanel>
 
                                     <DatePicker
@@ -322,18 +461,18 @@
                                         HorizontalAlignment="Left"
                                         x:Name="dpDesde" 
                                         Margin="60,0,0,0"
-                                        Width="165"
+                                        Width="165" d:IsLocked="True"
                                         />
                                 </Grid>
                                 <Grid x:Name="grdHasta"
                                     Margin="0,10,0,0"
                                     Width="Auto"
-                                    Height="Auto">
+                                    Height="Auto" d:IsLocked="True">
 
                                     <StackPanel x:Name="Hasta" 
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Center"
-                                        Orientation="Horizontal">
+                                        Orientation="Horizontal" d:IsLocked="True">
 
                                         <TextBlock
                                             Text="{DynamicResource Hasta}"
@@ -341,13 +480,13 @@
                                             HorizontalAlignment="Left"
                                             Width="Auto"
                                             Height="Auto"
-                                            Foreground="{DynamicResource PrimaryTextBrush}"/>
+                                            Foreground="{DynamicResource PrimaryTextBrush}" d:IsLocked="True"/>
                                         <TextBlock
                                             Text=":"
                                             FontSize="18"
                                             Width="Auto"
                                             Height="Auto"
-                                            Foreground="{DynamicResource PrimaryTextBrush}"/>
+                                            Foreground="{DynamicResource PrimaryTextBrush}" d:IsLocked="True"/>
                                     </StackPanel>
 
                                     <DatePicker
@@ -356,7 +495,7 @@
                                         HorizontalAlignment="Left"
                                         x:Name="dpHasta" 
                                         Margin="60,0,0,0"
-                                        Width="165"
+                                        Width="165" d:IsLocked="True"
                                         />
                                 </Grid>
 
@@ -365,159 +504,24 @@
                                     x:Name="btnConsultarVentas"
                                     Content="{DynamicResource Consultar}"
                                     Background="{DynamicResource PrimaryBrush}" 
-                                    Foreground="{DynamicResource TextIconBrush}" 
+                                    Foreground="{DynamicResource TextIconBrush}" d:IsLocked="True" 
                                     />
 
                             </StackPanel>
                         </Border>
                     </Expander>
                 </StackPanel>
-                <StackPanel
-                    Margin="310,33,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Orientation="Vertical" 
-                    Height="Auto"
-                    Width="396">
-
-                    <GroupBox 
-                        Grid.Row="0" 
-                        Grid.Column="0"
-                        Width="Auto" 
-                        Height="Auto"
-                        Header = "{DynamicResource Informacion_Contable}"
-                        Background = "{DynamicResource BorderBrush}" 
-                        Padding = "10" 
-                        Margin = "16">
-
-                        <Border
-                            Padding="20"
-                            Background = "{DynamicResource PrimaryBrush}" 
-                            CornerRadius = "4">
-
-                            <StackPanel
-                                Orientation="Vertical">
-
-                                <TextBlock
-                                    x:Name="txtFechasConsultadas"
-                                    Foreground="{DynamicResource TextIconBrush}" 
-                                    FontSize="18"
-                                    Text="Montos de hoy viernes, 24-24-2020:"/>
-
-                                <hc:Divider
-                                    Orientation="Horizontal"
-                                    LineStrokeThickness="2"
-                                    Margin="10"
-                                    LineStroke="{DynamicResource DefaultBrush}" 
-                                    />
-
-                                <StackPanel
-                                    Orientation="Vertical" Width="265">
-                                    <Grid
-                                        Height="Auto"
-                                        Width="Auto">
-
-                                        <StackPanel
-                                            Orientation="Horizontal">
-
-                                            <TextBlock
-                                                VerticalAlignment="Center"
-                                                HorizontalAlignment="Left"
-                                                FontSize="18"
-                                                Foreground="{DynamicResource TextIconBrush}" 
-                                                Text="{DynamicResource Ingresos}"/>
-                                            <TextBlock
-                                                Foreground="{DynamicResource TextIconBrush}" 
-                                                FontSize="18"
-                                                Text=":"/>
-                                        </StackPanel>
-
-                                        <TextBlock
-                                            x:Name="txtIngresos"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Right"
-                                            Foreground="{DynamicResource TextIconBrush}" 
-                                            FontSize="18"
-                                            Text="$ 9.999"/>
-                                    </Grid>
-                                    <Grid
-                                        Height="Auto"
-                                        Width="Auto">
-
-                                        <StackPanel
-                                            Orientation="Horizontal">
-
-                                            <TextBlock
-                                                VerticalAlignment="Center"
-                                                HorizontalAlignment="Left"
-                                                FontSize="18"
-                                                Foreground="{DynamicResource TextIconBrush}" 
-                                                Text="{DynamicResource Ganancias}"/>
-                                            <TextBlock
-                                                Foreground="{DynamicResource TextIconBrush}" 
-                                                FontSize="18"
-                                                Text=":"/>
-                                        </StackPanel>
-
-                                        <TextBlock
-                                            x:Name="txtGanancias"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Right"
-                                            Foreground="{DynamicResource TextIconBrush}" 
-                                            FontSize="18"
-                                            Text="$ 9.999"/>
-                                    </Grid>
-                                </StackPanel>
-
-
-
-                                <hc:Divider
-                                    Orientation="Horizontal"
-                                    LineStrokeThickness="2"
-                                    LineStroke="{DynamicResource DefaultBrush}"
-                                    Margin="10"
-                                    />
-
-
-                                <!--TODO colocar esto en un colapsable-->
-                                <ListView
-                                    ItemsSource="{Binding DataList}"
-                                    FontSize="18"
-                                    Width="Auto"
-                                    Height="Auto"
-                                    x:Name="listIngresosMonedas">
-                                    <ListView.View>
-                                        <GridView>
-                                            <GridViewColumn 
-                                                Header="Tipo de Pago" 
-                                                Width="130"
-                                                DisplayMemberBinding="{Binding tipopago}"/>
-
-                                            <GridViewColumn 
-                                                Header="Total" 
-                                                DisplayMemberBinding="{Binding monto}"/>
-
-
-                                        </GridView>
-
-                                    </ListView.View>
-                                </ListView>
-
-
-                            </StackPanel>
-                        </Border>
-                    </GroupBox>
-                </StackPanel>
-            </Grid>
-
-            <Grid>
-                <DataGrid
-                    x:Name="dgVentas"
-                    ItemsSource="{Binding DataList}"/>
             </Grid>
 
         </StackPanel>
-
-
+        <Grid x:Name="grdVentas"
+            Margin="10,433,10,0" 
+            Height="116" 
+            VerticalAlignment="Top" d:IsLocked="True">
+            <DataGrid
+                VerticalScrollBarVisibility="Auto"
+                ItemsSource="{Binding DataList}"
+                x:Name="dgVentas" Margin="0,10,0,0" d:IsLocked="True"/>
+        </Grid>
     </Grid>
 </hc:Window>

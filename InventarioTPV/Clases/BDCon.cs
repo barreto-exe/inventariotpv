@@ -5,26 +5,26 @@ using System.Data.SQLite;
 using System.IO;
 using System.Windows.Controls;
 
-namespace InventarioTPV.Clases
+namespace InventarioTPV
 {
     public class BDCon
     {
         //El mismo path y la misma variable de conexión para todas las consultas
         //La variable de conexión siempre permanece abierta
         private static string BaseDatos = "Recursos\\db.db";
-        private static SQLiteConnection conn = ConexionSqlite();
+        public static SQLiteConnection conGlobal = ConexionSqlite();
 
         private String Query;
         private List<String> NombreParametros;
-        private List<String> ValorParametros;
+        private List<Object> ValorParametros;
 
         public BDCon(String query)
         {
             this.Query = query;
             NombreParametros = new List<string>();
-            ValorParametros  = new List<string>();
+            ValorParametros  = new List<Object>();
         }
-        public void PasarParametros(string nombre, string valor)
+        public void PasarParametros(string nombre, object valor)
         {
             //Asocio a cada parámetro un valor.
             NombreParametros.Add(nombre);
@@ -60,20 +60,20 @@ namespace InventarioTPV.Clases
         //Abre una conexión global para todos los BDCon
         public static void AbrirConexionGlobal()
         {
-            if(conn.State == ConnectionState.Open)
+            if(conGlobal.State == ConnectionState.Open)
             {
-                conn.Close();
+                conGlobal.Close();
             }
 
-            conn = ConexionSqlite();
+            conGlobal = ConexionSqlite();
         }
 
         //Cierra la conexión global para los BDCon
         public static void CerrarConexionGlobal()
         {
-            if (conn.State == ConnectionState.Open)
+            if (conGlobal.State == ConnectionState.Open)
             {
-                conn.Close();
+                conGlobal.Close();
             }
         }
 
@@ -84,12 +84,12 @@ namespace InventarioTPV.Clases
                 //Los parámetros del query deben tener @
                 //Por ejemplo: SELECT @Efectivo as tipopago, @Monto as monto FROM c_tasa
                 CommandText = Query,
-                Connection = conn
+                Connection = conGlobal
             };
 
             //Añado cada parámetro con su valor en el comando
             String[] nombres = NombreParametros.ToArray();
-            String[] valores = ValorParametros.ToArray();
+            Object[] valores = ValorParametros.ToArray();
             for (int i = 0; i < nombres.Length; i++)
             {
                 command.Parameters.AddWithValue(nombres[i], valores[i]);
@@ -121,7 +121,7 @@ namespace InventarioTPV.Clases
 
             //Cierro para prevenir errores
             reader.Close();
-            
+
             return data;
         }
 

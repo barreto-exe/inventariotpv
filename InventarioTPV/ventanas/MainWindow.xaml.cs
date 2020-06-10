@@ -32,13 +32,13 @@ namespace InventarioTPV
 
         private void Actualiza_HoraAndGrid(object sender, EventArgs e)
         {
-            string fechahora = String.Format("{0:ddd, dd/MM/yyyy - hh:mm:ss tt}", DateTime.Now);
+            string fechahora = String.Format("{0:dddd, dd/MM/yyyy - hh:mm:ss tt}", DateTime.Now);
 
             //Colocar la primera letra en mayúscula
             this.txtFechaHora.Text = fechahora.Insert(1, fechahora[0].ToString().ToUpper()).Substring(1);
 
-
-            ActualizarAlturaGrid();
+            //Para acomodar la altura del grid
+            ActualizarAlturaGridVentas();
         }
 
         private void ConsultarTasa()
@@ -65,18 +65,7 @@ namespace InventarioTPV
 
             con.ConsultaSqlite(dgVentas);
             con.ConsultaSqlite(listIngresosMonedas);
-
-            //ActualizaAlturaGridVentas(null,null);
         }
 
-        private void expIngresoPorMoneda_Expanded(object sender, System.Windows.RoutedEventArgs e)
-        {
-            ActualizarAlturaGrid();
-        }
-
-        private void expIngresoPorMoneda_Collapsed(object sender, System.Windows.RoutedEventArgs e)
-        {
-            ActualizarAlturaGrid();
-        }
     }
 }

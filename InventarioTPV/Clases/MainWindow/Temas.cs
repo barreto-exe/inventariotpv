@@ -6,18 +6,9 @@ namespace InventarioTPV
 {
     public partial class MainWindow
     {
-        private void ActualizarAlturaGrid()
+        private void ActualizarAlturaGridVentas()
         {
-            bool ingresoExp = this.expIngresoPorMoneda.IsExpanded;
-            bool consultaExp = this.expConsultarVentas.IsExpanded;
-
-            //Si ambos están abiertos o ambos cerrados
-            if ((ingresoExp && consultaExp) || (!ingresoExp && !consultaExp))
-            {
-                Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(() => {
-                    grdVentas.Height = this.Height - stkPrincipal.ActualHeight;
-                }));
-            }
+            this.dgVentas.Height = this.ActualHeight - this.grdSuperior.ActualHeight;
         }
 
         public void UpdateSkin(SkinType skin)

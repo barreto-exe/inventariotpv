@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hc="https://handyorg.github.io/handycontrol"
     mc:Ignorable="d"
+    x:Name="VentanaMain"
     Title="{DynamicResource NombrePrograma}" 
     Language="es-VE"
     WindowStartupLocation="CenterScreen"
@@ -69,36 +70,39 @@
         </Style>
     </Window.Resources>
 
-    <Grid d:IsLocked="True">
-        <StackPanel x:Name="stkPrincipal"
+    <Grid>
+        <StackPanel 
+            x:Name="stkPrincipal"
+            Height="{Binding ActualHeight, ElementName=VentanaMain}" 
             Orientation="Vertical" 
-            Margin="10,0,10,0" 
-            VerticalAlignment="Top" d:IsLocked="True">
+            Margin="10,0,10,0">
 
             <Grid 
+                x:Name="grdSuperior"
                 Margin="10,10,0,0" 
                 Height="Auto" 
                 VerticalAlignment="Top" 
                 HorizontalAlignment="Left" 
-                Width="710" d:IsLocked="True">
+                Width="710">
 
                 <TextBlock
                     x:Name="txtFechaHora"
                     FontSize="20"
                     Text="Viernes, 24/04/2020 - 24:00:00 a.m."
-                    Foreground="{DynamicResource PrimaryTextBrush}" Margin="0,0,400,0" Height="27" VerticalAlignment="Top" d:IsLocked="True"
+                    Foreground="{DynamicResource PrimaryTextBrush}" 
+                    Margin="0,0,300,0" Height="27" VerticalAlignment="Top"
                     />
                 <hc:Divider
                     Margin="10,37,410,0"
                     Orientation="Horizontal"
                     LineStrokeThickness="2"
-                    LineStroke="{DynamicResource PrimaryBrush}" Height="2" VerticalAlignment="Top" d:IsLocked="True"
+                    LineStroke="{DynamicResource PrimaryBrush}" Height="2" VerticalAlignment="Top"
                     />
 
                 <StackPanel
                     VerticalAlignment="Top"
                     Orientation="Vertical" 
-                    Height="Auto" HorizontalAlignment="Left" Width="396" Margin="0,43,0,0" d:IsLocked="True">
+                    Height="Auto" HorizontalAlignment="Left" Width="396" Margin="0,43,0,0">
 
                     <GroupBox 
                         Grid.Row="0" 
@@ -108,7 +112,7 @@
                         Header = "{DynamicResource Informacion_Contable}"
                         Background = "{DynamicResource BorderBrush}" 
                         Padding = "10" 
-                        Margin = "16,16,16,0" d:IsLocked="True">
+                        Margin = "16,16,16,0">
 
                         <Border
                             Padding="20"
@@ -199,7 +203,7 @@
                         BorderThickness="1" 
                         BorderBrush="{DynamicResource PrimaryBrush}" 
                         MaxHeight="165"
-                        Width="365" d:IsLocked="True">
+                        Width="365">
 
                         <Border 
                             Height="Auto" 
@@ -239,13 +243,13 @@
                     Width="310" 
                     Height="Auto" 
                     HorizontalAlignment="Left" 
-                    VerticalAlignment="Top" Margin="400,59,0,0" d:IsLocked="True">
+                    VerticalAlignment="Top" Margin="400,59,0,0">
 
                     <Expander 
                         IsExpanded="True"
                         Header="{DynamicResource Tasa_del_Dia}"
                         BorderThickness="1" 
-                        BorderBrush="{DynamicResource PrimaryBrush}" d:IsLocked="True">
+                        BorderBrush="{DynamicResource PrimaryBrush}">
 
                         <Border 
                             Height="Auto" 
@@ -417,17 +421,20 @@
                         Header="{DynamicResource Consultar_Ventas}"
                         Margin="0,10,0,0"
                         BorderThickness="1" 
-                        BorderBrush="{DynamicResource PrimaryBrush}" d:IsLocked="True">
+                        MaxHeight="165"
+                        BorderBrush="{DynamicResource PrimaryBrush}">
 
                         <Border 
                             Padding="10"
                             BorderThickness="1" 
                             BorderBrush="{DynamicResource PrimaryBrush}"
-                            Background="{DynamicResource BorderBrush}" d:IsLocked="True">
+                            Background="{DynamicResource BorderBrush}">
 
                             <StackPanel 
+                                HorizontalAlignment="Center"
+                                Height="111"
                                 x:Name="stkConsultaVentas"
-                                Orientation="Vertical" d:IsLocked="True">
+                                Orientation="Vertical">
 
                                 <Grid 
                                     x:Name="grdDesde"
@@ -464,7 +471,8 @@
                                         Width="165" d:IsLocked="True"
                                         />
                                 </Grid>
-                                <Grid x:Name="grdHasta"
+                                <Grid 
+                                    x:Name="grdHasta"
                                     Margin="0,10,0,0"
                                     Width="Auto"
                                     Height="Auto" d:IsLocked="True">
@@ -495,7 +503,8 @@
                                         HorizontalAlignment="Left"
                                         x:Name="dpHasta" 
                                         Margin="60,0,0,0"
-                                        Width="165" d:IsLocked="True"
+                                        Width="165"
+                                        d:IsLocked="True"
                                         />
                                 </Grid>
 
@@ -513,15 +522,12 @@
                 </StackPanel>
             </Grid>
 
-        </StackPanel>
-        <Grid x:Name="grdVentas"
-            Margin="10,433,10,0" 
-            Height="116" 
-            VerticalAlignment="Top" d:IsLocked="True">
             <DataGrid
-                VerticalScrollBarVisibility="Auto"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
                 ItemsSource="{Binding DataList}"
-                x:Name="dgVentas" Margin="0,10,0,0" d:IsLocked="True"/>
-        </Grid>
+                x:Name="dgVentas" />
+        </StackPanel>
+
     </Grid>
 </hc:Window>

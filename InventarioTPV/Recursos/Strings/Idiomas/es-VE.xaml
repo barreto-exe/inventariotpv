@@ -46,6 +46,6 @@
     <system:String x:Key="Total">Total</system:String>
     <system:String x:Key="Cancelar">Cancelar</system:String>
     <system:String x:Key="Pagar">Pagar</system:String>
-    <system:String x:Key="Cantidad">Cantidad</system:String>
+    <system:String x:Key="Cantidad">Cantidad </system:String>
     
 </ResourceDictionary>

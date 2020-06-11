@@ -42,18 +42,12 @@ namespace InventarioTPV
 
         private void ConsultarTasa()
         {
-            string query = "SELECT * FROM c_tasa";
-            BDCon con = new BDCon(query);
+            Tasa tasa = Tasa.ConsultarTasa();
 
-            SQLiteDataReader dr = con.ConsultaSqlite();
-            dr.Read();
-
-            txtTasaDolar.Text = ((Double)dr["tasaDolar"]).ToString("#,0.00");
-            txtTasaEfectivo.Text = ((Double)dr["porcentajeEfectivo"]).ToString("#,0.00");
-            txtFechaCambioTasa.Text = dr["fecha"].ToString();
-            txtHoraCambioTasa.Text  = dr["hora"].ToString();
-
-            dr.Close();
+            txtTasaDolar.Text = "Bs.S. " + tasa.ValorDolar.ToString("#,0.00");
+            txtTasaEfectivo.Text = Convert.ToInt16(tasa.PorcentajeEfect).ToString() + "% de ganancia";
+            txtFechaCambioTasa.Text = tasa.Fecha;
+            txtHoraCambioTasa.Text  = tasa.Hora;
         }
 
         public void CodigoTest()
@@ -64,7 +58,9 @@ namespace InventarioTPV
 
             con.ConsultaSqlite(dgVentas);
             con.ConsultaSqlite(listIngresosMonedas);
+
         }
+
 
     }
 }

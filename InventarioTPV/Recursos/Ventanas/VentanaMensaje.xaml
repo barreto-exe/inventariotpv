@@ -7,7 +7,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Title="VentanaMensaje" 
-    MinHeight="160"
+    WindowStartupLocation="CenterOwner"
+    WindowStyle="SingleBorderWindow"
+    ResizeMode="NoResize"
+    MinHeight="180"
     MaxHeight="700" 
     Width="350">
 
@@ -36,7 +39,7 @@
                     Background="{DynamicResource BackgroundBrush}" 
                     Foreground="{DynamicResource PrimaryTextBrush}" 
                     VerticalAlignment="Top" 
-                    HorizontalAlignment="Left"/>
+                    HorizontalAlignment="Left" Click="BtnCancelar_Click"/>
                 <Button
                     x:Name="btnAceptar"
                     FontSize="10pt"
@@ -44,7 +47,7 @@
                     Width="100"
                     Content="{DynamicResource Aceptar}"
                     Background="{DynamicResource PrimaryBrush}" 
-                    Foreground="{DynamicResource TextIconBrush}" VerticalAlignment="Top" HorizontalAlignment="Right" />
+                    Foreground="{DynamicResource TextIconBrush}" VerticalAlignment="Top" HorizontalAlignment="Right" Click="BtnAceptar_Click" />
             </Grid>
 
 

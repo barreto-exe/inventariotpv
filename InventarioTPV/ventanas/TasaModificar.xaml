@@ -50,7 +50,7 @@
                 VerticalAlignment="Stretch"
                 Content="{DynamicResource Aceptar}"
                 Background="{DynamicResource PrimaryBrush}" 
-                Foreground="{DynamicResource TextIconBrush}"/>
+                Foreground="{DynamicResource TextIconBrush}" Click="BtnAceptar_Click"/>
 
         </StackPanel>
         

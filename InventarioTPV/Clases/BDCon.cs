@@ -9,29 +9,47 @@ namespace InventarioTPV
 {
     public class BDCon
     {
+        #region Atributos
         //El mismo path y la misma variable de conexión para todas las consultas
         //La variable de conexión siempre permanece abierta
         private static string BaseDatos = "Recursos\\db.db";
         public static SQLiteConnection conGlobal = ConexionSqlite();
 
-        private String Query;
+        private string query;
         private List<String> NombreParametros;
         private List<Object> ValorParametros;
+        #endregion
 
+        #region Getters y Setters
+        public string Query
+        {
+            get
+            {
+                return query;
+            }
+            set
+            {
+                query = value;
+            }
+        }
+        #endregion
+
+        /// <summary>
+        /// Objeto para construir y ejecutar consulta a la base de datos.
+        /// </summary>
+        /// <param name="query">Query a ejecutar en la base de datos</param>
         public BDCon(String query)
         {
-            this.Query = query;
+            this.query = query;
             NombreParametros = new List<string>();
             ValorParametros  = new List<Object>();
         }
-        public void PasarParametros(string nombre, object valor)
-        {
-            //Asocio a cada parámetro un valor.
-            NombreParametros.Add(nombre);
-            ValorParametros.Add(valor);
-        }
-        
-        //Retorna una variable de conexión única
+
+        #region Métodos estáticos
+        /// <summary>
+        /// Crea y retorna una variable de conexión única.
+        /// </summary>
+        /// <returns></returns>
         public static SQLiteConnection ConexionSqlite()
         {
             //Valido existencia de la base de datos
@@ -56,8 +74,10 @@ namespace InventarioTPV
                 return null;
             }
         }
-        
-        //Abre una conexión global para todos los BDCon
+
+        /// <summary>
+        /// Abre una conexión global para todos los BDCon. Si ya existe una abierta, la cierra y la sobreescribe.
+        /// </summary>
         public static void AbrirConexionGlobal()
         {
             if(conGlobal.State == ConnectionState.Open)
@@ -68,7 +88,9 @@ namespace InventarioTPV
             conGlobal = ConexionSqlite();
         }
 
-        //Cierra la conexión global para los BDCon
+        /// <summary>
+        /// Cierra la conexión global para los BDCon.
+        /// </summary>
         public static void CerrarConexionGlobal()
         {
             if (conGlobal.State == ConnectionState.Open)
@@ -76,43 +98,29 @@ namespace InventarioTPV
                 conGlobal.Close();
             }
         }
+        #endregion
 
-        public SQLiteDataReader ConsultaSqlite()
+        #region Métodos y Funciones
+        /// <summary>
+        /// Enviar parámetros con sus valores 
+        /// en caso de que el query lo requiera.
+        /// </summary>
+        /// <param name="nombre">Nombre del parámetro</param>
+        /// <param name="valor">Valor del parámetro</param>
+        public void PasarParametros(string nombre, object valor)
         {
-            SQLiteCommand command = new SQLiteCommand
-            {
-                //Los parámetros del query deben tener @
-                //Por ejemplo: SELECT @Efectivo as tipopago, @Monto as monto FROM c_tasa
-                CommandText = Query,
-                Connection = conGlobal
-            };
-
-            //Añado cada parámetro con su valor en el comando
-            String[] nombres = NombreParametros.ToArray();
-            Object[] valores = ValorParametros.ToArray();
-            for (int i = 0; i < nombres.Length; i++)
-            {
-                command.Parameters.AddWithValue(nombres[i], valores[i]);
-            }
-
-            try
-            {
-                //Ejecuto comando
-                SQLiteDataReader dr = command.ExecuteReader();
-                return dr;
-            }
-            catch
-            {
-                return null;
-            }
+            //Asocio a cada parámetro un valor.
+            NombreParametros.Add(nombre);
+            ValorParametros.Add(valor);
         }
-
-        //Si mi consulta sea para actualizar una tabla (DataGrid o ListView),
-        //Entonces necesitaré un DataTable para el itemsSource.
+        /// <summary>
+        /// Realiza la consulta y llena un DataTable con esta información.
+        /// </summary>
+        /// <returns>DataTable con el DataReader de la consulta cargado.</returns>
         public DataTable TablaConsulta()
         {
             //Hago consulta
-            SQLiteDataReader reader = ConsultaSqlite();
+            SQLiteDataReader reader = ComandoSqlite().ExecuteReader();
 
             //Creo un datatable y cargo los datos consultados
             DataTable data = new DataTable();
@@ -124,16 +132,47 @@ namespace InventarioTPV
 
             return data;
         }
+        /// <summary>
+        /// Construye el SQLiteCommand para consultar a la base de datos.
+        /// </summary>
+        public SQLiteCommand ComandoSqlite()
+        {
+            SQLiteCommand command = new SQLiteCommand
+            {
+                //Los parámetros del query deben tener @
+                //Por ejemplo: SELECT @Efectivo as tipopago, @Monto as monto FROM c_tasa
+                CommandText = query,
+                Connection = conGlobal
+            };
 
+            //Añado cada parámetro con su valor en el comando
+            String[] nombres = NombreParametros.ToArray();
+            Object[] valores = ValorParametros.ToArray();
+            for (int i = 0; i < nombres.Length; i++)
+            {
+                command.Parameters.AddWithValue(nombres[i], valores[i]);
+            }
+
+            return command;
+        }
+        /// <summary>
+        /// Realizar la consulta a la base de datos.
+        /// </summary>
+        /// <param name="list">Un ListView al que se le requiera llenar con la información consultada.</param>
         public void ConsultaSqlite(ListView list)
         {
             //Actualizo la fuente de datos del datagrid o listview
             list.ItemsSource = TablaConsulta().DefaultView;
         }
+        /// <summary>
+        /// Realizar la consulta a la base de datos.
+        /// </summary>
+        /// <param name="grid">Un DataGrid al que se le requiera llenar con la información consultada.</param>
         public void ConsultaSqlite(DataGrid grid)
         {
             //Actualizo la fuente de datos del datagrid o listview
             grid.ItemsSource = TablaConsulta().DefaultView;
         }
+        #endregion
     }
 }

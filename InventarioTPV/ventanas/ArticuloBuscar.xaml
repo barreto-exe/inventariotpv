@@ -1,0 +1,41 @@
+﻿<hc:Window 
+    x:Class="InventarioTPV.ArticuloBuscar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    mc:Ignorable="d"        
+    Language="es-VE"
+    Title="{DynamicResource Buscar_Articulo}" 
+    WindowStartupLocation="CenterScreen"
+    ResizeMode="NoResize"
+    WindowState="Normal"
+    Height="460"  Width="780">
+    <Grid>
+        <StackPanel
+            Orientation="Vertical"
+            Margin="10">
+
+            <TextBox 
+                x:Name="txtBuscar"
+                Margin="10,0,10,10"
+                Style="{StaticResource TextBoxExtend}" 
+                hc:InfoElement.Title="{DynamicResource Nombre_o_Codigo_de_Barras}" 
+                FontSize="14pt"
+                Width="500"
+                HorizontalAlignment="Left"/>
+            
+            <DataGrid 
+                x:Name="dataBuscados"
+                Margin="10,10,10,0"
+                ItemsSource="{Binding DataList}"
+                IsReadOnly="True"
+                CanUserAddRows="False"
+                CanUserDeleteRows="False"
+                Height="330"
+                FontSize="13pt"/>
+        </StackPanel>
+        
+    </Grid>
+</hc:Window>

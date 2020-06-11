@@ -1,0 +1,54 @@
+﻿<hc:Window
+    x:Class="InventarioTPV.VentanaMensaje"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:hc="https://handyorg.github.io/handycontrol" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="VentanaMensaje" 
+    MinHeight="160"
+    MaxHeight="700" 
+    Width="350">
+
+    <Grid Margin="10">
+
+        <StackPanel
+            Orientation="Vertical">
+
+            <TextBlock
+                x:Name="txtMensaje"
+                Text="Esto es un texto, bastante y considerablemente largo."
+                FontSize="14pt"
+                MinHeight="70"
+                TextWrapping="Wrap"
+                Foreground="{DynamicResource PrimaryTextBrush}" Margin="10,10,10,10" TextAlignment="Center" IsEnabled="False" 
+                />
+
+            <Grid Height="35" >
+                <Button
+                    x:Name="btnCancelar"
+                    Margin="0,0,10,0"
+                    FontSize="10pt"
+                    Height="35"
+                    Width="100"
+                    Content="{DynamicResource Cancelar}"
+                    Background="{DynamicResource BackgroundBrush}" 
+                    Foreground="{DynamicResource PrimaryTextBrush}" 
+                    VerticalAlignment="Top" 
+                    HorizontalAlignment="Left"/>
+                <Button
+                    x:Name="btnAceptar"
+                    FontSize="10pt"
+                    Height="35"
+                    Width="100"
+                    Content="{DynamicResource Aceptar}"
+                    Background="{DynamicResource PrimaryBrush}" 
+                    Foreground="{DynamicResource TextIconBrush}" VerticalAlignment="Top" HorizontalAlignment="Right" />
+            </Grid>
+
+
+        </StackPanel>
+
+    </Grid>
+</hc:Window>

@@ -1,0 +1,308 @@
+﻿<hc:Window 
+    x:Class="InventarioTPV.ArticuloEditar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    mc:Ignorable="d"        
+    Title="{DynamicResource Editar_Articulo}" 
+    Language="es-VE"
+    ResizeMode="NoResize"
+    WindowState="Normal"
+    WindowStartupLocation="CenterOwner"
+    ShowTitle="True"
+    Height="510"  Width="545">
+    <Grid>
+        <StackPanel
+            Margin="10,20,20,0"
+            Orientation="Vertical">
+
+            <StackPanel
+                x:Name="stkDescrip"
+                Orientation="Vertical">
+
+                <StackPanel
+                    Margin="10,10,10,0"
+                    Orientation="Horizontal">
+
+                    <TextBlock
+                        Text="{DynamicResource Descripcion_del_Articulo}"
+                        FontSize="14pt"
+                        HorizontalAlignment="Left"
+                        Foreground="{DynamicResource PrimaryTextBrush}" 
+                        />
+                    <TextBlock
+                        Text=":"
+                        FontSize="14pt"
+                        HorizontalAlignment="Left"
+                        Foreground="{DynamicResource PrimaryTextBrush}" 
+                        />
+
+                </StackPanel>
+
+                <TextBox
+                    x:Name="txtDescripcion"
+                    Margin="10,0,10,10"
+                    FontSize="14pt"
+                    />
+
+            </StackPanel>
+            <StackPanel
+                Orientation="Horizontal">
+
+                <StackPanel
+                    x:Name="stkCosto"
+                    Width="250"
+                    Orientation="Vertical">
+
+                    <StackPanel
+                        Margin="10,10,10,0"
+                        Orientation="Horizontal">
+
+                        <TextBlock
+                            Text="{DynamicResource Costo_del_Articulo}"
+                            FontSize="14pt"
+                            HorizontalAlignment="Left"
+                            Foreground="{DynamicResource PrimaryTextBrush}" 
+                            />
+                        <TextBlock
+                            Text=":"
+                            FontSize="14pt"
+                            HorizontalAlignment="Left"
+                            Foreground="{DynamicResource PrimaryTextBrush}" 
+                            />
+
+                    </StackPanel>
+
+                    <StackPanel
+                        Orientation="Horizontal">
+
+                        <TextBox
+                            x:Name="txtCosto"
+                            Margin="10,0,5,0"
+                            Width="210"
+                            VerticalAlignment="Center"
+                            FontSize="14pt"
+                            />
+
+                        <TextBlock
+                            Text="$"
+                            FontSize="16pt"
+                            VerticalAlignment="Center"
+                            Foreground="{DynamicResource PrimaryTextBrush}" 
+                            />
+
+                    </StackPanel>
+
+
+                </StackPanel>
+                <StackPanel
+                    x:Name="stkPrecio"
+                    Width="250"
+                    Orientation="Vertical" 
+                    Margin="15,0,0,0">
+
+                    <StackPanel
+                        Margin="10,10,10,0"
+                        Orientation="Horizontal">
+
+                        <TextBlock
+                            Text="{DynamicResource Precio_del_Articulo}"
+                            FontSize="14pt"
+                            HorizontalAlignment="Left"
+                            Foreground="{DynamicResource PrimaryTextBrush}" 
+                            />
+                        <TextBlock
+                            Text=":"
+                            FontSize="14pt"
+                            HorizontalAlignment="Left"
+                            Foreground="{DynamicResource PrimaryTextBrush}" 
+                            />
+
+                    </StackPanel>
+                    <StackPanel
+                        Orientation="Horizontal">
+
+                        <TextBox
+                            x:Name="txtPrecio"
+                            Margin="10,0,5,0"
+                            Width="210"
+                            VerticalAlignment="Center"
+                            FontSize="14pt"
+                            />
+
+                        <TextBlock
+                            Text="$"
+                            FontSize="16pt"
+                            VerticalAlignment="Center" 
+                            Foreground="{DynamicResource PrimaryTextBrush}" 
+                            />
+
+                    </StackPanel>
+                </StackPanel>
+
+            </StackPanel>
+
+            <StackPanel
+                Orientation="Horizontal">
+
+                <StackPanel
+                    x:Name="stkGanancia"
+                    Width="250"
+                    Orientation="Vertical">
+
+                    <StackPanel
+                        Margin="10,10,10,0"
+                        Orientation="Horizontal">
+
+                        <TextBlock
+                            Text="{DynamicResource Ganancia}"
+                            FontSize="14pt"
+                            HorizontalAlignment="Left"
+                            Foreground="{DynamicResource PrimaryTextBrush}" 
+                            />
+                        <TextBlock
+                            Text=":"
+                            FontSize="14pt"
+                            HorizontalAlignment="Left"
+                            Foreground="{DynamicResource PrimaryTextBrush}" 
+                            />
+
+                    </StackPanel>
+
+                    <StackPanel
+                        Orientation="Horizontal">
+
+                        <hc:NumericUpDown 
+                            x:Name="txtGanancia"
+                            Margin="10,0,5,0"
+                            FontSize="14pt"
+                            VerticalAlignment="Center"
+                            Width="210"
+                            Minimum="0"
+                            DecimalPlaces="0"
+                            Increment="1"
+                            hc:InfoElement.Placeholder="100"
+                            Style="{StaticResource NumericUpDownExtend}" />
+
+                        <TextBlock
+                            Text="%"
+                            FontSize="16pt"
+                            VerticalAlignment="Center" 
+                            Foreground="{DynamicResource PrimaryTextBrush}" 
+                            />
+
+                    </StackPanel>
+
+                </StackPanel>
+                <StackPanel
+                    x:Name="stkCantidad"
+                    Width="250"
+                    Orientation="Vertical" Margin="15,0,0,0">
+
+                    <StackPanel
+                        Margin="10,10,10,0"
+                        Orientation="Horizontal">
+
+                        <TextBlock
+                            Text="{DynamicResource Unidades_Agregadas}"
+                            FontSize="14pt"
+                            HorizontalAlignment="Left"
+                            Foreground="{DynamicResource PrimaryTextBrush}" 
+                            />
+                        <TextBlock
+                            Text=":"
+                            FontSize="14pt"
+                            HorizontalAlignment="Left"
+                            Foreground="{DynamicResource PrimaryTextBrush}" 
+                            />
+
+                    </StackPanel>
+
+                    <hc:NumericUpDown 
+                        x:Name="txtCantidad"
+                        Margin="10,0,10,0"
+                        FontSize="14pt"
+                        Width="230"
+                        Minimum="0"
+                        DecimalPlaces="0"
+                        Increment="1"
+                        hc:InfoElement.Placeholder="Cantidad"
+                        Style="{StaticResource NumericUpDownExtend}" />
+
+                </StackPanel>
+
+            </StackPanel>
+            <StackPanel
+                x:Name="stkCodigoBar"
+                Orientation="Vertical">
+
+                <StackPanel
+                    Margin="10,10,10,0"
+                    Orientation="Horizontal">
+
+                    <TextBlock
+                        Text="{DynamicResource Codigo_de_Barras}"
+                        FontSize="14pt"
+                        HorizontalAlignment="Left"
+                        Foreground="{DynamicResource PrimaryTextBrush}" 
+                        />
+                    <TextBlock
+                        Text=":"
+                        FontSize="14pt"
+                        HorizontalAlignment="Left"
+                        Foreground="{DynamicResource PrimaryTextBrush}" 
+                        />
+
+                </StackPanel>
+
+                <TextBox
+                    x:Name="txtCodBar"
+                    Margin="10,0,10,10"
+                    FontSize="14pt"
+                    />
+
+            </StackPanel>
+
+            <DataGrid 
+                x:Name="dataReportePrin" 
+                ItemsSource="{Binding DataList}"
+                CanUserAddRows="False"
+                CanUserDeleteRows="False"
+                CanUserReorderColumns="False" 
+                FontSize="13pt" Width="495" Height="100" Visibility="Visible"/>
+
+            <StackPanel
+                Orientation="Horizontal" 
+                HorizontalAlignment="Center">
+
+                <Button
+                    x:Name="btnBuscar"
+                    Margin="10"
+                    FontSize="12pt"
+                    Height="40"
+                    Width="120"
+                    VerticalAlignment="Stretch"
+                    Content="{DynamicResource Buscar}"
+                    Background="{DynamicResource PrimaryBrush}" 
+                    Foreground="{DynamicResource TextIconBrush}" Visibility="Visible" />
+
+                <Button
+                    x:Name="btnAceptar"
+                    Margin="10"
+                    FontSize="12pt"
+                    Height="40"
+                    Width="120"
+                    Content="{DynamicResource Aceptar}"
+                    Background="{DynamicResource PrimaryBrush}" 
+                    Foreground="{DynamicResource TextIconBrush}" />
+
+
+
+            </StackPanel>
+
+        </StackPanel>
+
+    </Grid>
+</hc:Window>

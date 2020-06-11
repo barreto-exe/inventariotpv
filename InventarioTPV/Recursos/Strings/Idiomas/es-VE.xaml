@@ -23,5 +23,29 @@
     <system:String x:Key="Fecha_de_Cambio">Fecha de Cambio</system:String>
     <system:String x:Key="Hora_de_Cambio">Hora de Cambio</system:String>
     <system:String x:Key="Ingreso_por_tipo_de_pago">Ingreso por tipo de pago</system:String>
+    <system:String x:Key="Editar_Articulo">Editar Artículo</system:String>
+    <system:String x:Key="Inventario">Inventario</system:String>
+    <system:String x:Key="Valor_de_Inventario">Valor de Inventario</system:String>
+    <system:String x:Key="Agregar">Agregar</system:String>
+    <system:String x:Key="Editar">Editar</system:String>
+    <system:String x:Key="Crear_Articulo">Crear Artículo</system:String>
+    <system:String x:Key="Descripcion_del_Articulo">Descripción del Artículo</system:String>
+    <system:String x:Key="Costo_del_Articulo">Costo del Artículo</system:String>
+    <system:String x:Key="Precio_del_Articulo">Precio del Artículo</system:String>
+    <system:String x:Key="Ganancia">Ganancia</system:String>
+    <system:String x:Key="Unidades_Agregadas">Unidades Agregadas</system:String>
+    <system:String x:Key="Codigo_de_Barras">Código de Barras</system:String>
+    <system:String x:Key="Buscar">Buscar</system:String>
+    <system:String x:Key="Aceptar">Aceptar</system:String>
+    <system:String x:Key="Buscar_Articulo">Buscar Artículo</system:String>
+    <system:String x:Key="Nombre_o_Codigo_de_Barras">Nombre o Código de Barras:</system:String>
+    <system:String x:Key="Cambio_de_Tasa">Cambio de Tasa</system:String>
+    <system:String x:Key="Tasa_BsS_Dolar">Tasa Bs.S./$</system:String>
+    <system:String x:Key="Porcentaje_Efectivo">Porcentaje (%) Bs.S. Efectivo</system:String>
+    <system:String x:Key="Venta">Venta</system:String>
+    <system:String x:Key="Total">Total</system:String>
+    <system:String x:Key="Cancelar">Cancelar</system:String>
+    <system:String x:Key="Pagar">Pagar</system:String>
+    <system:String x:Key="Cantidad">Cantidad</system:String>
     
 </ResourceDictionary>

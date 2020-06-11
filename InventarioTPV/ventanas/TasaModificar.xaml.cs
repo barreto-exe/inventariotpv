@@ -1,11 +1,11 @@
 ﻿namespace InventarioTPV
 {
     /// <summary>
-    /// Lógica de interacción para Inventario.xaml
+    /// Lógica de interacción para TasaModificar.xaml
     /// </summary>
-    public partial class Inventario
+    public partial class TasaModificar
     {
-        public Inventario()
+        public TasaModificar()
         {
             InitializeComponent();
         }

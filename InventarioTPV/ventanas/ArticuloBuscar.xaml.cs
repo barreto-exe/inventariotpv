@@ -1,11 +1,11 @@
 ﻿namespace InventarioTPV
 {
     /// <summary>
-    /// Lógica de interacción para Inventario.xaml
+    /// Lógica de interacción para ArticuloBuscar.xaml
     /// </summary>
-    public partial class Inventario
+    public partial class ArticuloBuscar
     {
-        public Inventario()
+        public ArticuloBuscar()
         {
             InitializeComponent();
         }

@@ -1,17 +1,19 @@
-﻿<Window x:Class="InventarioTPV.Ventanas.Inventario"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InventarioTPV.Ventanas"
-        xmlns:hc="https://handyorg.github.io/handycontrol"
-        mc:Ignorable="d"        
-        Title="Inventario" 
-        ResizeMode="CanResize"
-        WindowState="Maximized"
-        WindowStartupLocation="CenterOwner"
-        MinHeight="550"  MinWidth="650"
-        Height="622"  Width="1284">
+﻿<hc:Window 
+    x:Class="InventarioTPV.Inventario"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    mc:Ignorable="d"        
+    Title="{DynamicResource Inventario}" 
+    Language="es-VE"
+    ResizeMode="CanResize"
+    WindowState="Maximized"
+    WindowStartupLocation="CenterOwner"
+    ShowTitle="True"
+    MinHeight="550"  MinWidth="650"
+    Height="94"  Width="172">
     <Grid>
         <StackPanel
             Margin="10"
@@ -20,128 +22,83 @@
             <StackPanel
                 Width="Auto"
                 HorizontalAlignment="Left"
-                Orientation="Horizontal">
+                Orientation="Vertical">
 
-                <TextBlock 
-                    Text="Valor de Inventario: " 
-                    FontSize="20" 
-                    HorizontalAlignment="Left" 
-                    />
-                
-                <TextBlock 
-                    x:Name="txtValorInventario"
-                    Text="999$ - Bs.S. 999.999" 
-                    FontSize="20" 
-                    HorizontalAlignment="Left" 
-                    />
-                
+                <StackPanel
+                    Orientation="Horizontal">
+                    <TextBlock 
+                        Text="{DynamicResource Valor_de_Inventario}" 
+                        Foreground="{DynamicResource PrimaryTextBrush}" 
+                        FontSize="15pt" 
+                        HorizontalAlignment="Left" 
+                        />
+                    <TextBlock 
+                        Text=": " 
+                        FontSize="15pt" 
+                        Foreground="{DynamicResource PrimaryTextBrush}" 
+                        HorizontalAlignment="Left" 
+                        />
+                    <TextBlock 
+                        x:Name="txtValorInventario"
+                        Text="999$ - Bs.S. 999.999" 
+                        FontSize="15pt" 
+                        Foreground="{DynamicResource PrimaryTextBrush}" 
+                        HorizontalAlignment="Left" 
+                        />
 
+                </StackPanel>
+
+                <hc:Divider
+                    Margin="10,10,10,0"
+                    Orientation="Horizontal"
+                    LineStrokeThickness="2"
+                    LineStroke="{DynamicResource PrimaryBrush}" 
+                    />
 
             </StackPanel>
-            
-            <hc:Divider
-                Margin="10"
-                Orientation="Horizontal"
-                LineStrokeThickness="2"
-                LineStroke="{DynamicResource PrimaryBrush}"
-                />
 
         </StackPanel>
 
-        <DataGrid x:Name="dataReportePrin" 
-                  Margin="10,85,10,10" 
-                  IsReadOnly="True"
-                  CanUserAddRows="False"
-                  CanUserDeleteRows="False"
-                  CanUserReorderColumns="False" 
-                  Background="WhiteSmoke"
-                  VerticalGridLinesBrush="LightGray"
-                  GridLinesVisibility="Vertical"
-                  FontSize="13pt"
-                  >
-            <DataGrid.RowStyle>
-                <Style TargetType="DataGridRow">
-                    <Setter Property="Background" Value="White"></Setter>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding LineaRow}" Value="1">
-                            <Setter Property="Background" Value="LightPink"></Setter>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding LineaRow}" Value="2">
-                            <Setter Property="Background" Value="Yellow"></Setter>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.RowStyle>
-            <DataGrid.Columns>
-                <DataGridTextColumn 
-                                Header="Id" 
-                                SortDirection="Ascending"
-                                Binding="{Binding id}"/>
-                <DataGridTextColumn 
-                                Header="Descripción" 
-                                Binding="{Binding descripcion}"/>
-                <DataGridTextColumn 
-                                Header="Cantidad" 
-                                Binding="{Binding cantAct}"/>
-                <DataGridTextColumn 
-                                Header="Costo $/Unidad" 
-                                Binding="{Binding costoDolar}"/>
-                <DataGridTextColumn 
-                                Header="Precio $/Unidad" 
-                                Binding="{Binding precioDolar}"/>
-                <DataGridTextColumn 
-                                Header="Precio P/Venta" 
-                                Binding="{Binding precioBs}"/>
-                <DataGridTextColumn 
-                                Header="Precio Efectivo" 
-                                Binding="{Binding precioBsEfect}"/>
-                <DataGridTextColumn 
-                                Header="Precio P/Venta (Recom.)" 
-                                Binding="{Binding precioBsRec}"/>
-                <DataGridTextColumn 
-                                Header="Precio Efectivo (Recom.)" 
-                                Binding="{Binding precioBsEfectRec}"/>
-                <DataGridTextColumn 
-                                Header="Última Actualización" 
-                                Binding="{Binding fechaHora}"/>
-                <DataGridTextColumn 
-                                Header="Advertencia"
-                                Visibility="Collapsed"
-                                Binding="{Binding LineaRow}"/>
+        <StackPanel
+            Orientation="Horizontal" 
+            Width="500" Height="70" 
+            HorizontalAlignment="Right" 
+            VerticalAlignment="Top"
+            FlowDirection="RightToLeft">
 
-                <DataGridTemplateColumn Width="65">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button x:Name="btnBorrar"
-                                    Foreground="White" 
-                                    Style="{DynamicResource MaterialDesignFloatingActionButton}"
-                                    VerticalAlignment="Center"
-                                    Content="X"
-                                    Height="40" Width="40">
-                            </Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+            <Button
+                x:Name="btnEditar"
+                Margin="10"
+                FontSize="14pt"
+                Height="40"
+                Width="120"
+                VerticalAlignment="Stretch"
+                Content="{DynamicResource Editar}"
+                Background="{DynamicResource PrimaryBrush}" 
+                Foreground="{DynamicResource TextIconBrush}" />
 
-        <Button x:Name="btnAgregar"
-                Foreground="White" 
-                Margin="0,0,39,120" 
-                HorizontalAlignment="Right" 
-                VerticalAlignment="Bottom" 
-                Height="72" Width="72"
-                Content="VE"
-                >
-        </Button>
+            <Button
+                x:Name="btnCrear"
+                Margin="10"
+                FontSize="14pt"
+                Height="40"
+                Width="120"
+                Content="{DynamicResource Agregar}"
+                Background="{DynamicResource PrimaryBrush}" 
+                Foreground="{DynamicResource TextIconBrush}" />
 
-        <Button x:Name="btnEditar"
-                Foreground="White" 
-                Margin="0,0,47,46" 
-                HorizontalAlignment="Right" 
-                VerticalAlignment="Bottom" 
-                Content="IN"
-                Height="55" Width="55">
-        </Button>
+
+
+        </StackPanel>
+
+        <DataGrid 
+            x:Name="dataReportePrin" 
+            ItemsSource="{Binding DataList}"
+            Margin="10,70,10,10" 
+            IsReadOnly="True"
+            CanUserAddRows="False"
+            CanUserDeleteRows="False"
+            CanUserReorderColumns="False" 
+            FontSize="13pt"/>
     </Grid>
-</Window>
+</hc:Window>

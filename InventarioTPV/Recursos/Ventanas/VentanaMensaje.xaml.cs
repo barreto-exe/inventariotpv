@@ -1,11 +1,11 @@
 ﻿namespace InventarioTPV
 {
     /// <summary>
-    /// Lógica de interacción para Inventario.xaml
+    /// Lógica de interacción para VentanaMensaje.xaml
     /// </summary>
-    public partial class Inventario
+    public partial class VentanaMensaje 
     {
-        public Inventario()
+        public VentanaMensaje()
         {
             InitializeComponent();
         }

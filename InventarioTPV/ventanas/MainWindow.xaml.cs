@@ -60,7 +60,5 @@ namespace InventarioTPV
             con.ConsultaSqlite(listIngresosMonedas);
 
         }
-
-
     }
 }

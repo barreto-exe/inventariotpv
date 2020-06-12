@@ -1,4 +1,5 @@
-﻿using System.Data.SQLite;
+﻿using System;
+using System.Data.SQLite;
 
 namespace InventarioTPV
 {
@@ -58,7 +59,7 @@ namespace InventarioTPV
                 dr.Read();
 
                 //Leo el id de la consulta
-                int id = (int)dr["id"];
+                int id = Convert.ToInt32(dr["id"]);
 
                 dr.Close();
 

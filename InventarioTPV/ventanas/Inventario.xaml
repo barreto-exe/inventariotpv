@@ -83,6 +83,7 @@
                 FontSize="14pt"
                 Height="40"
                 Width="120"
+                Click="BtnCrear_Click"
                 Content="{DynamicResource Agregar}"
                 Background="{DynamicResource PrimaryBrush}" 
                 Foreground="{DynamicResource TextIconBrush}" />

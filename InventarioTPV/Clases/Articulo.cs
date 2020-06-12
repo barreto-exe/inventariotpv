@@ -122,30 +122,28 @@ namespace InventarioTPV
         /// <param name="articulo">Artículo a registrar.</param>
         /// <param name="activo">Activo o Inactivo.</param>
         /// <returns></returns>
-        public static bool RegistraDatosArticulo(Articulo articulo, bool activo)
+        public bool RegistraDatosArticulo(bool activo)
         {
             //Si el artículo tiene id, es porque ya está registrado.
-            if(articulo.Id != null)
+            if(this.Id != null)
             {
                 return true;
             }
-
 
             string query =
                 "INSERT INTO c_articulos (descripcion,precioDolar,costoDolar,codBarras,activo) " +
                 "VALUES( @Descripcion, @PrecioDolar, @CostoDolar, @CodBarras, @Activo )";
             BDCon con = new BDCon(query);
 
-            con.PasarParametros("Descripcion", articulo.Descripcion);
-            con.PasarParametros("PrecioDolar", articulo.PrecioDolar);
-            con.PasarParametros("CostoDolar",  articulo.CostoDolar);
-            con.PasarParametros("CodBarras",   articulo.CodBarras);
+            con.PasarParametros("Descripcion", this.Descripcion);
+            con.PasarParametros("PrecioDolar", this.PrecioDolar);
+            con.PasarParametros("CostoDolar",  this.CostoDolar);
+            con.PasarParametros("CodBarras",   this.CodBarras);
             con.PasarParametros("Activo", activo);
 
             //Ejecuta el comando y verifica la cantidad de registros afectados
             if(con.EjecutarComando() > 0)
             {
-                RegistraPreciosArticulo(articulo);
                 return true;
             }
 
@@ -157,19 +155,19 @@ namespace InventarioTPV
         /// </summary>
         /// <param name="articulo">Artículo con precios inicializados.</param>
         /// <returns></returns>
-        private static void RegistraPreciosArticulo(Articulo articulo)
+        public void RegistraPreciosArticulo()
         {
             //Si el artículo no tiene id, entonces no ha sido registrado.
-            int? id = articulo.Id;
+            int? id = this.Id;
             if (id == null)
             {
                 //Retorno, indicando que no se pueden registrar sus precios.
                 return;
             }
 
-            decimal[] preciosRedondos   = articulo.PreciosRedondos.ToArray();
-            decimal[] preciosCalculados = articulo.PreciosCalculados.ToArray();
-            TipoPago[] tiposPago = articulo.TiposDePago.ToArray();
+            decimal[] preciosRedondos   = this.PreciosRedondos.ToArray();
+            decimal[] preciosCalculados = this.PreciosCalculados.ToArray();
+            TipoPago[] tiposPago = this.TiposDePago.ToArray();
 
             #region Variables auxiliares
             string query;
@@ -229,7 +227,7 @@ namespace InventarioTPV
             }
         }
         /// <summary>
-        /// Agregar unidades del artículo en el inventario.
+        /// Agregar unidades del artículo en el inventario. Si no existe en la BBDD, retorna false.
         /// </summary>
         /// <param name="cantidad">Cantidad a añadir.</param>
         /// <returns></returns>
@@ -262,7 +260,7 @@ namespace InventarioTPV
             return false;
         }
         /// <summary>
-        /// Restar unidades del artículo en el inventario.
+        /// Restar unidades del artículo en el inventario. Si no existe en la BBDD, retorna false.
         /// </summary>
         /// <param name="cantidad">Cantidad a añadir.</param>
         /// <returns></returns>
@@ -294,14 +292,14 @@ namespace InventarioTPV
             con.PasarParametros("CodBarras", this.codBarras);
 
             SQLiteDataReader dr = con.ComandoSqlite().ExecuteReader();
-            dr.Read();
 
             //Si existe un artículo con exactamente los mismos valores,
             //Se retorna el id.
             if (dr.Read())
             {
+                int id = Convert.ToInt32(dr["id"]);
                 dr.Close();
-                return (int)dr["id"];
+                return id;
             }
 
             dr.Close();

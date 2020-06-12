@@ -12,8 +12,8 @@
     WindowStartupLocation="CenterScreen"
     WindowState="Maximized"
     ShowTitle="True"
-    MinHeight="565" 
-    MinWidth="880" Height="384">
+    MinHeight="580" 
+    MinWidth="880" Height="484" Width="759">
 
     <hc:Window.NonClientAreaContent>
 
@@ -73,17 +73,14 @@
     <Grid>
         <StackPanel 
             x:Name="stkPrincipal"
-            Height="{Binding ActualHeight, ElementName=VentanaMain}" 
+            Height="Auto" 
             Orientation="Vertical" 
             Margin="10,0,10,0">
 
             <Grid 
                 x:Name="grdSuperior"
                 Margin="10,10,0,0" 
-                Height="Auto" 
-                VerticalAlignment="Top" 
-                HorizontalAlignment="Left" 
-                Width="710">
+                Height="Auto" >
 
                 <TextBlock
                     x:Name="txtFechaHora"
@@ -93,10 +90,14 @@
                     Margin="0,0,300,0" Height="27" VerticalAlignment="Top"
                     />
                 <hc:Divider
-                    Margin="10,37,410,0"
+                    Margin="10,40,0,0"
                     Orientation="Horizontal"
+                    HorizontalAlignment="Left"
+                    Width="380"
                     LineStrokeThickness="2"
-                    LineStroke="{DynamicResource PrimaryBrush}" Height="2" VerticalAlignment="Top"
+                    LineStroke="{DynamicResource PrimaryBrush}" 
+                    Height="2" 
+                    VerticalAlignment="Top"
                     />
 
                 <StackPanel
@@ -513,12 +514,60 @@
                                     x:Name="btnConsultarVentas"
                                     Content="{DynamicResource Consultar}"
                                     Background="{DynamicResource PrimaryBrush}" 
-                                    Foreground="{DynamicResource TextIconBrush}" d:IsLocked="True" 
+                                    Foreground="{DynamicResource TextIconBrush}" 
                                     />
 
                             </StackPanel>
                         </Border>
                     </Expander>
+                </StackPanel>
+                <StackPanel
+                    VerticalAlignment="Top"
+                    Orientation="Vertical" 
+                    Height="248"
+                    Margin="0,43,0,0" 
+                    HorizontalAlignment="Right"
+                    Width="130">
+
+                    <GroupBox 
+                        Grid.Row="0" 
+                        Grid.Column="0"
+                        Width="Auto" 
+                        Height="232"
+                        Header = "{DynamicResource Acciones}"
+                        Background = "{DynamicResource BorderBrush}" 
+                        Padding = "5" 
+                        Margin = "16,16,16,0">
+
+                        <Border
+                            Padding="5,5,5,5"
+                            Background = "{DynamicResource PrimaryBrush}" 
+                            CornerRadius = "4">
+
+                            <StackPanel
+                                Orientation="Vertical">
+                                
+                                <Button
+                                    x:Name="btnVender"
+                                    HorizontalAlignment="Stretch"
+                                    Content="{DynamicResource Vender}"
+                                    Background="{DynamicResource PrimaryBrush}" 
+                                    Foreground="{DynamicResource TextIconBrush}" 
+                                    />
+                                
+                                <Button
+                                    x:Name="btnInventario"
+                                    HorizontalAlignment="Stretch"
+                                    Click="BtnInventario_Click"
+                                    Content="{DynamicResource Inventario}"
+                                    Background="{DynamicResource PrimaryBrush}" 
+                                    Foreground="{DynamicResource TextIconBrush}" 
+                                    Margin="0,5,0,0" 
+                                    />
+
+                            </StackPanel>
+                        </Border>
+                    </GroupBox>
                 </StackPanel>
             </Grid>
 

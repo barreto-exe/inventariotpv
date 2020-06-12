@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.SQLite;
 
 namespace InventarioTPV
@@ -72,7 +73,7 @@ namespace InventarioTPV
                 dr.Read();
 
                 //Leo el id de la consulta
-                int id = (int)dr["id"];
+                int id = Convert.ToInt32(dr["id"]);
 
                 dr.Close();
 
@@ -176,11 +177,11 @@ namespace InventarioTPV
             while(dr.Read())
             {
                 //Obtengo instancia de la moneda asociada 
-                moneda = Moneda.MonedaById((int)dr["idMoneda"]);
+                moneda = Moneda.MonedaById(Convert.ToInt32(dr["idMoneda"]));
 
                 //Determino si aplica para descuento o no
                 bool aplicaDescuento = false;
-                if ((int)dr["aplicaDescuento"] == 1)
+                if (Convert.ToInt32(dr["aplicaDescuento"]) == 1)
                     aplicaDescuento = true;
 
                 //Obtengo instancia con la descripción y moneda asociada

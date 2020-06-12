@@ -12,7 +12,7 @@
     WindowState="Normal"
     WindowStartupLocation="CenterOwner"
     ShowTitle="True"
-    Height="510"  Width="545">
+    Height="430"  Width="545">
     <Grid>
         <StackPanel
             Margin="10,20,20,0"
@@ -78,13 +78,18 @@
                     <StackPanel
                         Orientation="Horizontal">
 
-                        <TextBox
+                        <hc:NumericUpDown 
                             x:Name="txtCosto"
                             Margin="10,0,5,0"
-                            Width="210"
-                            VerticalAlignment="Center"
                             FontSize="14pt"
-                            />
+                            VerticalAlignment="Center"
+                            Width="210"
+                            Minimum="0"
+                            DecimalPlaces="2"
+                            Increment="1"
+                            hc:InfoElement.Placeholder="100"
+                            ValueChanged="TxtCosto_ValueChanged"
+                            Style="{StaticResource NumericUpDownExtend}" />
 
                         <TextBlock
                             Text="$"
@@ -124,13 +129,19 @@
                     <StackPanel
                         Orientation="Horizontal">
 
-                        <TextBox
+                        <hc:NumericUpDown 
                             x:Name="txtPrecio"
                             Margin="10,0,5,0"
-                            Width="210"
-                            VerticalAlignment="Center"
                             FontSize="14pt"
-                            />
+                            VerticalAlignment="Center"
+                            Width="210"
+                            Minimum="0"
+                            DecimalPlaces="2"
+                            Increment="1"
+                            hc:InfoElement.Placeholder="100"
+                            ValueChanged="TxtPrecio_ValueChanged"
+                            Style="{StaticResource NumericUpDownExtend}" />
+
 
                         <TextBlock
                             Text="$"
@@ -144,8 +155,7 @@
 
             </StackPanel>
 
-            <StackPanel
-                Orientation="Horizontal">
+            <Grid>
 
                 <StackPanel
                     x:Name="stkGanancia"
@@ -180,10 +190,11 @@
                             FontSize="14pt"
                             VerticalAlignment="Center"
                             Width="210"
-                            Minimum="0"
-                            DecimalPlaces="0"
+                            Minimum="100"
+                            DecimalPlaces="2"
                             Increment="1"
                             hc:InfoElement.Placeholder="100"
+                            ValueChanged="TxtGanancia_ValueChanged"
                             Style="{StaticResource NumericUpDownExtend}" />
 
                         <TextBlock
@@ -196,7 +207,8 @@
                     </StackPanel>
 
                 </StackPanel>
-                <StackPanel
+                
+                <!--<StackPanel
                     x:Name="stkCantidad"
                     Width="250"
                     Orientation="Vertical" Margin="15,0,0,0">
@@ -231,9 +243,10 @@
                         hc:InfoElement.Placeholder="Cantidad"
                         Style="{StaticResource NumericUpDownExtend}" />
 
-                </StackPanel>
+                </StackPanel>-->
 
-            </StackPanel>
+            </Grid>
+            
             <StackPanel
                 x:Name="stkCodigoBar"
                 Orientation="Vertical">
@@ -265,14 +278,6 @@
 
             </StackPanel>
 
-            <DataGrid 
-                x:Name="dataReportePrin" 
-                ItemsSource="{Binding DataList}"
-                CanUserAddRows="False"
-                CanUserDeleteRows="False"
-                CanUserReorderColumns="False" 
-                FontSize="13pt" Width="495" Height="100" Visibility="Visible"/>
-
             <StackPanel
                 Orientation="Horizontal" 
                 HorizontalAlignment="Center">
@@ -296,7 +301,8 @@
                     Width="120"
                     Content="{DynamicResource Aceptar}"
                     Background="{DynamicResource PrimaryBrush}" 
-                    Foreground="{DynamicResource TextIconBrush}" />
+                    Foreground="{DynamicResource TextIconBrush}" 
+                    Click="BtnAceptar_Click" />
 
 
 

@@ -26,5 +26,11 @@ namespace InventarioTPV
                 ConsultarTasa();
             }
         }
+        private void BtnInventario_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Inventario inventario = new Inventario();
+            inventario.Owner = this;
+            inventario.ShowDialog();
+        }
     }
 }

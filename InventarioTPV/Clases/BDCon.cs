@@ -156,6 +156,21 @@ namespace InventarioTPV
             return command;
         }
         /// <summary>
+        /// Ejecuta el comando. Retorna la cantidad de registros afectados.
+        /// </summary>
+        /// <returns></returns>
+        public int EjecutarComando()
+        {
+            try
+            {
+                return this.ComandoSqlite().ExecuteNonQuery();
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+        /// <summary>
         /// Realizar la consulta a la base de datos.
         /// </summary>
         /// <param name="list">Un ListView al que se le requiera llenar con la información consultada.</param>

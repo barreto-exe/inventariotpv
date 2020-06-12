@@ -142,21 +142,14 @@ namespace InventarioTPV
             con.PasarParametros("Fecha", fecha);
             con.PasarParametros("Hora", hora);
 
-            try
+            //Ejecuta el comando y verifica la cantidad de registros afectados
+            if (con.EjecutarComando() > 0)
             {
-                //Ejecuta el comando y verifica la cantidad de registros afectados
-                if (con.ComandoSqlite().ExecuteNonQuery() > 0)
-                {
-                    return true;
-                }
+                return true;
+            }
 
-                //Si no hubo registros por alguna razón, arroja false
-                return false;
-            }
-            catch
-            {
-                return false;
-            }
+            //Si no hubo registros por alguna razón, arroja false
+            return false;
         }
 
         /// <summary>

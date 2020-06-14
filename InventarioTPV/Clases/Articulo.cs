@@ -216,10 +216,11 @@ namespace InventarioTPV
                 precioCalculado = precioDolar * tasa.ValorDolar;
                 if (pago.AplicaDescuento)
                 {
-                    precioCalculado = (precioCalculado * 100) / tasa.PorcentajeEfect;
+                    precioCalculado = (precioCalculado * 100) / (tasa.PorcentajeEfect+100);
                 }
 
-                precioRedondo = RedondeaArriba(precioCalculado, 3);
+                //Redondea basada en la configuración del usuario
+                precioRedondo = RedondeaArriba(precioCalculado, Properties.Settings.Default.FactorRedondeo);
 
                 //Añado precios a la lista
                 preciosCalculados.Add(precioCalculado);
@@ -351,6 +352,41 @@ namespace InventarioTPV
             //Hago redondeo
             if (monto % factor == 0) return monto;
             return (factor - monto % factor) + monto;
+        }
+        /// <summary>
+        /// Actualiza los datos de un artículo en los campos asociados al id.
+        /// </summary>
+        /// <param name="id">ID del artículo.</param>
+        /// <param name="articulo">Instancia con datos a refrescar.</param>
+        /// <returns></returns>
+        public static void ActualizarDatosById(int id, Articulo articulo)
+        {
+            //Borrar artículo y precios de la BD
+            string query = 
+                "DELETE FROM c_articulos WHERE id = @Id;" +
+                "DELETE FROM c_articulos_precios WHERE idArticulo = @Id;";
+            BDCon con = new BDCon(query);
+            con.PasarParametros("Id", id);
+            con.EjecutarComando();
+
+            //Registrar de nuevo artículo de la BD, con el mismo id
+            query =
+                "INSERT INTO c_articulos (id,descripcion,precioDolar,costoDolar,codBarras,activo) " +
+                "VALUES( @Id, @Descripcion, @PrecioDolar, @CostoDolar, @CodBarras, @Activo )";
+            con = new BDCon(query);
+
+            con.PasarParametros("Id", id);
+            con.PasarParametros("Descripcion", articulo.Descripcion);
+            con.PasarParametros("PrecioDolar", articulo.PrecioDolar);
+            con.PasarParametros("CostoDolar", articulo.CostoDolar);
+            con.PasarParametros("CodBarras", articulo.CodBarras);
+            con.PasarParametros("Activo", true);
+
+            //Registrar el artículo
+            con.EjecutarComando();
+
+            //Volver a registrar sus precios
+            articulo.RegistraPreciosArticulo();
         }
         #endregion
     }

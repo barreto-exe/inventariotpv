@@ -75,7 +75,7 @@
                 VerticalAlignment="Stretch"
                 Content="{DynamicResource Editar}"
                 Background="{DynamicResource PrimaryBrush}" 
-                Foreground="{DynamicResource TextIconBrush}" />
+                Foreground="{DynamicResource TextIconBrush}" Click="BtnEditar_Click" />
 
             <Button
                 x:Name="btnCrear"

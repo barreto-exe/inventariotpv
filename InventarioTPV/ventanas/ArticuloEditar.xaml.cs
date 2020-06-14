@@ -8,34 +8,62 @@ namespace InventarioTPV
     /// </summary>
     public partial class ArticuloEditar
     {
+        #region Atributos
         public enum Operacion
         {
-            Agregar,
+            Crear,
             Editar
         }
+        private Operacion tipo;
+        private Articulo articulo;
+        private int idArticulo;
+        #endregion
 
+        #region Constructores
         /// <summary>
-        /// Ventana para agregar o editar un artículo.
+        /// Instancia de una ventana para editar un artículo.
         /// </summary>
-        /// <param name="tipo">Enum para identificar si es operación de agregar o editar.</param>
-        public ArticuloEditar(Operacion tipo)
+        /// <param name="articulo">Artículo a editar.</param>
+        public ArticuloEditar(int idArticulo, Articulo articulo)
         {
             InitializeComponent();
 
-            //Verificando el tipo de operación a realizar en la vista
-            if(tipo == Operacion.Agregar)
-            {
-                //Si es para crear artículo, se colapsa el botón buscar.
-                this.btnBuscar.Visibility = System.Windows.Visibility.Collapsed;
-            }
-            if(tipo == Operacion.Editar)
-            {
+            //Obtener datos del artículo a editar
+            this.articulo   = articulo;
+            this.idArticulo = idArticulo;
 
-            }
+            //Identificando en la clase el tipo de operación
+            this.tipo = Operacion.Editar;
 
+            //Llenar los campos con las propiedades preexistentes
+            this.txtDescripcion.Text = articulo.Descripcion;
+            this.txtCosto.Value  = Convert.ToDouble(articulo.CostoDolar);
+            this.txtPrecio.Value = Convert.ToDouble(articulo.PrecioDolar);
+            this.txtCodBar.Text  = articulo.CodBarras;
+            ActualizarRelacionGanancia(txtCosto.Value, txtPrecio.Value);
+
+            //Enfocar primer caja de texto
             this.txtDescripcion.Focus();
         }
+        /// <summary>
+        /// Instancia de una ventana para crear un artículo.
+        /// </summary>
+        public ArticuloEditar()
+        {
+            InitializeComponent();
 
+            //Identificando en la clase el tipo de operación
+            this.tipo = Operacion.Crear;
+
+            ////Se colapsa el botón buscar.
+            //this.btnBuscar.Visibility = System.Windows.Visibility.Collapsed;
+
+            //Enfocar primer caja de texto
+            this.txtDescripcion.Focus();
+        }
+        #endregion
+        
+        #region Métodos
         /// <summary>
         /// Refresca la relación proporcional entre Precio-Costo-Ganancia en función del costo y precio.
         /// </summary>
@@ -47,7 +75,7 @@ namespace InventarioTPV
             if (costo == 0)
                 return;
 
-            double porcentaje = (precio / costo) * 100;
+            double porcentaje = (precio / costo) * 100 - 100;
 
             this.txtGanancia.Value = porcentaje;
         }
@@ -58,7 +86,9 @@ namespace InventarioTPV
         /// <param name="porcentajeGanancia">Porcentaje de ganancia del artículo.</param>
         private void ActualizarRelacionPrecio(double costo, double porcentajeGanancia)
         {
-            this.txtPrecio.Value = costo * porcentajeGanancia / 100;
+            this.txtPrecio.Value = costo + costo * porcentajeGanancia / 100;
         }
+        #endregion
+
     }
 }

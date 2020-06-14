@@ -8,10 +8,12 @@
     mc:Ignorable="d"        
     Language="es-VE"
     Title="{DynamicResource Buscar_Articulo}" 
-    WindowStartupLocation="CenterScreen"
+    WindowStartupLocation="CenterOwner"
     ResizeMode="NoResize"
+    WindowStyle="ToolWindow"
     WindowState="Normal"
-    Height="460"  Width="780">
+    Height="480"  
+    Width="750">
     <Grid>
         <StackPanel
             Orientation="Vertical"
@@ -24,17 +26,48 @@
                 hc:InfoElement.Title="{DynamicResource Nombre_o_Codigo_de_Barras}" 
                 FontSize="14pt"
                 Width="500"
+                TextChanged="TxtBuscar_TextChanged"
                 HorizontalAlignment="Left"/>
-            
-            <DataGrid 
-                x:Name="dataBuscados"
+
+            <Grid
                 Margin="10,10,10,0"
-                ItemsSource="{Binding DataList}"
-                IsReadOnly="True"
-                CanUserAddRows="False"
-                CanUserDeleteRows="False"
-                Height="330"
-                FontSize="13pt"/>
+                Height="330" 
+                HorizontalAlignment="Stretch">
+                
+                <DataGrid 
+                    x:Name="dataBuscados"
+                    ItemsSource="{Binding DataList}"
+                    IsReadOnly="True"
+                    AutoGenerateColumns="False"
+                    CanUserAddRows="False"
+                    CanUserDeleteRows="False"
+                    HorizontalAlignment="Stretch"
+                    FontSize="13pt">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="{DynamicResource Id}" Binding="{Binding id}" SortDirection="Ascending"/>
+                    <DataGridTextColumn Header="{DynamicResource Descripcion}" Binding="{Binding descripcion}"/>
+                    <DataGridTextColumn Header="{DynamicResource Costo_D}"  Binding="{Binding costoDolar}"/>
+                    <DataGridTextColumn Header="{DynamicResource Precio_D}" Binding="{Binding precioDolar}"/>
+                    <DataGridTextColumn Header="{DynamicResource Codigo_de_Barras}"  Binding="{Binding codBarras}"/>
+                    <DataGridTemplateColumn > 
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button
+                                    x:Name="btnEditarArticulo"
+                                    Click="BtnEditarArticulo_Click"
+                                    Content="{DynamicResource Editar}"
+                                    Background="{DynamicResource PrimaryBrush}" 
+                                    Foreground="{DynamicResource TextIconBrush}"
+                                    FontSize="12pt"
+                                    Height="35"
+                                    />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            </Grid>
         </StackPanel>
         
     </Grid>

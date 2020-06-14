@@ -6,7 +6,7 @@ namespace InventarioTPV
     {
         private void BtnCrear_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            ArticuloEditar ventana = new ArticuloEditar(Operacion.Agregar);
+            ArticuloEditar ventana = new ArticuloEditar();
             ventana.Owner = this;
             ventana.ShowDialog();
         }

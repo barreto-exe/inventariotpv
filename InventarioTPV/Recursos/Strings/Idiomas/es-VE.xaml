@@ -49,5 +49,9 @@
     <system:String x:Key="Cantidad">Cantidad</system:String>
     <system:String x:Key="Acciones">Acciones</system:String>
     <system:String x:Key="Vender">Vender</system:String>
+    <system:String x:Key="Id">Id</system:String>
+    <system:String x:Key="Descripcion">Descripcion</system:String>
+    <system:String x:Key="Costo_D">Costo $</system:String>
+    <system:String x:Key="Precio_D">Precio $</system:String>
 
 </ResourceDictionary>

@@ -190,10 +190,9 @@
                             FontSize="14pt"
                             VerticalAlignment="Center"
                             Width="210"
-                            Minimum="100"
                             DecimalPlaces="2"
+                            IsManipulationEnabled="False"
                             Increment="1"
-                            hc:InfoElement.Placeholder="100"
                             ValueChanged="TxtGanancia_ValueChanged"
                             Style="{StaticResource NumericUpDownExtend}" />
 
@@ -282,7 +281,7 @@
                 Orientation="Horizontal" 
                 HorizontalAlignment="Center">
 
-                <Button
+                <!--<Button
                     x:Name="btnBuscar"
                     Margin="10"
                     FontSize="12pt"
@@ -291,7 +290,7 @@
                     VerticalAlignment="Stretch"
                     Content="{DynamicResource Buscar}"
                     Background="{DynamicResource PrimaryBrush}" 
-                    Foreground="{DynamicResource TextIconBrush}" Visibility="Visible" />
+                    Foreground="{DynamicResource TextIconBrush}" Visibility="Visible" Click="btnBuscar_Click" />-->
 
                 <Button
                     x:Name="btnAceptar"

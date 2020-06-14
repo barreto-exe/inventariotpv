@@ -10,5 +10,11 @@
             InitializeComponent();
         }
 
+        private void BtnEditar_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            ArticuloBuscar buscar = new ArticuloBuscar();
+            buscar.Owner = this;
+            buscar.ShowDialog();
+        }
     }
 }

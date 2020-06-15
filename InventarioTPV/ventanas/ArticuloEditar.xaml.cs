@@ -51,7 +51,7 @@ namespace InventarioTPV
         public ArticuloEditar()
         {
             InitializeComponent();
-
+            
             //Identificando en la clase el tipo de operación
             this.tipo = Operacion.Crear;
 

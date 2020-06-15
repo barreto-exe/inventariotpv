@@ -19,8 +19,20 @@ namespace InventarioTPV
             //Verifica el tipo de operación sobre artículo
             if (this.tipo == Operacion.Crear)
             {
-                articulo.RegistraDatosArticulo(true);
-                articulo.RegistraPreciosArticulo();
+                //Si el artículo tiene id, entonces ya ha sido registrado.
+                if (articulo.Id != null)
+                {
+                    //Avisar que no se puede registrar.
+                    string msj =
+                        "Este producto ya ha sido registrado con anterioridad. " +
+                        "Búsquelo en el apartado de edición.";
+                    App.MensajeModal(msj, this);
+                }
+                else
+                {
+                    articulo.RegistraDatosArticulo(true);
+                    articulo.RegistraPreciosArticulo();
+                }
             }
             if(this.tipo == Operacion.Editar)
             {

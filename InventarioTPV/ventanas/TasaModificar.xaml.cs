@@ -8,14 +8,14 @@ namespace InventarioTPV
     /// </summary>
     public partial class TasaModificar
     {
-        public decimal Tasa
+        public decimal CampoTasa
         {
             get
             {
                 return Convert.ToDecimal(txtTasa.Value);
             }
         }
-        public decimal Porcentaje
+        public decimal CampoPorcentaje
         {
             get
             {
@@ -38,6 +38,16 @@ namespace InventarioTPV
         public TasaModificar()
         {
             InitializeComponent();
+
+            //Consultar la tasa actual
+            Tasa tasa = Tasa.ConsultarTasa();
+
+            //Colocar la tasa actual en los controles 
+            this.txtTasa.Value = Convert.ToDouble(tasa.ValorDolar);
+            this.txtPorcentaje.Value = Convert.ToDouble(tasa.PorcentajeEfect);
+
+            //Enfocar campo de texto
+            this.txtTasa.Focus();
         }
 
         private void BtnAceptar_Click(object sender, System.Windows.RoutedEventArgs e)

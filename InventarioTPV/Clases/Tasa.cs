@@ -165,12 +165,16 @@ namespace InventarioTPV
             SQLiteDataReader dr = con.ComandoSqlite().ExecuteReader();
             dr.Read();
 
-            return 
+            Tasa tasa =
                 new Tasa(
                 Convert.ToDecimal(dr["tasaDolar"]), 
                 Convert.ToDecimal(dr["porcentajeEfectivo"]), 
                 Convert.ToString(dr["fecha"]), 
                 Convert.ToString(dr["hora"]));
+
+            dr.Close();
+
+            return tasa;
         }
     }
 }

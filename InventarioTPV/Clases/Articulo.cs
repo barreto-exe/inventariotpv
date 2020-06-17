@@ -388,6 +388,43 @@ namespace InventarioTPV
             //Volver a registrar sus precios
             articulo.RegistraPreciosArticulo();
         }
+        /// <summary>
+        /// Actualiza los precios de los artículos según la tasa actual.
+        /// </summary>
+        public static void ActualizarPreciosBBDD()
+        {
+            //Armando consulta a BBDD.
+            string query = "SELECT * FROM c_articulos";
+            BDCon con = new BDCon(query);
+            SQLiteDataReader dr = con.ComandoSqlite().ExecuteReader();
+
+            #region Variables Auxiliares
+            Articulo articulo;
+            int id;
+            string descripcion, codBarras;
+            decimal costoDolar, precioDolar;
+            #endregion
+
+            //Mientras hayan artículos leídos 
+            while (dr.Read())
+            {
+                //Obtengo valores para Artículo
+                id = Convert.ToInt32(dr["id"]);
+                descripcion = (string)dr["descripcion"];
+                codBarras   = (string)dr["codBarras"];
+                precioDolar = Convert.ToDecimal(dr["precioDolar"]);
+                costoDolar  = Convert.ToDecimal(dr["costoDolar"]);
+
+                //Instanciar artículo y guardo sus datos en base de datos
+                articulo = new Articulo(descripcion, costoDolar, precioDolar, codBarras);
+
+                //Actualizar del artículo para refrescar su precio
+                Articulo.ActualizarDatosById(id, articulo);
+            }
+
+            //Cierro para prevenir errores
+            dr.Close();
+        }
         #endregion
     }
 }

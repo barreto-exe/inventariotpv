@@ -13,7 +13,7 @@
     WindowStyle="ToolWindow"
     WindowState="Normal"
     Height="480"  
-    Width="750">
+    Width="950">
     <Grid>
         <StackPanel
             Orientation="Vertical"
@@ -47,8 +47,10 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="{DynamicResource Id}" Binding="{Binding id}" SortDirection="Ascending"/>
                     <DataGridTextColumn Header="{DynamicResource Descripcion}" Binding="{Binding descripcion}"/>
-                    <DataGridTextColumn Header="{DynamicResource Costo_D}"  Binding="{Binding costoDolar}"/>
-                    <DataGridTextColumn Header="{DynamicResource Precio_D}" Binding="{Binding precioDolar}"/>
+                    <DataGridTextColumn Header="{DynamicResource Costo_D}" Binding="{Binding costoDolar, StringFormat={}{0:#,#0.##} }"/>
+                    <DataGridTextColumn Header="{DynamicResource Precio_D}" Binding="{Binding precioDolar, StringFormat={}{0:#,#0.##}}"/>
+                    <DataGridTextColumn Header="{DynamicResource BsS_Punto}" Binding="{Binding precioPunto, StringFormat={}{0:#,#0.##}}"/>
+                    <DataGridTextColumn Header="{DynamicResource BsS_Efectivo}" Binding="{Binding precioEfect, StringFormat={}{0:#,#0.##}}"/>
                     <DataGridTextColumn Header="{DynamicResource Codigo_de_Barras}"  Binding="{Binding codBarras}"/>
                     <DataGridTemplateColumn > 
                         <DataGridTemplateColumn.CellTemplate>

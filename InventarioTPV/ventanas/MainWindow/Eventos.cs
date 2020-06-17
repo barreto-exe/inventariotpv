@@ -15,7 +15,7 @@ namespace InventarioTPV
                 return;
 
             //Registro la nueva tasa
-            Tasa tasa = new Tasa(modificar.Tasa, modificar.Porcentaje, DateTime.Now);
+            Tasa tasa = new Tasa(modificar.CampoTasa, modificar.CampoPorcentaje, DateTime.Now);
             if(!tasa.RegistrarTasa())
             {
                 App.MensajeModal("Error al registrar la tasa.", this);
@@ -24,6 +24,8 @@ namespace InventarioTPV
             {
                 //Tasa Registrada con exito, así que la actualizo en la vista.
                 ConsultarTasa();
+
+                Articulo.ActualizarPreciosBBDD();
             }
         }
         private void BtnInventario_Click(object sender, System.Windows.RoutedEventArgs e)

@@ -53,5 +53,7 @@
     <system:String x:Key="Descripcion">Descripcion</system:String>
     <system:String x:Key="Costo_D">Costo $</system:String>
     <system:String x:Key="Precio_D">Precio $</system:String>
+    <system:String x:Key="BsS_Punto">Bs.S. Punto</system:String>
+    <system:String x:Key="BsS_Efectivo">Bs.S. Efectivo</system:String>
 
 </ResourceDictionary>

@@ -30,12 +30,16 @@ namespace InventarioTPV
                 "descripcion," +
                 "precioDolar," +
                 "costoDolar, " +
+                "(SELECT precioRedondo FROM c_articulos_precios WHERE idTipoPago = 1 AND idArticulo = id) as precioPunto, " +
+                "(SELECT precioRedondo FROM c_articulos_precios WHERE idTipoPago = 2 AND idArticulo = id) as precioEfect, " +
                 "codBarras " +
                 "FROM c_articulos " +
                 "WHERE " +
                 "descripcion like @Descripcion " +
                 "OR " +
-                "codBarras like @CodBarras";
+                "codBarras like @CodBarras " +
+                "AND " +
+                "activo = 1";
             BDCon con = new BDCon(query);
             con.PasarParametros("Descripcion", "%" + this.txtBuscar.Text  + "%");
             con.PasarParametros("CodBarras",   "%" + this.txtBuscar.Text + "%");
@@ -54,7 +58,7 @@ namespace InventarioTPV
             string descripcion = (string)datos[1];
             decimal precio = Convert.ToDecimal(datos[2]);
             decimal costo  = Convert.ToDecimal(datos[3]);
-            string codBarras = (string)datos[4];
+            string codBarras = (string)datos[6];
 
             //Instanciando artículo a editar
             Articulo articulo = new Articulo(descripcion, costo, precio, codBarras);

@@ -22,16 +22,18 @@ namespace InventarioTPV
                 return Convert.ToDecimal(txtPorcentaje.Value);
             }
         }
-        
+        public bool Aceptado { get; set; } = false;
+
         /// <summary>
         /// Si el usuario presionó aceptar, consultado es true.
         /// </summary>
-        public bool Consultado
+        public bool Valido
         {
             get
             {
-                //Si no presionó aceptar, entonces ambos están en 0
-                return !(txtPorcentaje.Value == 0 && txtTasa.Value == 0);
+                //Si no presionó aceptar o ambos están en 0, 
+                //entonces se retorna falso para no actualizar nada
+                return (txtPorcentaje.Value != 0 || txtTasa.Value != 0) && Aceptado;
             }
         }
 
@@ -56,6 +58,7 @@ namespace InventarioTPV
             {
                 return;
             }
+            Aceptado = true;
             this.Close();
         }
     }

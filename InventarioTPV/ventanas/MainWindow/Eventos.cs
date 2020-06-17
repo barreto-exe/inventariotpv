@@ -1,4 +1,6 @@
-﻿using System;
+﻿using System.Windows.Threading;
+using System;
+using System.ComponentModel;
 
 namespace InventarioTPV
 {
@@ -11,7 +13,7 @@ namespace InventarioTPV
             modificar.ShowDialog();
 
             //Si canceló la operación, retorno
-            if (!modificar.Consultado)
+            if (!modificar.Valido)
                 return;
 
             //Registro la nueva tasa
@@ -25,9 +27,25 @@ namespace InventarioTPV
                 //Tasa Registrada con exito, así que la actualizo en la vista.
                 ConsultarTasa();
 
-                Articulo.ActualizarPreciosBBDD();
+                //Instanciar worker para actualizar Precios en BBDD.
+                BackgroundWorker actualizadorBD = new BackgroundWorker();
+                actualizadorBD.DoWork += ActualizadorBD_DoWork;
+                actualizadorBD.RunWorkerCompleted += ActualizadorBD_RunWorkerCompleted;
+                actualizadorBD.RunWorkerAsync();
             }
         }
+
+        #region Actualizador Worker
+        private void ActualizadorBD_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Articulo.ActualizarPreciosBBDD();
+        }
+        private void ActualizadorBD_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+        }
+        #endregion
+
+
         private void BtnInventario_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             Inventario inventario = new Inventario();
